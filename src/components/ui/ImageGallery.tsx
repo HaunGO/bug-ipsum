@@ -8,27 +8,26 @@ export function ImageGallery({ title = "SOURCE IMAGES" }: ImageGalleryProps) {
   const imageFiles = ['1.jpg', '2.jpg', '3.jpg'];
   
   return (
-    <div className="mb-8">
+    <div className="gallery-container">
       {title && (
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">{title}</h3>
+        <h3 className="gallery-title">{title}</h3>
       )}
-      <div className="w-full overflow-x-auto">
-        <div className="flex gap-4 pb-4" style={{ minWidth: 'max-content' }}>
+      <div className="gallery-scroll">
+        <div className="gallery-grid" style={{ minWidth: 'max-content' }}>
           {imageFiles.map((filename, index) => (
             <div 
               key={filename}
-              className="flex-shrink-0 border border-gray-200 rounded-lg overflow-hidden shadow-sm"
+              className="gallery-item"
             >
               <Image
                 src={`/images/${filename}`}
                 alt={`Source image ${index + 1}`}
                 width={400}
                 height={300}
-                className="object-cover"
-                style={{ height: '300px', width: 'auto' }}
+                className="gallery-image"
               />
-              <div className="p-3 bg-white">
-                <p className="text-sm font-mono text-gray-600">{filename}</p>
+              <div className="gallery-caption">
+                <p className="gallery-filename">{filename}</p>
               </div>
             </div>
           ))}

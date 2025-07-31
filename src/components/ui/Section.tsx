@@ -5,10 +5,15 @@ interface SectionProps {
 }
 
 export function Section({ title, children, className = "" }: SectionProps) {
+  // const isScroller = className.includes('sectionScroller');
   return (
-    <section className={`px-8 py-6 border-b border-gray-200 ${className}`}>
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">{title}</h2>
-      {children}
+    <section className="content-section">
+      <h2 className="section-title">{title}</h2>
+      {/* {isScroller ? ( */}
+        <div className={`sectionScroller`}>
+          {children}
+        </div>
+      {/* ) : children} */}
     </section>
   );
 } 

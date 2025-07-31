@@ -1,19 +1,23 @@
-import { Header } from '@/components/ui/Header';
 import { Section } from '@/components/ui/Section';
 import { MasonryGrid } from '@/components/ui/MasonryGrid';
 import { ImageCard } from '@/components/ui/ImageCard';
 import { UrlExample } from '@/components/ui/UrlExample';
 import { ImageGallery } from '@/components/ui/ImageGallery';
+import { Header } from '@/components/ui/Header';
+// import { AnimatedCard } from '@/components/ui/AnimatedCard';
+import { Footer } from '@/components/ui/Footer';
 
 export default function HomePage() {
   return (
-    <div className="bg-white">
-      <Header 
-        title="Bug Ipsum" 
-        subtitle="A buggy placeholder image generator." 
-      />
-      
-      <div className="">
+    <div className="bg-white dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <Header 
+          title="Bug Ipsum"
+          subtitle="A buggy placeholder image generator"
+          className="mb-12"
+        />
+        
         <div className="px-8 py-6">
           <ImageGallery title="SOURCE IMAGES" />
         </div>
@@ -299,11 +303,10 @@ export default function HomePage() {
           </MasonryGrid>
         </Section>
 
+
       </div>
       
-      <footer className="bg-gray-100 px-8 py-4 text-center text-sm text-gray-600 border-t border-gray-200">
-        <p>Sharp • Next.js • TypeScript</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

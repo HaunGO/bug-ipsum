@@ -1,42 +1,187 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+  }
+
+  /* Add smooth transitions for theme changes */
+  *, *::before, *::after {
+    @apply transition-colors duration-300;
+  }
+
+  /* Base typography */
+  body {
+    @apply font-sans antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+  }
+
+  /* Headings */
+  h1 {
+    @apply text-4xl font-bold text-gray-900 dark:text-white mb-4;
+  }
+
+  h2 {
+    @apply text-3xl font-bold text-gray-800 dark:text-gray-100 mb-3;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-3;
+  }
+
+  h4 {
+    @apply text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2;
+  }
+
+  h5 {
+    @apply text-lg font-medium text-gray-800 dark:text-gray-100 mb-2;
+  }
+
+  h6 {
+    @apply text-base font-medium text-gray-800 dark:text-gray-100 mb-2;
+  }
+
+  /* Paragraphs and inline text */
+  p {
+    @apply text-gray-600 dark:text-gray-300 mb-4;
+  }
+
+  .lead {
+    @apply text-xl text-gray-600 dark:text-gray-300;
+  }
+
+  strong {
+    @apply font-semibold text-gray-900 dark:text-white;
+  }
+
+  code {
+    @apply font-mono text-sm bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+@layer components {
+  /* Layout components */
+  .site-footer {
+    @apply bg-white dark:bg-gray-800 px-8 py-4 text-center text-sm text-gray-600 dark:text-gray-300 border-t border-gray-200 dark:border-gray-700;
+  }
 
-.sectionScroller {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  overflow-x: auto;
-  /* overflow-y: hidden; */
-  /* white-space: nowrap; */
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
+  .main-nav {
+    @apply bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50;
+  }
 
-.sectionScroller > * {
-  /* white-space: normal; */
-  /* display: inline-block; */
-  /* vertical-align: top; */
+  .nav-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .nav-brand {
+    @apply flex-shrink-0 flex items-center;
+  }
+
+  .nav-brand-text {
+    @apply text-xl font-bold text-gray-900 dark:text-white;
+  }
+
+  .nav-menu {
+    @apply hidden md:ml-6 md:flex md:space-x-8;
+  }
+
+  .nav-link {
+    @apply inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors;
+  }
+
+  .nav-link-active {
+    @apply border-blue-500 text-gray-900 dark:text-white;
+  }
+
+  .nav-link-inactive {
+    @apply border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200;
+  }
+
+  .mobile-menu-button {
+    @apply md:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800;
+  }
+
+  /* Section components */
+  .content-section {
+    @apply px-8 py-6 border-b border-gray-200 dark:border-gray-700;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold mb-6 text-gray-900 dark:text-white;
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
+    @apply relative bg-gray-200 dark:bg-gray-700 inline-flex h-8 w-16 items-center rounded-full transition-colors duration-200 ease-in-out cursor-pointer;
+  }
+
+  .theme-toggle__inner {
+    @apply inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-transform duration-200 ease-in-out;
+  }
+
+  /* Header */
+  .page-header {
+    @apply border-b border-gray-200 dark:border-gray-700 px-8 py-12;
+  }
+
+  .page-header__container {
+    @apply max-w-4xl mx-auto;
+  }
+
+  /* Image Gallery */
+  .gallery-container {
+    @apply mb-8;
+  }
+
+  .gallery-title {
+    @apply text-lg font-semibold mb-4 text-gray-900 dark:text-white;
+  }
+
+  .gallery-scroll {
+    @apply w-full overflow-x-auto;
+  }
+
+  .gallery-grid {
+    @apply flex gap-4 pb-4;
+  }
+
+  .gallery-item {
+    @apply flex-shrink-0 overflow-hidden;
+  }
+
+  .gallery-image {
+    @apply object-cover h-[300px] w-auto;
+  }
+
+  .gallery-caption {
+    @apply p-3 bg-white dark:bg-gray-800;
+  }
+
+  .gallery-filename {
+    @apply text-sm font-mono text-gray-600 dark:text-gray-300;
+  }
+
+  /* Image Cards */
+  .image-card {
+    @apply overflow-hidden;
+  }
+
+  .image-card-title {
+    @apply text-base font-semibold mb-3 text-gray-900 dark:text-white;
+  }
+
+  .image-card-code {
+    @apply bg-gray-50 dark:bg-gray-900 p-3 rounded font-mono text-sm text-gray-700 dark:text-gray-300 mb-3 overflow-x-auto;
+  }
+
+  .image-card-image {
+    @apply w-full h-auto;
+  }
+
+  /* Utility classes */
+  .sectionScroller {
+    @apply w-screen -ml-[50vw] left-1/2 relative overflow-x-auto px-8;
+  }
 }

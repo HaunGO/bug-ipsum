@@ -7,15 +7,15 @@ interface ImageCardProps {
 
 export function ImageCard({ title, code, imageUrl, alt }: ImageCardProps) {
   return (
-    <div className="">
-      <h3 className="text-base font-semibold mb-3 text-gray-800">{title}</h3>
-      <div className="bg-gray-50 border border-gray-200 p-3 rounded font-mono text-sm text-gray-700 mb-3 overflow-x-auto">
+    <div className="image-card">
+      <h3 className="image-card-title">{title}</h3>
+      <div className="image-card-code">
         {code}
       </div>
       <img 
         src={imageUrl} 
         alt={alt} 
-        className=""
+        className="image-card-image"
       />
     </div>
   );
