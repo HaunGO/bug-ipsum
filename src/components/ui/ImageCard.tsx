@@ -1,22 +1,34 @@
+import Image from 'next/image';
+
 interface ImageCardProps {
+  width?: number;
+  height?: number;
+  caption: string;
   title: string;
-  code: string;
-  imageUrl: string;
-  alt: string;
+  src: string;
 }
 
-export function ImageCard({ title, code, imageUrl, alt }: ImageCardProps) {
+export function ImageCard({ 
+  width = 300, 
+  height = 200, 
+  caption, 
+  title, 
+  src 
+}: ImageCardProps) {
   return (
-    <div className="image-card">
-      <h3 className="image-card-title">{title}</h3>
-      <div className="image-card-code">
-        {code}
-      </div>
-      <img 
-        src={imageUrl} 
-        alt={alt} 
-        className="image-card-image"
+    <figure className="flex flex-col" >
+      <Image 
+        src={src} 
+        alt={caption}
+        width={width}
+        height={height}
+        className="object-cover"
+        priority
       />
-    </div>
+      <figcaption className="mt-2 text-sm">
+        <div className="font-semibold">{title}</div>
+        <div className="text-gray-600 dark:text-gray-400 break-words">{caption}</div>
+      </figcaption>
+    </figure>
   );
 } 

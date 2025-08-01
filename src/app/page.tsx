@@ -1,5 +1,5 @@
 import { Section } from '@/components/ui/Section';
-import { MasonryGrid } from '@/components/ui/MasonryGrid';
+import { CardBox } from '@/components/ui/CardBox';
 import { ImageCard } from '@/components/ui/ImageCard';
 import { UrlExample } from '@/components/ui/UrlExample';
 import { ImageGallery } from '@/components/ui/ImageGallery';
@@ -18,289 +18,355 @@ export default function HomePage() {
           className="mb-12"
         />
         
-        <div className="px-8 py-6">
+        {/* <Section title="SOURCE IMAGES" className="">
           <ImageGallery title="SOURCE IMAGES" />
-        </div>
+        </Section> */}
 
-        <Section title="BASIC USAGE" className="sectionScroller">
-          <UrlExample>GET /{'{width}'}/{'{height}'}</UrlExample>
-          <MasonryGrid>
+        <Section title="BASIC USAGE" className="">
+          <UrlExample>/{'{width}'}/{'{height}'}</UrlExample>
+          <CardBox variant="scroll">
             <ImageCard 
-              title="Basic"
-              code="/300/200"
-              imageUrl="/api/300/200"
-              alt="300x200"
+              width={500}
+              height={300}
+              title="Landscape"
+              caption="/500/300"
+              src="/api/500/300"
             />
             <ImageCard 
+              width={300}
+              height={300}
               title="Square"
-              code="/400/400"
-              imageUrl="/api/400/400"
-              alt="400x400"
+              caption="/300/300"
+              src="/api/300/300"
             />
             <ImageCard 
+              width={100}
+              height={300}
+              title="Portrait"
+              caption="/100/300"
+              src="/api/100/300"
+            />
+            <ImageCard 
+              width={800}
+              height={300}
               title="Wide"
-              code="/800/200"
-              imageUrl="/api/800/200"
-              alt="800x200"
+              caption="/800/300"
+              src="/api/800/300"
             />
-          </MasonryGrid>
+          </CardBox>
         </Section>
-
-        <Section title="IMAGE SELECTION" className="sectionScroller">
-          <UrlExample>GET /{'{width}'}/{'{height}'}?image={'{index}'}</UrlExample>
-          <MasonryGrid>
+{/* 
+        <Section title="IMAGE SELECTION" className="">
+          <UrlExample>?image={'{index}'}</UrlExample>
+          <CardBox variant="scroll">
             <ImageCard 
+              width={300}
+              height={200}
               title="Image 0"
-              code="/300/200?image=0"
-              imageUrl="/api/300/200?image=0"
-              alt="Image 0"
+              caption="GET /300/200?image=0"
+              src="/api/300/200?image=0"
             />
             <ImageCard 
+              width={300}
+              height={200}
               title="Image 1"
-              code="/300/200?image=1"
-              imageUrl="/api/300/200?image=1"
-              alt="Image 1"
+              caption="GET /300/200?image=1"
+              src="/api/300/200?image=1"
             />
             <ImageCard 
+              width={300}
+              height={200}
               title="Image 2"
-              code="/300/200?image=2"
-              imageUrl="/api/300/200?image=2"
-              alt="Image 2"
+              caption="GET /300/200?image=2"
+              src="/api/300/200?image=2"
             />
-          </MasonryGrid>
+          </CardBox>
         </Section>
-        
-        <Section title="SATURATION SCALE" className="sectionScroller">
-          <UrlExample>GET /{'{width}'}/{'{height}'}?saturation={'{0-3}'}</UrlExample>
-          <MasonryGrid>
+         */}
+
+
+        <Section title="SATURATION SCALE" className="">
+          <UrlExample>?saturation={'{0-3}'}</UrlExample>
+          <CardBox variant="fit">
             <ImageCard 
-              title="Grayscale (0)"
-              code="/300/200?image=0&saturation=0"
-              imageUrl="/api/300/200?image=0&saturation=0"
-              alt="Grayscale"
+              width={300}
+              height={200}
+              title="Grayscale"
+              caption="?saturation=0"
+              src="/api/300/200?image=0&saturation=0"
             />
             <ImageCard 
-              title="Very Low (0.5)"
-              code="/300/200?image=0&saturation=0.5"
-              imageUrl="/api/300/200?image=0&saturation=0.5"
-              alt="Very Low Saturation"
+              width={300}
+              height={200}
+              title="Very Low"
+              caption="?saturation=0.5"
+              src="/api/300/200?image=0&saturation=0.5"
             />
             <ImageCard 
-              title="Low (1)"
-              code="/300/200?image=0&saturation=1"
-              imageUrl="/api/300/200?image=0&saturation=1"
-              alt="Low Saturation"
+              width={300}
+              height={200}
+              title="Low"
+              caption="?saturation=1"
+              src="/api/300/200?image=0&saturation=1"
             />
             <ImageCard 
-              title="Normal (1.5)"
-              code="/300/200?image=0&saturation=1.5"
-              imageUrl="/api/300/200?image=0&saturation=1.5"
-              alt="Normal Saturation"
+              width={300}
+              height={200}
+              title="Normal"
+              caption="?saturation=1.5"
+              src="/api/300/200?image=0&saturation=1.5"
             />
             <ImageCard 
-              title="High (2)"
-              code="/300/200?image=0&saturation=2"
-              imageUrl="/api/300/200?image=0&saturation=2"
-              alt="High Saturation"
+              width={300}
+              height={200}
+              title="High"
+              caption="?saturation=2"
+              src="/api/300/200?image=0&saturation=2"
             />
             <ImageCard 
-              title="Very High (2.5)"
-              code="/300/200?image=0&saturation=2.5"
-              imageUrl="/api/300/200?image=0&saturation=2.5"
-              alt="Very High Saturation"
+              width={300}
+              height={200}
+              title="Very High"
+              caption="?saturation=2.5"
+              src="/api/300/200?image=0&saturation=2.5"
             />
             <ImageCard 
-              title="Vivid (3)"
-              code="/300/200?image=0&saturation=3"
-              imageUrl="/api/300/200?image=0&saturation=3"
-              alt="Vivid Saturation"
+              width={300}
+              height={200}
+              title="Vivid"
+              caption="?saturation=3"
+              src="/api/300/200?image=0&saturation=3"
             />
-          </MasonryGrid>
+          </CardBox>
         </Section>
 
-        <Section title="BLUR SCALE" className="sectionScroller">
-          <UrlExample>GET /{'{width}'}/{'{height}'}?blur={'{0.3-20}'}</UrlExample>
-          <MasonryGrid>
+        <Section title="BLUR SCALE" className="">
+          <UrlExample>?blur={'{0.3-20}'}</UrlExample>
+          <CardBox variant="fit">
             <ImageCard 
-              title="Sharp (0.3)"
-              code="/300/200?image=1&blur=0.3"
-              imageUrl="/api/300/200?image=1&blur=0.3"
-              alt="Sharp"
+              width={300}
+              height={200}
+              title="Sharp"
+              caption="?blur=0.3"
+              src="/api/300/200?image=1&blur=0.3"
             />
             <ImageCard 
-              title="Very Soft (3)"
-              code="/300/200?image=1&blur=3"
-              imageUrl="/api/300/200?image=1&blur=3"
-              alt="Very Soft Blur"
+              width={300}
+              height={200}
+              title="Very Soft"
+              caption="?blur=3"
+              src="/api/300/200?image=1&blur=3"
             />
             <ImageCard 
-              title="Soft (7)"
-              code="/300/200?image=1&blur=7"
-              imageUrl="/api/300/200?image=1&blur=7"
-              alt="Soft Blur"
+              width={300}
+              height={200}
+              title="Soft"
+              caption="?blur=7"
+              src="/api/300/200?image=1&blur=7"
             />
             <ImageCard 
-              title="Medium (10)"
-              code="/300/200?image=1&blur=10"
-              imageUrl="/api/300/200?image=1&blur=10"
-              alt="Medium Blur"
+              width={300}
+              height={200}
+              title="Medium"
+              caption="?blur=10"
+              src="/api/300/200?image=1&blur=10"
             />
             <ImageCard 
-              title="Heavy (13)"
-              code="/300/200?image=1&blur=13"
-              imageUrl="/api/300/200?image=1&blur=13"
-              alt="Heavy Blur"
+              width={300}
+              height={200}
+              title="Heavy"
+              caption="?blur=13"
+              src="/api/300/200?image=1&blur=13"
             />
             <ImageCard 
-              title="Very Heavy (17)"
-              code="/300/200?image=1&blur=17"
-              imageUrl="/api/300/200?image=1&blur=17"
-              alt="Very Heavy Blur"
+              width={300}
+              height={200}
+              title="Very Heavy"
+              caption="?blur=17"
+              src="/api/300/200?image=1&blur=17"
             />
             <ImageCard 
-              title="Maximum (20)"
-              code="/300/200?image=1&blur=20"
-              imageUrl="/api/300/200?image=1&blur=20"
-              alt="Maximum Blur"
+              width={300}
+              height={200}
+              title="Maximum"
+              caption="?blur=20"
+              src="/api/300/200?image=1&blur=20"
             />
-          </MasonryGrid>
+          </CardBox>
         </Section>
 
-        <Section title="CONTRAST SCALE" className="sectionScroller">
-          <UrlExample>GET /{'{width}'}/{'{height}'}?contrast={'{0.1-3.0}'}</UrlExample>
-          <MasonryGrid>
+        <Section title="CONTRAST SCALE" className="">
+          <UrlExample>?contrast={'{0.1-3.0}'}</UrlExample>
+          <CardBox variant="fit">
             <ImageCard 
-              title="Flat (0.1)"
-              code="/300/200?image=2&contrast=0.1"
-              imageUrl="/api/300/200?image=2&contrast=0.1"
-              alt="Flat Contrast"
+              width={300}
+              height={200}
+              title="Flat"
+              caption="?contrast=0.1"
+              src="/api/300/200?image=2&contrast=0.1"
             />
             <ImageCard 
-              title="Very Low (0.5)"
-              code="/300/200?image=2&contrast=0.5"
-              imageUrl="/api/300/200?image=2&contrast=0.5"
-              alt="Very Low Contrast"
+              width={300}
+              height={200}
+              title="Very Low"
+              caption="?contrast=0.5"
+              src="/api/300/200?image=2&contrast=0.5"
             />
             <ImageCard 
-              title="Low (1.0)"
-              code="/300/200?image=2&contrast=1.0"
-              imageUrl="/api/300/200?image=2&contrast=1.0"
-              alt="Low Contrast"
+              width={300}
+              height={200}
+              title="Low"
+              caption="?contrast=1.0"
+              src="/api/300/200?image=2&contrast=1.0"
             />
             <ImageCard 
-              title="Normal (1.5)"
-              code="/300/200?image=2&contrast=1.5"
-              imageUrl="/api/300/200?image=2&contrast=1.5"
-              alt="Normal Contrast"
+              width={300}
+              height={200}
+              title="Normal"
+              caption="?contrast=1.5"
+              src="/api/300/200?image=2&contrast=1.5"
             />
             <ImageCard 
-              title="High (2.0)"
-              code="/300/200?image=2&contrast=2.0"
-              imageUrl="/api/300/200?image=2&contrast=2.0"
-              alt="High Contrast"
+              width={300}
+              height={200}
+              title="High"
+              caption="?contrast=2.0"
+              src="/api/300/200?image=2&contrast=2.0"
             />
             <ImageCard 
-              title="Very High (2.5)"
-              code="/300/200?image=2&contrast=2.5"
-              imageUrl="/api/300/200?image=2&contrast=2.5"
-              alt="Very High Contrast"
+              width={300}
+              height={200}
+              title="Very High"
+              caption="?contrast=2.5"
+              src="/api/300/200?image=2&contrast=2.5"
             />
             <ImageCard 
-              title="Maximum (3.0)"
-              code="/300/200?image=2&contrast=3.0"
-              imageUrl="/api/300/200?image=2&contrast=3.0"
-              alt="Maximum Contrast"
+              width={300}
+              height={200}
+              title="Maximum"
+              caption="?contrast=3.0"
+              src="/api/300/200?image=2&contrast=3.0"
             />
-          </MasonryGrid>
+          </CardBox>
         </Section>
 
-        <Section title="TINT EXAMPLES" className="sectionScroller">
-          <UrlExample>GET /{'{width}'}/{'{height}'}?tint={'{hex-color}'}</UrlExample>
-          <MasonryGrid>
+        <Section title="TINT EXAMPLES" className="">
+          <UrlExample>?tint={'{hex-color}'}</UrlExample>
+          <CardBox variant="fit">
             <ImageCard 
-              title="Red Tint"
-              code="/300/200?image=0&tint=ff6b6b"
-              imageUrl="/api/300/200?image=0&tint=ff6b6b"
-              alt="Red Tint"
+              width={200}
+              height={150}
+              title="Red"
+              caption="?tint=ff6b6b"
+              src="/api/300/200?image=0&tint=ff6b6b"
             />
             <ImageCard 
-              title="Orange Tint"
-              code="/300/200?image=0&tint=ff922b"
-              imageUrl="/api/300/200?image=0&tint=ff922b"
-              alt="Orange Tint"
+              width={200}
+              height={150}
+              title="Orange"
+              caption="?tint=ff922b"
+              src="/api/300/200?image=0&tint=ff922b"
             />
             <ImageCard 
-              title="Yellow Tint"
-              code="/300/200?image=0&tint=ffd93d"
-              imageUrl="/api/300/200?image=0&tint=ffd93d"
-              alt="Yellow Tint"
+              width={200}
+              height={150}
+              title="Yellow"
+              caption="?tint=ffd93d"
+              src="/api/300/200?image=0&tint=ffd93d"
             />
             <ImageCard 
-              title="Green Tint"
-              code="/300/200?image=1&tint=51cf66"
-              imageUrl="/api/300/200?image=1&tint=51cf66"
-              alt="Green Tint"
+              width={200}
+              height={150}
+              title="Green"
+              caption="?tint=51cf66"
+              src="/api/300/200?image=0&tint=51cf66"
             />
             <ImageCard 
-              title="Blue Tint"
-              code="/300/200?image=1&tint=4ecdc4"
-              imageUrl="/api/300/200?image=1&tint=4ecdc4"
-              alt="Blue Tint"
+              width={200}
+              height={150}
+              title="Blue"
+              caption="?tint=4ecdc4"
+              src="/api/300/200?image=0&tint=4ecdc4"
             />
             <ImageCard 
-              title="Indigo Tint"
-              code="/300/200?image=2&tint=748ffc"
-              imageUrl="/api/300/200?image=2&tint=748ffc"
-              alt="Indigo Tint"
+              width={200}
+              height={150}
+              title="Indigo"
+              caption="?tint=748ffc"
+              src="/api/300/200?image=0&tint=748ffc"
             />
             <ImageCard 
-              title="Purple Tint"
-              code="/300/200?image=2&tint=ae3ec9"
-              imageUrl="/api/300/200?image=2&tint=ae3ec9"
-              alt="Purple Tint"
+              width={200}
+              height={150}
+              title="Purple"
+              caption="?tint=ae3ec9"
+              src="/api/300/200?image=0&tint=ae3ec9"
             />
-          </MasonryGrid>
+          </CardBox>
         </Section>
 
-        <Section title="COMBINATIONS" className="sectionScroller">
-          <MasonryGrid>
+        <Section title="COMBINATIONS" className="">
+          <CardBox variant="wrap">
             <ImageCard 
+              width={300}
+              height={200}
               title="Grayscale + Blur"
-              code="/300/200?image=0&saturation=0&blur=2"
-              imageUrl="/api/300/200?image=0&saturation=0&blur=2"
-              alt="Grayscale with Blur"
+              caption="?saturation=0&blur=2"
+              src="/api/300/200?image=0&saturation=0&blur=2"
             />
             <ImageCard 
-              title="Blur + Tint"
-              code="/300/200?image=1&blur=4&tint=4ecdc4"
-              imageUrl="/api/300/200?image=1&blur=4&tint=4ecdc4"
-              alt="Blur with Teal Tint"
-            />
-            <ImageCard 
+              width={300}
+              height={200}
               title="Low Sat + Contrast"
-              code="/300/200?image=2&saturation=0.5&contrast=1.8"
-              imageUrl="/api/300/200?image=2&saturation=0.5&contrast=1.8"
-              alt="Low Saturation with High Contrast"
+              caption="?saturation=0.5&contrast=1.8"
+              src="/api/300/200?image=2&saturation=0.5&contrast=1.8"
             />
             <ImageCard 
+              width={300}
+              height={200}
               title="All Effects"
-              code="/300/200?image=0&saturation=1.5&blur=1&tint=ffd93d&contrast=1.3"
-              imageUrl="/api/300/200?image=0&saturation=1.5&blur=1&tint=ffd93d&contrast=1.3"
-              alt="All Effects Combined"
+              caption="?saturation=1.5&blur=1&tint=ffd93d&contrast=1.3"
+              src="/api/300/200?image=0&saturation=1.5&blur=1&tint=ffd93d&contrast=1.3"
             />
             <ImageCard 
+              width={300}
+              height={200}
               title="Vintage Look"
-              code="/300/200?image=1&tint=8b4513&contrast=0.8&blur=0.5&saturation=0.7"
-              imageUrl="/api/300/200?image=1&tint=8b4513&contrast=0.8&blur=0.5&saturation=0.7"
-              alt="Vintage Effect"
+              caption="?tint=8b4513&contrast=0.8&blur=0.5&saturation=0.7"
+              src="/api/300/200?image=1&tint=8b4513&contrast=0.8&blur=0.5&saturation=0.7"
             />
             <ImageCard 
+              width={300}
+              height={200}
               title="High Contrast B&W"
-              code="/300/200?image=2&saturation=0&contrast=2.5&blur=1"
-              imageUrl="/api/300/200?image=2&saturation=0&contrast=2.5&blur=1"
-              alt="High Contrast Black & White"
+              caption="?saturation=0&contrast=2.5&blur=1"
+              src="/api/300/200?image=2&saturation=0&contrast=2.5&blur=1"
             />
-          </MasonryGrid>
+            <ImageCard 
+              width={300}
+              height={200}
+              title="Cyberpunk"
+              caption="?saturation=2.5&contrast=2&tint=00ffff"
+              src="/api/300/200?image=2&saturation=2.5&contrast=2&tint=00ffff"
+            />
+            <ImageCard 
+              width={300}
+              height={200}
+              title="Desert Heat"
+              caption="?saturation=2&contrast=1.8&tint=ff8533&blur=0.8"
+              src="/api/300/200?image=0&saturation=2&contrast=1.8&tint=ff8533&blur=0.8"
+            />
+            <ImageCard 
+              width={300}
+              height={200}
+              title="Moonlight"
+              caption="?saturation=0.7&contrast=1.2&tint=3d3d5c&blur=1.5"
+              src="/api/300/200?image=1&saturation=0.7&contrast=1.2&tint=3d3d5c&blur=1.5"
+            />
+
+
+
+          </CardBox>
         </Section>
 
 

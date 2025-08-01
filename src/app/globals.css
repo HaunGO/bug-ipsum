@@ -105,7 +105,7 @@
 
   /* Section components */
   .content-section {
-    @apply px-8 py-6 border-b border-gray-200 dark:border-gray-700;
+    @apply py-4 border-b border-gray-200 dark:border-gray-700;
   }
 
   .section-title {
@@ -123,48 +123,15 @@
 
   /* Header */
   .page-header {
-    @apply border-b border-gray-200 dark:border-gray-700 px-8 py-12;
+    @apply border-b border-gray-200 dark:border-gray-700 py-12;
   }
 
   .page-header__container {
     @apply max-w-4xl mx-auto;
   }
 
-  /* Image Gallery */
-  .gallery-container {
-    @apply mb-8;
-  }
-
-  .gallery-title {
-    @apply text-lg font-semibold mb-4 text-gray-900 dark:text-white;
-  }
-
-  .gallery-scroll {
-    @apply w-full overflow-x-auto;
-  }
-
-  .gallery-grid {
-    @apply flex gap-4 pb-4;
-  }
-
-  .gallery-item {
-    @apply flex-shrink-0 overflow-hidden;
-  }
-
-  .gallery-image {
-    @apply object-cover h-[300px] w-auto;
-  }
-
-  .gallery-caption {
-    @apply p-3 bg-white dark:bg-gray-800;
-  }
-
-  .gallery-filename {
-    @apply text-sm font-mono text-gray-600 dark:text-gray-300;
-  }
-
   /* Image Cards */
-  .image-card {
+  /* .image-card {
     @apply overflow-hidden;
   }
 
@@ -178,10 +145,10 @@
 
   .image-card-image {
     @apply w-full h-auto;
-  }
+  } */
 
   /* Utility classes */
-  .sectionScroller {
+  /* .sectionScroller {
     @apply w-screen -ml-[50vw] left-1/2 relative overflow-x-auto px-8;
-  }
+  } */
 }
