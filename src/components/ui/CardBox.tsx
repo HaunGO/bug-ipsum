@@ -14,8 +14,8 @@ export function CardBox({ children, variant='scroll', className='' }: CardBoxPro
     
     const containerStyles = {
       none:   "",
-      scroll: "flex flex-row flex-nowrap gap-6 pb-4 [&>*]:flex-none",
-      fit:    "flex flex-row flex-nowrap gap-2 md:gap-4 lg:gap-6 pb-4",
+      scroll: "flex flex-row flex-nowrap gap-4 pb-4 [&>*]:flex-none",
+      fit:    "flex flex-row flex-wrap gap-2 md:gap-4 pb-4 [&>*]:flex-1 [&>*]:min-w-0",
       wrap:   "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 auto-rows-max [&>img]:w-full"
     };
 

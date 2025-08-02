@@ -5,11 +5,30 @@ import crypto from 'crypto';
 export interface ImageParams {
   width: number;
   height: number;
-  saturation?: number; // Saturation level: 0 = grayscale, 1 = normal, 2+ = oversaturated
-  blur?: number;
+  saturation?: number; // Saturation level: 1-9 scale (1 = minimum, 5 = normal, 9 = maximum)
+  blur?: number; // Blur level: 1-9 scale (1 = minimal blur, 9 = maximum blur)
   tint?: string;
-  contrast?: number;
+  contrast?: number; // Contrast level: 1-9 scale (1 = minimal contrast, 5 = normal, 9 = maximum)
   image?: number; // Index of the image to use (0, 1, 2)
+}
+
+// Helper functions to map 1-9 scale to actual effect values
+function mapSaturation(scale: number): number {
+  // Scale 1-9 maps to saturation 0.1-3.0
+  // Scale 5 = normal (1.0), Scale 1 = desaturated (0.1), Scale 9 = highly saturated (3.0)
+  return 0.1 + ((scale - 1) / 8) * 2.9;
+}
+
+function mapBlur(scale: number): number {
+  // Scale 1-9 maps to blur 0.3-3.5 (increased max blur for more effect)
+  // Scale 1 = minimal blur (0.3), Scale 9 = maximum blur (3.5)
+  return 0.3 + ((scale - 1) / 8) * 3.2;
+}
+
+function mapContrast(scale: number): number {
+  // Scale 1-9 maps to contrast 0.1-3.0
+  // Scale 5 = normal (1.0), Scale 1 = low contrast (0.1), Scale 9 = high contrast (3.0)
+  return 0.1 + ((scale - 1) / 8) * 2.9;
 }
 
 export async function processImage(params: ImageParams): Promise<Buffer> {
@@ -32,24 +51,27 @@ export async function processImage(params: ImageParams): Promise<Buffer> {
   // Start pipeline
   let pipeline = sharp(imagePath).resize(width, height, { fit: "cover" });
   
-  // Apply effects
+  // Apply effects using 1-9 scale
   if (saturation !== undefined && saturation !== null) {
-    const saturationValue = parseFloat(saturation.toString());
-    if (!isNaN(saturationValue) && saturationValue >= 0 && saturationValue <= 3) {
+    const saturationScale = parseInt(saturation.toString());
+    if (!isNaN(saturationScale) && saturationScale >= 1 && saturationScale <= 9) {
+      const saturationValue = mapSaturation(saturationScale);
       pipeline = pipeline.modulate({ saturation: saturationValue });
     }
   }
   
   if (blur !== undefined && blur !== null) {
-    const blurValue = parseFloat(blur.toString());
-    if (!isNaN(blurValue) && blurValue > 0 && blurValue <= 20) {
+    const blurScale = parseInt(blur.toString());
+    if (!isNaN(blurScale) && blurScale >= 1 && blurScale <= 9) {
+      const blurValue = mapBlur(blurScale);
       pipeline = pipeline.blur(blurValue);
     }
   }
   
-  if (contrast) {
-    const contrastValue = parseFloat(contrast.toString());
-    if (!isNaN(contrastValue) && contrastValue >= 0.1 && contrastValue <= 3.0) {
+  if (contrast !== undefined && contrast !== null) {
+    const contrastScale = parseInt(contrast.toString());
+    if (!isNaN(contrastScale) && contrastScale >= 1 && contrastScale <= 9) {
+      const contrastValue = mapContrast(contrastScale);
       pipeline = pipeline.linear(contrastValue, -(contrastValue * 0.5) + 0.5);
     }
   }

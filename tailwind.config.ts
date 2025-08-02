@@ -28,6 +28,9 @@ const config: Config = {
         sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-geist-mono)', 'monospace'],
       },
+      fontSize: {
+        xs: ['0.5rem', { lineHeight: '0.9rem' }], // Even smaller than default 0.75rem
+      },
     },
   },
   plugins: [
