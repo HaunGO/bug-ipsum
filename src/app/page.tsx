@@ -53,36 +53,41 @@ export default function HomePage() {
             />
           </CardBox>
         </Section>
-{/* 
-        <Section title="IMAGE SELECTION" className="">
-          <UrlExample>?image={'{index}'}</UrlExample>
-          <CardBox variant="scroll">
+
+        <Section title="Saturation" className="">
+          <h2>Saturation <code>?saturation={'{1-9}'}</code></h2>
+          <CardBox variant="fit">
             <ImageCard 
               width={300}
-              height={200}
-              title="Image 0"
-              caption="GET /300/200?image=0"
-              src="/api/300/200?image=0"
+              height={250}
+              title="None"
+              caption="?saturation=1"
+              src="/api/300/251?image=0&saturation=1"
             />
             <ImageCard 
               width={300}
-              height={200}
-              title="Image 1"
-              caption="GET /300/200?image=1"
-              src="/api/300/200?image=1"
+              height={250}
+              title="Low"
+              caption="?saturation=2"
+              src="/api/300/251?image=0&saturation=2"
             />
             <ImageCard 
               width={300}
-              height={200}
-              title="Image 2"
-              caption="GET /300/200?image=2"
-              src="/api/300/200?image=2"
+              height={250}
+              title="High"
+              caption="?saturation=7"
+              src="/api/300/251?image=0&saturation=7"
+            />
+            <ImageCard 
+              width={300}
+              height={250}
+              title="Max"
+              caption="?saturation=9"
+              src="/api/300/251?image=0&saturation=9"
             />
           </CardBox>
         </Section>
-         */}
-
-<Section title="Blur" className="">
+        <Section title="Blur" className="">
           <h2>Blur <code>?blur={'{1-9}'}</code></h2>
           <CardBox variant="fit">
             <ImageCard 
@@ -98,6 +103,13 @@ export default function HomePage() {
               title="Low"
               caption="?blur=3"
               src="/api/300/300?image=1&blur=3"
+            />
+            <ImageCard 
+              width={300}
+              height={300}
+              title="Low"
+              caption="?blur=5"
+              src="/api/300/300?image=1&blur=5"
             />
 
             <ImageCard 
@@ -118,46 +130,6 @@ export default function HomePage() {
         </Section>
 
 
-        <Section title="Saturation" className="">
-          <h2>Saturation <code>?saturation={'{1-9}'}</code></h2>
-          <CardBox variant="fit">
-            <ImageCard 
-              width={250}
-              height={300}
-              title="None"
-              caption="?saturation=1"
-              src="/api/250/300?image=0&saturation=1"
-            />
-            <ImageCard 
-              width={250}
-              height={300}
-              title="Low"
-              caption="?saturation=2"
-              src="/api/250/300?image=0&saturation=2"
-            />
-            <ImageCard 
-              width={250}
-              height={300}
-              title="Mild"
-              caption="?saturation=3"
-              src="/api/250/300?image=0&saturation=3"
-            />
-            <ImageCard 
-              width={250}
-              height={300}
-              title="High"
-              caption="?saturation=7"
-              src="/api/250/300?image=0&saturation=7"
-            />
-            <ImageCard 
-              width={250}
-              height={300}
-              title="Max"
-              caption="?saturation=9"
-              src="/api/250/300?image=0&saturation=9"
-            />
-          </CardBox>
-        </Section>
 
         <Section title="Contrast" className="">
           <h2>Contrast <code>?contrast={'{1-9}'}</code></h2>

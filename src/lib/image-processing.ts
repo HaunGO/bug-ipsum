@@ -14,9 +14,9 @@ export interface ImageParams {
 
 // Helper functions to map 1-9 scale to actual effect values
 function mapSaturation(scale: number): number {
-  // Scale 1-9 maps to saturation 0.1-3.0
-  // Scale 5 = normal (1.0), Scale 1 = desaturated (0.1), Scale 9 = highly saturated (3.0)
-  return 0.1 + ((scale - 1) / 8) * 2.9;
+  // Scale 1-9 maps to saturation 0.1-4.5
+  // Scale 5 = normal (1.0), Scale 1 = desaturated (0.1), Scale 9 = highly saturated (4.5)
+  return 0.1 + ((scale - 1) / 8) * 4.4;
 }
 
 function mapBlur(scale: number): number {

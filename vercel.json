@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/bugipsum/(.*)",
+      "destination": "/$1"
+    },
+    {
+      "source": "/bugipsum",
+      "destination": "/"
+    }
+  ]
+}
