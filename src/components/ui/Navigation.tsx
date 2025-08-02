@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { ThemeToggle } from './ThemeToggle';
-// import { useTheme } from '../../lib/theme';
+import Image from 'next/image';
+import { useTheme } from '../../lib/theme';
 
 // const navigation = [
 //   // { name: 'Home', href: '/' },
@@ -16,6 +17,9 @@ import { ThemeToggle } from './ThemeToggle';
 export function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const logoSrc = resolvedTheme === 'dark' ? '/images/logo-white.png' : '/images/logo-black.png';
+
 
   return (
     <nav className="main-nav">
@@ -23,9 +27,16 @@ export function Navigation() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="nav-brand">
-              <span className="nav-brand-text">
+              {/* <span className="nav-brand-text">
                 Bug Ipsum
-              </span>
+              </span> */}
+              <Image 
+                  src={logoSrc}
+                  alt="Bug Ipsum Logo"
+                  width={100}
+                  height={40}
+                  style={{ objectFit: 'contain' }}
+                />
             </Link>
             
             <div className="nav-menu">
@@ -64,7 +75,7 @@ export function Navigation() {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200 dark:border-gray-700">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200 dark:border-gray-500">
               {/* {navigation.map((item) => (
                 <Link
                   key={item.name}

@@ -14,13 +14,18 @@ export default function HomePage() {
         
         <Header 
           title="Bug Ipsum"
-          subtitle="A buggy image generator"
+          subtitle="A buggy little placeholder image generator."
           className="mb-12"
         />
         
         {/* <Section title="SOURCE IMAGES" className="">
           <ImageGallery title="SOURCE IMAGES" />
         </Section> */}
+
+
+{/* <Image src="/images/logo.png" alt="logo" width={100} height={100} />  */}
+
+
 
         <Section title="Basic Width/Height" className="">
           <h2>Basic <code>/{'{width}'}/{'{height}'}</code></h2>
@@ -160,15 +165,15 @@ export default function HomePage() {
               width={200}
               height={300}
               title="High"
-              caption="?contrast=7"
-              src="/api/200/300?image=2&contrast=7"
+              caption="?contrast=5"
+              src="/api/200/300?image=2&contrast=5"
             />
             <ImageCard 
               width={200}
               height={300}
               title="Higher"
-              caption="?contrast=8"
-              src="/api/200/300?image=2&contrast=8"
+              caption="?contrast=7"
+              src="/api/200/300?image=2&contrast=7"
             />
             <ImageCard 
               width={200}

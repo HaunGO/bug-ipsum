@@ -122,13 +122,13 @@
   }
 
   /* Header */
-  .page-header {
+  /* .page-header {
     @apply border-b border-gray-200 dark:border-gray-700 py-12;
   }
 
   .page-header__container {
     @apply max-w-4xl mx-auto;
-  }
+  } */
 
   /* Image Cards */
   /* .image-card {
