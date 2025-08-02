@@ -298,6 +298,79 @@ export default function HomePage() {
           </CardBox>
         </Section>
 
+        <Section title="Sample URLs">
+          <h2>Ready-to-use examples</h2>
+          <div>
+            
+            {/* Basic Examples */}
+            <div>
+              <h3>Basic Sizes</h3>
+              <div>
+                <div><a href="/api">/api</a> - Default square</div>
+                <div><a href="/api/400/600">/api/400/600</a> - Portrait</div>
+                <div><a href="/api/800/400">/api/800/400</a> - Landscape</div>
+                <div><a href="/api/200/200">/api/200/200</a> - Small square</div>
+              </div>
+            </div>
+
+            {/* Color Effects */}
+            <div>
+              <h3>Color Tints</h3>
+              <div>
+                <div><a href="/api/400/300?tint=ff6b6b">/api/400/300?tint=ff6b6b</a> - Red</div>
+                <div><a href="/api/400/300?tint=4ecdc4">/api/400/300?tint=4ecdc4</a> - Ocean blue</div>
+                <div><a href="/api/400/300?tint=ff922b">/api/400/300?tint=ff922b</a> - Orange</div>
+                <div><a href="/api/400/300?tint=ae3ec9">/api/400/300?tint=ae3ec9</a> - Purple</div>
+              </div>
+            </div>
+
+            {/* Single Effects */}
+            <div>
+              <h3>Single Effects</h3>
+              <div>
+                <div><a href="/api/400/300?saturation=9">/api/400/300?saturation=9</a> - Max saturation</div>
+                <div><a href="/api/400/300?blur=8">/api/400/300?blur=8</a> - Heavy blur</div>
+                <div><a href="/api/400/300?contrast=9">/api/400/300?contrast=9</a> - High contrast</div>
+                <div><a href="/api/400/300?saturation=1">/api/400/300?saturation=1</a> - Desaturated</div>
+              </div>
+            </div>
+
+            {/* Preset Combos */}
+            <div>
+              <h3>Preset Styles</h3>
+              <div>
+                <div><a href="/api/500/300?saturation=8&contrast=7&blur=2&tint=00ffff">/api/500/300?saturation=8&contrast=7&blur=2&tint=00ffff</a> - Cyberpunk</div>
+                <div><a href="/api/500/300?tint=8b4513&contrast=3&blur=2&saturation=3">/api/500/300?tint=8b4513&contrast=3&blur=2&saturation=3</a> - Vintage</div>
+                <div><a href="/api/500/300?saturation=7&contrast=7&tint=ff8533&blur=2">/api/500/300?saturation=7&contrast=7&tint=ff8533&blur=2</a> - Desert heat</div>
+              </div>
+            </div>
+
+            {/* Use Cases */}
+            <div>
+              <h3>Common Use Cases</h3>
+              <div>
+                <div><a href="/api/150/150?blur=3&saturation=6">/api/150/150?blur=3&saturation=6</a> - Avatar</div>
+                <div><a href="/api/1200/400?tint=6366f1&saturation=5&contrast=6">/api/1200/400?tint=6366f1&saturation=5&contrast=6</a> - Hero banner</div>
+                <div><a href="/api/280/200?blur=1&saturation=7">/api/280/200?blur=1&saturation=7</a> - Thumbnail</div>
+              </div>
+            </div>
+
+            {/* API Info */}
+            <div>
+              <h3>API Reference</h3>
+              <div>
+                <div><strong>Format:</strong> <code>/api/width/height</code></div>
+                <div><strong>Parameters:</strong></div>
+                <div>• <code>saturation=1-9</code></div>
+                <div>• <code>blur=1-9</code></div>
+                <div>• <code>contrast=1-9</code></div>
+                <div>• <code>tint=hexcolor</code></div>
+                <div>• <code>image=0-2</code></div>
+              </div>
+            </div>
+
+          </div>
+        </Section>
 
       </div>
       
