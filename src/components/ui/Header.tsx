@@ -15,15 +15,7 @@ export function Header({ title, subtitle, className = '' }: HeaderProps) {
 
   return (
     <header className={`page-header ${className}`}>
-      {/* <Image 
-        src={logoSrc}
-        alt="Bug Ipsum Logo"
-        width={300}
-        height={100}
-        style={{ objectFit: 'contain' }}
-      /> */}
-      {/* <h1 style={{ margin: 0 }}>{title}</h1> */}
-      <p className="lead">{subtitle}</p>
+      {/* <h1 className="h1">{subtitle}</h1> */}
     </header>
   );
 } 

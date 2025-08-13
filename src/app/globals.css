@@ -20,7 +20,7 @@
 
   /* Headings */
   h1 {
-    @apply text-4xl font-bold text-gray-900 dark:text-white mb-4;
+    @apply text-4xl font-bold text-gray-900 dark:text-white mt-4;
   }
 
   h2 {
@@ -149,6 +149,6 @@
 
   /* Utility classes */
   /* .sectionScroller {
-    @apply w-screen -ml-[50vw] left-1/2 relative overflow-x-auto px-8;
+    @apply w-screen -ml-[70vw] left-1/2 relative overflow-x-auto px-8;
   } */
 }

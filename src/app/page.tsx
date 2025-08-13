@@ -10,24 +10,22 @@ import { Footer } from '@/components/ui/Footer';
 export default function HomePage() {
   return (
     <div className="bg-white dark:bg-gray-900">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <Header 
           title="Bug Ipsum"
-          subtitle="A buggy little placeholder image generator."
-          className="mb-12"
+          subtitle="A buggy little placeholder image service."
+          className=""
         />
-        
-        {/* <Section title="SOURCE IMAGES" className="">
-          <ImageGallery title="SOURCE IMAGES" />
-        </Section> */}
+      </div>        
 
+      <ImageGallery />
 
 {/* <Image src="/images/logo.png" alt="logo" width={100} height={100} />  */}
 
 
+<div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <Section title="Basic Width/Height" className="">
+        <Section title="Basic Width/Height" className="hidden">
           <h2>Basic <code>/{'{width}'}/{'{height}'}</code></h2>
           <CardBox variant="scroll">
           
@@ -59,39 +57,55 @@ export default function HomePage() {
           </CardBox>
         </Section>
 
-        <Section title="Saturation" className="">
-          <h2>Saturation <code>?saturation={'{1-9}'}</code></h2>
+        <Section title="Contrast" className="">
+          <h2>Contrast <code>?contrast={'{1-9}'}</code></h2>
           <CardBox variant="fit">
             <ImageCard 
               width={300}
-              height={250}
-              title="None"
-              caption="?saturation=1"
-              src="/api/300/251?image=0&saturation=1"
+              height={300}
+              title="Min"
+              caption="?contrast=2"
+              src="/api/300/300?image=2&contrast=2"
             />
             <ImageCard 
               width={300}
-              height={250}
+              height={300}
               title="Low"
-              caption="?saturation=2"
-              src="/api/300/251?image=0&saturation=2"
+              caption="?contrast=3"
+              src="/api/300/300?image=2&contrast=3"
             />
             <ImageCard 
               width={300}
-              height={250}
+              height={300}
+              title="Mid"
+              caption="?contrast=5"
+              src="/api/300/300?image=2&contrast=5"
+            />
+
+            <ImageCard 
+              width={300}
+              height={300}
               title="High"
-              caption="?saturation=7"
-              src="/api/300/251?image=0&saturation=7"
+              caption="?contrast=7"
+              src="/api/300/300?image=2&contrast=7"
             />
+            {/* <ImageCard 
+              width={300}
+              height={300}
+              title="Higher"
+              caption="?contrast=7"
+              src="/api/300/300?image=2&contrast=7"
+            /> */}
             <ImageCard 
               width={300}
-              height={250}
+              height={300}
               title="Max"
-              caption="?saturation=9"
-              src="/api/300/251?image=0&saturation=9"
+              caption="?contrast=9"
+              src="/api/300/300?image=2&contrast=9"
             />
           </CardBox>
         </Section>
+
         <Section title="Blur" className="">
           <h2>Blur <code>?blur={'{1-9}'}</code></h2>
           <CardBox variant="fit">
@@ -112,18 +126,18 @@ export default function HomePage() {
             <ImageCard 
               width={300}
               height={300}
-              title="Low"
-              caption="?blur=5"
-              src="/api/300/300?image=1&blur=5"
+              title="Mid"
+              caption="?blur=6"
+              src="/api/300/300?image=1&blur=6"
             />
 
-            <ImageCard 
+            {/* <ImageCard 
               width={300}
               height={300}
               title="High"
               caption="?blur=7"
               src="/api/300/300?image=1&blur=7"
-            />
+            /> */}
             <ImageCard 
               width={300}
               height={300}
@@ -134,53 +148,36 @@ export default function HomePage() {
           </CardBox>
         </Section>
 
-
-
-        <Section title="Contrast" className="">
-          <h2>Contrast <code>?contrast={'{1-9}'}</code></h2>
+        <Section title="Saturation" className="">
+          <h2>Saturation <code>?saturation={'{1-9}'}</code></h2>
           <CardBox variant="fit">
+            {/* <ImageCard 
+              width={300}
+              height={250}
+              title="None"
+              caption="?saturation=1"
+              src="/api/300/251?image=0&saturation=1"
+            /> */}
             <ImageCard 
-              width={200}
-              height={300}
+              width={400}
+              height={250}
               title="Min"
-              caption="?contrast=1"
-              src="/api/200/300?image=2&contrast=1"
+              caption="?saturation=1"
+              src="/api/300/251?image=0&saturation=1"
             />
             <ImageCard 
-              width={200}
-              height={300}
-              title="Low"
-              caption="?contrast=2"
-              src="/api/200/300?image=2&contrast=2"
+              width={400}
+              height={251}
+              title="Mid"
+              caption="?saturation=3"
+              src="/api/300/251?image=0&saturation=3"
             />
             <ImageCard 
-              width={200}
-              height={300}
-              title="Medium"
-              caption="?contrast=3"
-              src="/api/200/300?image=2&contrast=3"
-            />
-
-            <ImageCard 
-              width={200}
-              height={300}
-              title="High"
-              caption="?contrast=5"
-              src="/api/200/300?image=2&contrast=5"
-            />
-            <ImageCard 
-              width={200}
-              height={300}
-              title="Higher"
-              caption="?contrast=7"
-              src="/api/200/300?image=2&contrast=7"
-            />
-            <ImageCard 
-              width={200}
-              height={300}
+              width={400}
+              height={251}
               title="Max"
-              caption="?contrast=9"
-              src="/api/200/300?image=2&contrast=9"
+              caption="?saturation=9"
+              src="/api/300/251?image=0&saturation=9"
             />
           </CardBox>
         </Section>
@@ -240,7 +237,7 @@ export default function HomePage() {
           </CardBox>
         </Section>
 
-        <Section title="Combinations" className="">
+        <Section title="Examples" className="">
           <h2>Preset Styles</h2>
           <CardBox variant="wrap">
             <ImageCard 

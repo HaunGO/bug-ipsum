@@ -6,7 +6,8 @@ interface SectionProps {
 
 export function Section({ title, children, className = "" }: SectionProps) {
   return (
-    <section title={title} className="content-section">      
+    <section className={`content-section ${className}`}>      
+      {/* <h2 className="section-title">{title}</h2> */}
       <div>
         {children}
       </div>
