@@ -9,7 +9,7 @@ export interface ImageParams {
   blur?: number; // Blur level: 1-9 scale (1 = minimal blur, 9 = maximum blur)
   tint?: string;
   contrast?: number; // Contrast level: 1-9 scale (1 = minimal contrast, 5 = normal, 9 = maximum)
-  image?: number; // Index of the image to use (0, 1, 2)
+  image?: number; // Index of the image to use (0-25 for the new bug images)
 }
 
 // Helper functions to map 1-9 scale to actual effect values
@@ -34,8 +34,38 @@ function mapContrast(scale: number): number {
 export async function processImage(params: ImageParams): Promise<Buffer> {
   const { width, height, saturation, blur, tint, contrast, image } = params;
   
-  // Pick image based on parameter or random
-  const imageFiles = ['1.jpg', '2.jpg', '3.jpg'];
+  // Updated image list with the new bug images
+  const imageFiles = [
+    'leaf-footed-bug-on-a-window-2.jpg',
+    'black-widow-underbelly.jpg',
+    'leaf-footed-bug-on-a-window-1.jpg',
+    'big-brown-moth-2.jpg',
+    'cotton-candy-moth.jpg',
+    'easter-bugs-3.jpg',
+    'ladybug-softy.jpg',
+    'easter-bugs-1.jpg',
+    'easter-bugs-2.jpg',
+    'ladybug-macro.jpg',
+    'beetle-on-a-leaf_27937308242_o.jpg',
+    'macro-fly.jpg',
+    'little-green-leaf-bug.jpg',
+    'bug-juice.jpg',
+    'jumping-spider.jpg',
+    'rolley-polley.jpg',
+    'big-harry-tarantula.jpg',
+    'inch-worm-macro-2.jpg',
+    'inch-worm-macro-1.jpg',
+    'spider-in-white.jpg',
+    'unknown-red-bug.jpg',
+    'under-ladybug-skirt.jpg',
+    'beetles-under-tree-bark-macro-1.jpg',
+    'beetles-under-tree-bark-macro-2.jpg',
+    'bug-silhouette-on-screen.jpg',
+    'bumble-bee.jpg',
+    'potato-beetle.jpg',
+    'big-fly.jpg'
+  ];
+  
   let selectedImage: string;
   
   if (image !== undefined && image >= 0 && image < imageFiles.length) {
@@ -46,7 +76,7 @@ export async function processImage(params: ImageParams): Promise<Buffer> {
     selectedImage = imageFiles[randomIndex];
   }
   
-  const imagePath = path.join(process.cwd(), 'public', 'images', selectedImage);
+  const imagePath = path.join(process.cwd(), 'public', 'images', 'bugs', 'only', selectedImage);
   
   // Start pipeline
   let pipeline = sharp(imagePath).resize(width, height, { fit: "cover" });

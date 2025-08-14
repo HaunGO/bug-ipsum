@@ -6,7 +6,7 @@ interface FooterProps {
 export function Footer({ className = '', children }: FooterProps) {
   return (
     <footer className={`site-footer ${className}`}>
-      {children || <p><em>It's not a bug, it's a feature.</em></p>}
+      {children || <p><em>Every bug is a feature waiting to be discovered.</em></p>}
     </footer>
   );
 } 
