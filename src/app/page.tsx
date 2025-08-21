@@ -13,7 +13,7 @@ export default function HomePage() {
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <Header 
           title="Bug Ipsum"
-          subtitle="A creepy-crawly placeholder image service featuring real bug photography."
+          subtitle="A buggy placeholder image service featuring real bug photography."
           className=""
         />
       </div>        
@@ -25,7 +25,7 @@ export default function HomePage() {
 
 <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <Section title="Basic Width/Height" className="hidden">
+        <Section title="Basic Width/Height" className="">
           <h2>Basic <code>/{'{width}'}/{'{height}'}</code></h2>
           <CardBox variant="scroll">
           
@@ -44,120 +44,23 @@ export default function HomePage() {
               height={300}
               title="Tall"
               caption="/100/300"
-              src="/api/100/300?image=16"
-            />
+              src="/api/100/300?image=19" />
 
             <ImageCard 
               width={800}
               height={300}
               title="Wide"
               caption="/800/300"
-              src="/api/800/300?image=4"
+              src="/api/800/300?image=16"
             />
           </CardBox>
         </Section>
 
-        <Section title="Contrast" className="">
-          <h2>Contrast <code>?contrast={'{1-9}'}</code></h2>
-          <CardBox variant="fit">
-            <ImageCard 
-              width={300}
-              height={300}
-              title="Min"
-              caption="?contrast=2"
-              src="/api/300/300?image=14&contrast=2"
-            />
-            <ImageCard 
-              width={300}
-              height={300}
-              title="Low"
-              caption="?contrast=3"
-              src="/api/300/300?image=14&contrast=3"
-            />
-            <ImageCard 
-              width={300}
-              height={300}
-              title="Mid"
-              caption="?contrast=5"
-              src="/api/300/300?image=14&contrast=5"
-            />
 
-            <ImageCard 
-              width={300}
-              height={300}
-              title="High"
-              caption="?contrast=7"
-              src="/api/300/300?image=14&contrast=7"
-            />
-            {/* <ImageCard 
-              width={300}
-              height={300}
-              title="Higher"
-              caption="?contrast=7"
-              src="/api/300/300?image=14&contrast=7"
-            /> */}
-            <ImageCard 
-              width={300}
-              height={300}
-              title="Max"
-              caption="?contrast=9"
-              src="/api/300/300?image=14&contrast=9"
-            />
-          </CardBox>
-        </Section>
-
-        <Section title="Blur" className="">
-          <h2>Blur <code>?blur={'{1-9}'}</code></h2>
-          <CardBox variant="fit">
-            <ImageCard 
-              width={300}
-              height={300}
-              title="Min"
-              caption="?blur=1"
-              src="/api/300/300?image=25&blur=1"
-            />
-            <ImageCard 
-              width={300}
-              height={300}
-              title="Low"
-              caption="?blur=3"
-              src="/api/300/300?image=25&blur=3"
-            />
-            <ImageCard 
-              width={300}
-              height={300}
-              title="Mid"
-              caption="?blur=6"
-              src="/api/300/300?image=25&blur=6"
-            />
-
-            {/* <ImageCard 
-              width={300}
-              height={300}
-              title="High"
-              caption="?blur=7"
-              src="/api/300/300?image=25&blur=7"
-            /> */}
-            <ImageCard 
-              width={300}
-              height={300}
-              title="Max"
-              caption="?blur=9"
-              src="/api/300/300?image=25&blur=9"
-            />
-          </CardBox>
-        </Section>
 
         <Section title="Saturation" className="">
           <h2>Saturation <code>?saturation={'{1-9}'}</code></h2>
           <CardBox variant="fit">
-            {/* <ImageCard 
-              width={300}
-              height={250}
-              title="None"
-              caption="?saturation=1"
-              src="/api/300/251?image=0&saturation=1"
-            /> */}
             <ImageCard 
               width={400}
               height={250}
@@ -182,6 +85,100 @@ export default function HomePage() {
           </CardBox>
         </Section>
 
+
+        <Section title="Blur" className="">
+          <h2>Blur <code>?blur={'{1-9}'}</code></h2>
+          <CardBox variant="fit">
+            <ImageCard 
+              width={300}
+              height={300}
+              title="Min"
+              caption="?blur=1"
+              src="/api/300/300?image=14&blur=1"
+            />
+            <ImageCard 
+              width={300}
+              height={300}
+              title="Low"
+              caption="?blur=3"
+              src="/api/300/300?image=14&blur=3"
+            />
+            <ImageCard 
+              width={300}
+              height={300}
+              title="Mid"
+              caption="?blur=6"
+              src="/api/300/300?image=14&blur=6"
+            />
+
+            {/* <ImageCard 
+              width={300}
+              height={300}
+              title="High"
+              caption="?blur=7"
+              src="/api/300/300?image=25&blur=7"
+            /> */}
+            <ImageCard 
+              width={300}
+              height={300}
+              title="Max"
+              caption="?blur=9"
+              src="/api/300/300?image=14&blur=9"
+            />
+          </CardBox>
+        </Section>
+
+
+        <Section title="Contrast" className="">
+          <h2>Contrast <code>?contrast={'{1-9}'}</code></h2>
+          <CardBox variant="fit">
+            <ImageCard 
+              width={300}
+              height={300}
+              title="Min"
+              caption="?contrast=2"
+              src="/api/300/300?image=10&contrast=2"
+            />
+            <ImageCard 
+              width={300}
+              height={300}
+              title="Low"
+              caption="?contrast=3"
+              src="/api/300/300?image=10&contrast=3"
+            />
+            <ImageCard 
+              width={300}
+              height={300}
+              title="Mid"
+              caption="?contrast=5"
+              src="/api/300/300?image=10&contrast=5"
+            />
+
+            <ImageCard 
+              width={300}
+              height={300}
+              title="High"
+              caption="?contrast=7"
+              src="/api/300/300?image=10&contrast=7"
+            />
+            {/* <ImageCard 
+              width={300}
+              height={300}
+              title="Higher"
+              caption="?contrast=7"
+              src="/api/300/300?image=10&contrast=7"
+            /> */}
+            <ImageCard 
+              width={300}
+              height={300}
+              title="Max"
+              caption="?contrast=9"
+              src="/api/300/300?image=10&contrast=9"
+            />
+          </CardBox>
+        </Section>
+
+
         <Section title="Tint of Color" className="">
           <h2>Tint of Color <code>?tint={'{hex-color}'}</code></h2>
           <CardBox variant="fit">
@@ -190,28 +187,28 @@ export default function HomePage() {
               height={30}
               title="Red"
               caption="?tint=ff6b6b"
-              src="/api/200/300?image=16&tint=ff6b6b"
+              src="/api/200/300?image=0&tint=ff6b6b"
             />
             <ImageCard 
               width={200}
               height={30}
               title="Orange"
               caption="?tint=ff922b"
-              src="/api/200/300?image=16&tint=ff922b"
+              src="/api/200/300?image=0&tint=ff922b"
             />
             <ImageCard 
               width={200}
               height={30}
               title="Yellow"
               caption="?tint=ffd93d"
-              src="/api/200/300?image=16&tint=ffd93d"
+              src="/api/200/300?image=0&tint=ffd93d"
             />
             <ImageCard 
               width={200}
               height={30}
               title="Green"
               caption="?tint=51cf66"
-              src="/api/200/300?image=16&tint=51cf66"
+              src="/api/200/300?image=0&tint=51cf66"
             />
             <ImageCard 
               width={200}
@@ -236,6 +233,9 @@ export default function HomePage() {
             />
           </CardBox>
         </Section>
+
+
+
 
         <Section title="Examples" className="">
           <h2>Preset Styles</h2>

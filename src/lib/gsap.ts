@@ -1,8 +1,9 @@
 import { gsap } from 'gsap';
 
 // Register GSAP plugins if needed
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+gsap.registerPlugin(ScrollTrigger);
 // gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 // Common animation configurations

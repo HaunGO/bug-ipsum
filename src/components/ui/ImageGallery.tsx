@@ -2,21 +2,47 @@
 
 import { ImageCard } from './ImageCard';
 import { useEffect, useRef } from 'react';
-import { gsap } from '@/lib/gsap';
 import { bugImages, getImageByIndex } from '@/lib/bug-images';
+import { gsap } from '@/lib/gsap';
 
 interface ImageGalleryProps {
   title?: string;
 }
 
+// ===== ANIMATION CONFIGURATION VARIABLES =====
+// Adjust these values to customize the scrolling behavior
+
+// Speed and Timing
+const ANIMATION_SPEED = 60; // Duration in seconds for one complete back-and-forth cycle
+const PAUSE_DURATION = 0.5; // Seconds to wait after manual scroll before resuming auto-scroll
+
+// Scroll Range and Behavior
+const SCROLL_RANGE_PERCENT = 60; // Percentage of content width to scroll (0-100)
+const SCROLL_DIRECTION = 'back-and-forth'; // 'back-and-forth' or 'continuous-loop'
+
+// Easing and Animation Style
+const EASING_FUNCTION = 'power1.inOut'; // GSAP easing: 'none', 'power1.inOut', 'power2.inOut', 'back.inOut', etc.
+const EASING_STRENGTH = 1; // Strength multiplier for easing (1 = normal, 2 = stronger, 0.5 = gentler)
+
+// ScrollTrigger Settings
+const SCROLLTRIGGER_START = 'top bottom'; // When to start animation ('top bottom' = when top of gallery enters bottom of viewport)
+const SCROLLTRIGGER_END = 'bottom top'; // When to end animation ('bottom top' = when bottom of gallery leaves top of viewport)
+const SCROLLTRIGGER_TOGGLE_ACTIONS = 'play pause resume pause'; // Animation control: 'play pause resume pause'
+
+// Performance and Responsiveness
+const MANUAL_SCROLL_THRESHOLD = 5; // Minimum scroll delta to detect manual scrolling
+const RESUME_DELAY = 500; // Milliseconds to wait before resuming after manual scroll
+
+// ===== END CONFIGURATION VARIABLES =====
+
 export function ImageGallery({ title = "" }: ImageGalleryProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const scrollTimelineRef = useRef<gsap.core.Timeline | null>(null);
   const isUserScrollingRef = useRef(false);
   const lastScrollLeftRef = useRef(0);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const animationDurationRef = useRef(100);
+  const animationRef = useRef<gsap.core.Timeline | null>(null);
+  const isAnimatingRef = useRef(false);
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
@@ -24,87 +50,88 @@ export function ImageGallery({ title = "" }: ImageGalleryProps) {
     
     if (!scrollContainer || !content || bugImages.length === 0) return;
 
-    // For seamless loop, we scroll exactly half the content width (since content is duplicated)
-    const halfWidth = content.scrollWidth / 2;
+    // Calculate scroll range based on configuration
+    const maxScrollWidth = content.scrollWidth - scrollContainer.clientWidth;
+    const scrollRange = (maxScrollWidth * SCROLL_RANGE_PERCENT) / 100;
     
     // Set initial position
     scrollContainer.scrollLeft = 0;
     
-    // Create seamless infinite scroll
-    const scrollTimeline = gsap.timeline({ repeat: -1 });
-    scrollTimelineRef.current = scrollTimeline;
-    
-    const animateScroll = (startFrom?: number) => {
-      if (isUserScrollingRef.current) return;
-      
-      // Kill any existing animation
-      scrollTimeline.kill();
-      
-      // Create new timeline
-      const newTimeline = gsap.timeline({ repeat: -1 });
-      scrollTimelineRef.current = newTimeline;
-      
-      const startPosition = startFrom !== undefined ? startFrom : scrollContainer.scrollLeft;
-      const targetPosition = startPosition + halfWidth;
-      
-      // Calculate remaining duration based on progress
-      const progress = startPosition / halfWidth;
-      const remainingDuration = animationDurationRef.current * (1 - progress);
-      
-      newTimeline.to(scrollContainer, {
-        scrollLeft: targetPosition,
-        duration: remainingDuration,
-        ease: "none",
-        onComplete: () => {
-          // Reset to start position for seamless loop
-          scrollContainer.scrollLeft = 0;
-          // Start next cycle
-          animateScroll(0);
+    // Create the back-and-forth animation timeline
+    const createAnimation = () => {
+      if (animationRef.current) {
+        animationRef.current.kill();
+      }
+
+      const tl = gsap.timeline({
+        repeat: -1,
+        yoyo: true,
+        ease: EASING_FUNCTION,
+        onUpdate: () => {
+          if (scrollContainer && !isUserScrollingRef.current) {
+            scrollContainer.scrollLeft = tl.progress() * scrollRange;
+          }
         }
       });
+
+      // Animate to the right
+      tl.to({}, {
+        duration: ANIMATION_SPEED / 2,
+        ease: EASING_FUNCTION,
+        onUpdate: () => {
+          if (scrollContainer && !isUserScrollingRef.current) {
+            const progress = tl.progress();
+            scrollContainer.scrollLeft = progress * scrollRange;
+          }
+        }
+      });
+
+      // Animate back to the left (yoyo will handle this automatically)
+      animationRef.current = tl;
+      isAnimatingRef.current = true;
     };
 
     // Start the animation
-    animateScroll();
-
+    createAnimation();
+    
     // Handle manual scrolling
     const handleScroll = () => {
       const currentScrollLeft = scrollContainer.scrollLeft;
-      const scrollDelta = Math.abs(currentScrollLeft - lastScrollLeftRef.current);
+      const scrollDelta = currentScrollLeft - lastScrollLeftRef.current;
       
-      // If user is scrolling manually (significant scroll delta)
-      if (scrollDelta > 5) {
+      if (Math.abs(scrollDelta) > MANUAL_SCROLL_THRESHOLD) {
         isUserScrollingRef.current = true;
         
-        // Pause current animation
-        if (scrollTimelineRef.current) {
-          scrollTimelineRef.current.pause();
+        // Pause the animation
+        if (animationRef.current) {
+          animationRef.current.pause();
         }
         
-        // Resume animation after user stops scrolling
+        // Clear existing timeout
         if (scrollTimeoutRef.current) {
           clearTimeout(scrollTimeoutRef.current);
         }
+        
+        // Keep animation paused after manual scroll
         scrollTimeoutRef.current = setTimeout(() => {
           isUserScrollingRef.current = false;
-          // Resume from current position
-          animateScroll(currentScrollLeft);
-        }, 1500); // Wait 1.5 seconds after user stops scrolling
+          // Animation stays paused - user can restart by refreshing or implementing a restart mechanism
+        }, RESUME_DELAY);
       }
       
       lastScrollLeftRef.current = currentScrollLeft;
     };
 
-    // Add scroll event listener
     scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
 
+    // Cleanup function
     return () => {
-      if (scrollTimelineRef.current) {
-        scrollTimelineRef.current.kill();
-      }
       scrollContainer.removeEventListener('scroll', handleScroll);
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
+      }
+      if (animationRef.current) {
+        animationRef.current.kill();
       }
     };
   }, []);
@@ -128,9 +155,9 @@ export function ImageGallery({ title = "" }: ImageGalleryProps) {
 
   return (
       <section className="relative">
-        <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+        <div className="absolute top-[32%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
            <h1 
-            className="text-2xl lg:text-5xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-full p-4 lg:p-8 text-center pointer-events-none shadow-2xl whitespace-nowrap"
+            className="text-2xl lg:text-5xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-full px-4 py-2 lg:px-8 lg:py-3 text-center pointer-events-none shadow-2xl whitespace-nowrap"
             >A buggy little placeholder image service.
            </h1>
         </div>
@@ -212,8 +239,8 @@ export function ImageGallery({ title = "" }: ImageGalleryProps) {
               alt={getImageByIndex(6)}
               className="object-cover w-full h-full rounded"
             />
-      </div>
-    </div>
+          </div>
+        </div>
 
         {/* Second Bento Grid */}
         <div className="grid grid-cols-4 grid-rows-3 gap-2 w-[80vw] lg:w-[900px] flex-none h-full">

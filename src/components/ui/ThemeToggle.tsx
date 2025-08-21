@@ -1,9 +1,15 @@
 'use client';
 
 import { useTheme } from '../../lib/theme';
+import { useEffect, useState } from 'react';
 
 export function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Determine if we should show light or dark based on current theme
   const isDark = theme === 'dark' || (theme === 'system' && resolvedTheme === 'dark');
@@ -15,6 +21,11 @@ export function ThemeToggle() {
       setTheme('dark');
     }
   };
+
+  // Don't render until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return <div className="theme-toggle w-12 h-6 bg-gray-200 rounded-full"></div>;
+  }
 
   return (
     <button
