@@ -1,33 +1,20 @@
 'use client';
 
-import { ImageCard } from './ImageCard';
 import { useEffect, useRef } from 'react';
 import { bugImages, getImageByIndex } from '@/lib/bug-images';
 import { gsap } from '@/lib/gsap';
-
-interface ImageGalleryProps {
-  title?: string;
-}
 
 // ===== ANIMATION CONFIGURATION VARIABLES =====
 // Adjust these values to customize the scrolling behavior
 
 // Speed and Timing
 const ANIMATION_SPEED = 90; // Duration in seconds for one complete back-and-forth cycle
-const PAUSE_DURATION = 0.5; // Seconds to wait after manual scroll before resuming auto-scroll
 
 // Scroll Range and Behavior
 const SCROLL_RANGE_PERCENT = 60; // Percentage of content width to scroll (0-100)
-const SCROLL_DIRECTION = 'back-and-forth'; // 'back-and-forth' or 'continuous-loop'
 
 // Easing and Animation Style
 const EASING_FUNCTION = 'power1.inOut'; // GSAP easing: 'none', 'power1.inOut', 'power2.inOut', 'back.inOut', etc.
-const EASING_STRENGTH = 1; // Strength multiplier for easing (1 = normal, 2 = stronger, 0.5 = gentler)
-
-// ScrollTrigger Settings
-const SCROLLTRIGGER_START = 'top bottom'; // When to start animation ('top bottom' = when top of gallery enters bottom of viewport)
-const SCROLLTRIGGER_END = 'bottom top'; // When to end animation ('bottom top' = when bottom of gallery leaves top of viewport)
-const SCROLLTRIGGER_TOGGLE_ACTIONS = 'play pause resume pause'; // Animation control: 'play pause resume pause'
 
 // Performance and Responsiveness
 const MANUAL_SCROLL_THRESHOLD = 5; // Minimum scroll delta to detect manual scrolling
@@ -35,7 +22,7 @@ const RESUME_DELAY = 500; // Milliseconds to wait before resuming after manual s
 
 // ===== END CONFIGURATION VARIABLES =====
 
-export function ImageGallery({ title = "" }: ImageGalleryProps) {
+export function ImageGallery() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const isUserScrollingRef = useRef(false);
@@ -92,7 +79,7 @@ export function ImageGallery({ title = "" }: ImageGalleryProps) {
     };
 
     // Start the animation
-    // createAnimation();
+    createAnimation();
     
     // Handle manual scrolling
     const handleScroll = () => {

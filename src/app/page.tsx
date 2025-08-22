@@ -6,7 +6,6 @@ import { ImageGallery } from '@/components/ui/ImageGallery';
 import { Header } from '@/components/ui/Header';
 // import { AnimatedCard } from '@/components/ui/AnimatedCard';
 import { Footer } from '@/components/ui/Footer';
-import Image from 'next/image';
 
 export default function HomePage() {
   return (

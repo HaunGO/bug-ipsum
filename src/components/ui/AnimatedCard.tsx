@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { gsap, fadeInUp, scaleIn } from '../../lib/gsap';
+import { gsap, fadeInUp } from '../../lib/gsap';
 
 interface AnimatedCardProps {
   title: string;

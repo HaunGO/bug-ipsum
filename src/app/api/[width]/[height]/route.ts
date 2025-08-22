@@ -38,23 +38,26 @@ export async function GET(
     });
     
     // Set cache headers based on whether it's random or specific
+    const baseHeaders = {
+      'Content-Type': 'image/jpeg'
+    };
+    
     const cacheHeaders = isRandomImage 
       ? {
+          ...baseHeaders,
           'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
           'Pragma': 'no-cache',
           'Expires': '0'
         }
       : {
+          ...baseHeaders,
           'Cache-Control': 'public, max-age=86400, s-maxage=86400, immutable',
           'ETag': `"${crypto.createHash('md5').update(imageBuffer).digest('hex')}"`
         };
     
     // Return response
     return new Response(imageBuffer, {
-      headers: {
-        'Content-Type': 'image/jpeg',
-        ...cacheHeaders
-      },
+      headers: cacheHeaders
     });
     
   } catch (error) {

@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bug Ipsum",
-  description: "A placeholder image generator, showing custom photograpy of bugs.",
+  title: "BugIpsum.com",
+  description: "A buggy little placeholder image service.",
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
