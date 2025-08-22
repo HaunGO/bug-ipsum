@@ -15,11 +15,12 @@ export interface ImageParams {
   tint?: string;
   contrast?: number; // Contrast level: 1-9 scale (1 = minimal contrast, 5 = normal, 9 = maximum)
   image?: number; // Index of the image to use (0-25 for the new bug images)
+  timestamp?: number; // Add timestamp for base /api route uniqueness
 }
 
 // Generate a unique cache key for the image parameters
 function generateCacheKey(params: ImageParams): string {
-  const { width, height, saturation, blur, tint, contrast, image } = params;
+  const { width, height, saturation, blur, tint, contrast, image, timestamp } = params;
   const keyParts = [
     width,
     height,
@@ -27,7 +28,8 @@ function generateCacheKey(params: ImageParams): string {
     blur || 'default',
     tint || 'default',
     contrast || 'default',
-    image !== undefined ? image : `random-${Date.now()}` // Add timestamp for random images
+    image !== undefined ? image : 'random',
+    timestamp || 'no-timestamp'
   ];
   return crypto.createHash('md5').update(keyParts.join('|')).digest('hex');
 }
@@ -166,10 +168,10 @@ async function processImageBuffer(params: ImageParams): Promise<Buffer> {
 }
 
 export async function processImage(params: ImageParams): Promise<Buffer> {
-  const { width, height, saturation, blur, tint, contrast, image } = params;
+  const { width, height, saturation, blur, tint, contrast, image, timestamp } = params;
   
-  // For random images (no specific image parameter), bypass cache entirely
-  const isRandomImage = image === undefined;
+  // For random images (no specific image parameter) OR when timestamp is provided, bypass cache entirely
+  const isRandomImage = image === undefined || timestamp !== undefined;
   
   if (!isRandomImage) {
     // Clean up cache periodically (only for non-random images)
@@ -195,8 +197,8 @@ export async function processImage(params: ImageParams): Promise<Buffer> {
     
     return buffer;
   } else {
-    // For random images, always process without caching
-    console.log(`Random image - bypassing cache`);
+    // For random images or timestamp-based requests, always process without caching
+    console.log(`Random image or timestamp request - bypassing cache`);
     return await processImageBuffer(params);
   }
 }

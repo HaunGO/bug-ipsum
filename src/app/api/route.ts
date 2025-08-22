@@ -1,34 +1,37 @@
 import { NextRequest } from 'next/server';
 import { processImage } from '@/lib/image-processing';
 
+// Force dynamic rendering for this route
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: NextRequest) {
   try {
-    // Extract query parameters
-    const { searchParams } = new URL(request.url);
-    const saturation = searchParams.get('saturation');
-    const blur = searchParams.get('blur');
-    const tint = searchParams.get('tint');
-    const contrast = searchParams.get('contrast');
-    const image = searchParams.get('image');
+    // Add timestamp to force uniqueness and prevent Vercel edge caching
+    const timestamp = Date.now();
     
-    // Process image with default 300x300 size
+    // Process image with timestamp to ensure uniqueness
     const imageBuffer = await processImage({
       width: 300,
       height: 300,
-      saturation: saturation ? parseFloat(saturation) : undefined,
-      blur: blur ? parseFloat(blur) : undefined,
-      tint: tint || undefined,
-      contrast: contrast ? parseFloat(contrast) : undefined,
-      image: image ? parseInt(image, 10) : undefined,
+      timestamp: timestamp, // Force unique processing
     });
     
-    // Return response
-    return new Response(imageBuffer, {
-      headers: {
-        'Content-Type': 'image/jpeg',
-        'Cache-Control': 'public, max-age=3600',
-      },
-    });
+    // Aggressive cache prevention headers specifically for Vercel
+    const headers = {
+      'Content-Type': 'image/jpeg',
+      'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0, proxy-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0',
+      'Surrogate-Control': 'no-store',
+      'CDN-Cache-Control': 'no-cache',
+      'Vercel-CDN-Cache-Control': 'no-cache',
+      'X-Vercel-Cache': 'no-cache',
+      'Last-Modified': new Date(timestamp).toUTCString(),
+      'ETag': `"random-${timestamp}"`,
+    };
+    
+    return new Response(imageBuffer, { headers });
     
   } catch (error) {
     console.error('Image processing error:', error);
