@@ -73,22 +73,8 @@ function mapContrast(scale: number): number {
   return 0.1 + ((scale - 1) / 8) * 2.9;
 }
 
-export async function processImage(params: ImageParams): Promise<Buffer> {
-  // Clean up cache periodically
-  cleanupCache();
-  
-  // Generate cache key
-  const cacheKey = generateCacheKey(params);
-  
-  // Check if image is already cached
-  const cached = imageCache.get(cacheKey);
-  if (cached && (Date.now() - cached.timestamp) < CACHE_TTL) {
-    console.log(`Cache HIT for key: ${cacheKey}`);
-    return cached.buffer;
-  }
-  
-  console.log(`Cache MISS for key: ${cacheKey}`);
-  
+// Actual image processing logic
+async function processImageBuffer(params: ImageParams): Promise<Buffer> {
   const { width, height, saturation, blur, tint, contrast, image } = params;
   
   // Updated image list with the new bug images
@@ -176,12 +162,43 @@ export async function processImage(params: ImageParams): Promise<Buffer> {
     }
   }
   
-  const buffer = await pipeline.toBuffer();
+  return await pipeline.toBuffer();
+}
+
+export async function processImage(params: ImageParams): Promise<Buffer> {
+  const { width, height, saturation, blur, tint, contrast, image } = params;
   
-  // Cache the processed image
-  imageCache.set(cacheKey, { buffer, timestamp: Date.now() });
+  // For random images (no specific image parameter), bypass cache entirely
+  const isRandomImage = image === undefined;
   
-  return buffer;
+  if (!isRandomImage) {
+    // Clean up cache periodically (only for non-random images)
+    cleanupCache();
+    
+    // Generate cache key
+    const cacheKey = generateCacheKey(params);
+    
+    // Check if image is already cached
+    const cached = imageCache.get(cacheKey);
+    if (cached && (Date.now() - cached.timestamp) < CACHE_TTL) {
+      console.log(`Cache HIT for key: ${cacheKey}`);
+      return cached.buffer;
+    }
+    
+    console.log(`Cache MISS for key: ${cacheKey}`);
+    
+    // Process the image
+    const buffer = await processImageBuffer(params);
+    
+    // Cache the processed image
+    imageCache.set(cacheKey, { buffer, timestamp: Date.now() });
+    
+    return buffer;
+  } else {
+    // For random images, always process without caching
+    console.log(`Random image - bypassing cache`);
+    return await processImageBuffer(params);
+  }
 }
 
 export function validateParams(width: string, height: string): { valid: boolean; error?: string } {
