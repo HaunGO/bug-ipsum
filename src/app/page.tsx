@@ -6,6 +6,7 @@ import { ImageGallery } from '@/components/ui/ImageGallery';
 import { Header } from '@/components/ui/Header';
 // import { AnimatedCard } from '@/components/ui/AnimatedCard';
 import { Footer } from '@/components/ui/Footer';
+import Image from 'next/image';
 
 export default function HomePage() {
   return (
@@ -20,10 +21,7 @@ export default function HomePage() {
 
       <ImageGallery />
 
-{/* <Image src="/images/logo.png" alt="logo" width={100} height={100} />  */}
-
-
-<div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <Section title="Basic Width/Height" className="">
           <h2>Basic <code>/{'{width}'}/{'{height}'}</code></h2>
@@ -47,11 +45,11 @@ export default function HomePage() {
               src="/api/100/300?image=19" />
 
             <ImageCard 
-              width={800}
+              width={784}
               height={300}
               title="Wide"
-              caption="/800/300"
-              src="/api/800/300?image=16"
+              caption="/784/300"
+              src="/api/784/300?image=16"
             />
           </CardBox>
         </Section>

@@ -13,7 +13,7 @@ interface ImageGalleryProps {
 // Adjust these values to customize the scrolling behavior
 
 // Speed and Timing
-const ANIMATION_SPEED = 60; // Duration in seconds for one complete back-and-forth cycle
+const ANIMATION_SPEED = 90; // Duration in seconds for one complete back-and-forth cycle
 const PAUSE_DURATION = 0.5; // Seconds to wait after manual scroll before resuming auto-scroll
 
 // Scroll Range and Behavior
@@ -92,7 +92,7 @@ export function ImageGallery({ title = "" }: ImageGalleryProps) {
     };
 
     // Start the animation
-    createAnimation();
+    // createAnimation();
     
     // Handle manual scrolling
     const handleScroll = () => {
@@ -179,63 +179,70 @@ export function ImageGallery({ title = "" }: ImageGalleryProps) {
         {/* First Bento Grid */}
         <div className="grid grid-cols-4 grid-rows-3 gap-2 w-[80vw] lg:w-[900px] flex-none h-full">
           {/* Top left - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">0</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(0)}`}
+              src={`/api/500/500?image=0`}
               alt={getImageByIndex(0)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top center - square (1 col, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">1</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(1)}`}
+              src={`/api/500/500?image=1`}
               alt={getImageByIndex(1)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top right - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">2</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(2)}`}
+              src={`/api/500/500?image=2`}
               alt={getImageByIndex(2)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">3</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(3)}`}
+              src={`/api/500/500?image=3`}
               alt={getImageByIndex(3)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">4</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(4)}`}
+              src={`/api/500/500?image=4`}
               alt={getImageByIndex(4)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">5</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(5)}`}
+              src={`/api/500/500?image=5`}
               alt={getImageByIndex(5)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Bottom right - square (1 col, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">6</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(6)}`}
+              src={`/api/500/500?image=6`}
               alt={getImageByIndex(6)}
               className="object-cover w-full h-full rounded"
             />
@@ -245,63 +252,70 @@ export function ImageGallery({ title = "" }: ImageGalleryProps) {
         {/* Second Bento Grid */}
         <div className="grid grid-cols-4 grid-rows-3 gap-2 w-[80vw] lg:w-[900px] flex-none h-full">
           {/* Top left - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">7</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(7)}`}
+              src={`/api/500/500?image=7`}
               alt={getImageByIndex(7)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top center - square (1 col, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">8</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(8)}`}
+              src={`/api/500/500?image=8`}
               alt={getImageByIndex(8)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top right - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">9</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(9)}`}
+              src={`/api/500/500?image=9`}
               alt={getImageByIndex(9)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">10</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(10)}`}
+              src={`/api/500/500?image=10`}
               alt={getImageByIndex(10)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">11</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(11)}`}
+              src={`/api/500/500?image=11`}
               alt={getImageByIndex(11)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">12</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(12)}`}
+              src={`/api/500/500?image=12`}
               alt={getImageByIndex(12)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Bottom right - square (1 col, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">13</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(13)}`}
+              src={`/api/500/500?image=13`}
               alt={getImageByIndex(13)}
               className="object-cover w-full h-full rounded"
             />
@@ -311,63 +325,70 @@ export function ImageGallery({ title = "" }: ImageGalleryProps) {
         {/* Third Bento Grid */}
         <div className="grid grid-cols-4 grid-rows-3 gap-2 w-[80vw] lg:w-[900px] flex-none h-full">
           {/* Top left - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">14</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(14)}`}
+              src={`/api/500/500?image=14`}
               alt={getImageByIndex(14)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top center - square (1 col, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">15</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(15)}`}
+              src={`/api/500/500?image=15`}
               alt={getImageByIndex(15)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top right - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">16</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(16)}`}
+              src={`/api/500/500?image=16`}
               alt={getImageByIndex(16)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">17</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(17)}`}
+              src={`/api/500/500?image=17`}
               alt={getImageByIndex(17)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">18</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(18)}`}
+              src={`/api/500/500?image=18`}
               alt={getImageByIndex(18)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">19</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(19)}`}
+              src={`/api/500/500?image=19`}
               alt={getImageByIndex(19)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Bottom right - square (1 col, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">20</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(20)}`}
+              src={`/api/500/500?image=20`}
               alt={getImageByIndex(20)}
               className="object-cover w-full h-full rounded"
             />
@@ -378,63 +399,70 @@ export function ImageGallery({ title = "" }: ImageGalleryProps) {
         {/* First Bento Grid (Duplicate) */}
         <div className="grid grid-cols-4 grid-rows-3 gap-2 w-[80vw] lg:w-[900px] flex-none h-full">
           {/* Top left - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">21</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(21)}`}
+              src={`/api/500/500?image=21`}
               alt={getImageByIndex(21)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top center - square (1 col, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">22</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(22)}`}
+              src={`/api/500/500?image=22`}
               alt={getImageByIndex(22)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top right - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">23</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(23)}`}
+              src={`/api/500/500?image=23`}
               alt={getImageByIndex(23)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">24</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(24)}`}
+              src={`/api/500/500?image=24`}
               alt={getImageByIndex(24)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">25</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(25)}`}
+              src={`/api/500/500?image=25`}
               alt={getImageByIndex(25)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">26</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(26)}`}
+              src={`/api/500/500?image=26`}
               alt={getImageByIndex(26)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Bottom right - square (1 col, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">0</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(0)}`}
+              src={`/api/500/500?image=0`}
               alt={getImageByIndex(0)}
               className="object-cover w-full h-full rounded"
             />
@@ -444,63 +472,70 @@ export function ImageGallery({ title = "" }: ImageGalleryProps) {
         {/* Second Bento Grid (Duplicate) */}
         <div className="grid grid-cols-4 grid-rows-3 gap-2 w-[80vw] lg:w-[900px] flex-none h-full">
           {/* Top left - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">1</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(1)}`}
+              src={`/api/500/500?image=1`}
               alt={getImageByIndex(1)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top center - square (1 col, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">2</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(2)}`}
+              src={`/api/500/500?image=2`}
               alt={getImageByIndex(2)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top right - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">3</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(3)}`}
+              src={`/api/500/500?image=3`}
               alt={getImageByIndex(3)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">4</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(4)}`}
+              src={`/api/500/500?image=4`}
               alt={getImageByIndex(4)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">5</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(5)}`}
+              src={`/api/500/500?image=5`}
               alt={getImageByIndex(5)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">6</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(6)}`}
+              src={`/api/500/500?image=6`}
               alt={getImageByIndex(6)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Bottom right - square (1 col, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">7</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(7)}`}
+              src={`/api/500/500?image=7`}
               alt={getImageByIndex(7)}
               className="object-cover w-full h-full rounded"
             />
@@ -510,63 +545,70 @@ export function ImageGallery({ title = "" }: ImageGalleryProps) {
         {/* Third Bento Grid (Duplicate) */}
         <div className="grid grid-cols-4 grid-rows-3 gap-2 w-[80vw] lg:w-[900px] flex-none h-full">
           {/* Top left - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">8</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(8)}`}
+              src={`/api/500/500?image=8`}
               alt={getImageByIndex(8)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top center - square (1 col, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">9</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(9)}`}
+              src={`/api/500/500?image=9`}
               alt={getImageByIndex(9)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Top right - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">10</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(10)}`}
+              src={`/api/500/500?image=10`}
               alt={getImageByIndex(10)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
-          <div className="col-span-1 row-span-2">
+          <div className="relative col-span-1 row-span-2">
+            <span className="image-gallery-caption">11</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(11)}`}
+              src={`/api/500/500?image=11`}
               alt={getImageByIndex(11)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">12</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(12)}`}
+              src={`/api/500/500?image=12`}
               alt={getImageByIndex(12)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
-          <div className="col-span-1 row-span-1">
+          <div className="relative col-span-1 row-span-1">
+            <span className="image-gallery-caption">13</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(13)}`}
+              src={`/api/500/500?image=13`}
               alt={getImageByIndex(13)}
               className="object-cover w-full h-full rounded"
             />
           </div>
           
           {/* Bottom right - square (1 col, 1 row) */}
-          <div className="col-span-2 row-span-1">
+          <div className="relative col-span-2 row-span-1">
+            <span className="image-gallery-caption">14</span>
             <img
-              src={`/images/bugs/only/${getImageByIndex(14)}`}
+              src={`/api/500/500?image=14`}
               alt={getImageByIndex(14)}
               className="object-cover w-full h-full rounded"
             />

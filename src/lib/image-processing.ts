@@ -2,6 +2,11 @@ import sharp from 'sharp';
 import path from 'path';
 import crypto from 'crypto';
 
+// In-memory cache for processed images
+const imageCache = new Map<string, { buffer: Buffer; timestamp: number }>();
+const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+const MAX_CACHE_SIZE = 1000; // Maximum number of cached images
+
 export interface ImageParams {
   width: number;
   height: number;
@@ -10,6 +15,43 @@ export interface ImageParams {
   tint?: string;
   contrast?: number; // Contrast level: 1-9 scale (1 = minimal contrast, 5 = normal, 9 = maximum)
   image?: number; // Index of the image to use (0-25 for the new bug images)
+}
+
+// Generate a unique cache key for the image parameters
+function generateCacheKey(params: ImageParams): string {
+  const { width, height, saturation, blur, tint, contrast, image } = params;
+  const keyParts = [
+    width,
+    height,
+    saturation || 'default',
+    blur || 'default',
+    tint || 'default',
+    contrast || 'default',
+    image !== undefined ? image : `random-${Date.now()}` // Add timestamp for random images
+  ];
+  return crypto.createHash('md5').update(keyParts.join('|')).digest('hex');
+}
+
+// Clean up expired cache entries
+function cleanupCache(): void {
+  const now = Date.now();
+  const expiredKeys: string[] = [];
+  
+  for (const [key, value] of imageCache.entries()) {
+    if (now - value.timestamp > CACHE_TTL) {
+      expiredKeys.push(key);
+    }
+  }
+  
+  expiredKeys.forEach(key => imageCache.delete(key));
+  
+  // If cache is still too large, remove oldest entries
+  if (imageCache.size > MAX_CACHE_SIZE) {
+    const entries = Array.from(imageCache.entries());
+    entries.sort((a, b) => a[1].timestamp - b[1].timestamp);
+    const toRemove = entries.slice(0, entries.length - MAX_CACHE_SIZE);
+    toRemove.forEach(([key]) => imageCache.delete(key));
+  }
 }
 
 // Helper functions to map 1-9 scale to actual effect values
@@ -32,6 +74,21 @@ function mapContrast(scale: number): number {
 }
 
 export async function processImage(params: ImageParams): Promise<Buffer> {
+  // Clean up cache periodically
+  cleanupCache();
+  
+  // Generate cache key
+  const cacheKey = generateCacheKey(params);
+  
+  // Check if image is already cached
+  const cached = imageCache.get(cacheKey);
+  if (cached && (Date.now() - cached.timestamp) < CACHE_TTL) {
+    console.log(`Cache HIT for key: ${cacheKey}`);
+    return cached.buffer;
+  }
+  
+  console.log(`Cache MISS for key: ${cacheKey}`);
+  
   const { width, height, saturation, blur, tint, contrast, image } = params;
   
   // Updated image list with the new bug images
@@ -119,7 +176,12 @@ export async function processImage(params: ImageParams): Promise<Buffer> {
     }
   }
   
-  return await pipeline.toBuffer();
+  const buffer = await pipeline.toBuffer();
+  
+  // Cache the processed image
+  imageCache.set(cacheKey, { buffer, timestamp: Date.now() });
+  
+  return buffer;
 }
 
 export function validateParams(width: string, height: string): { valid: boolean; error?: string } {

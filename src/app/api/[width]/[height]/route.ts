@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { processImage, validateParams } from '@/lib/image-processing';
+import crypto from 'crypto';
 
 export async function GET(
   request: NextRequest,
@@ -22,6 +23,9 @@ export async function GET(
     const contrast = searchParams.get('contrast');
     const image = searchParams.get('image');
     
+    // Determine if this is a random image request
+    const isRandomImage = !image || image === '';
+    
     // Process image
     const imageBuffer = await processImage({
       width: parseInt(resolvedParams.width, 10),
@@ -33,11 +37,23 @@ export async function GET(
       image: image ? parseInt(image, 10) : undefined,
     });
     
+    // Set cache headers based on whether it's random or specific
+    const cacheHeaders = isRandomImage 
+      ? {
+          'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        }
+      : {
+          'Cache-Control': 'public, max-age=86400, s-maxage=86400, immutable',
+          'ETag': `"${crypto.createHash('md5').update(imageBuffer).digest('hex')}"`
+        };
+    
     // Return response
     return new Response(imageBuffer, {
       headers: {
         'Content-Type': 'image/jpeg',
-        'Cache-Control': 'public, max-age=3600',
+        ...cacheHeaders
       },
     });
     
