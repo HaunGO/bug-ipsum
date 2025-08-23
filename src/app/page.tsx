@@ -6,6 +6,8 @@ import { ImageGallery } from '@/components/ui/ImageGallery';
 import { Header } from '@/components/ui/Header';
 // import { AnimatedCard } from '@/components/ui/AnimatedCard';
 import { Footer } from '@/components/ui/Footer';
+import { BugBuilder } from '@/components/ui/BugBuilder';
+
 
 export default function HomePage() {
   return (
@@ -19,7 +21,9 @@ export default function HomePage() {
       </div>        
 
       <ImageGallery />
+      <BugBuilder />
 
+      
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <Section title="Basic Width/Height" className="">
