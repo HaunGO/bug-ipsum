@@ -47,14 +47,35 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
   };
 
   return (
-    <div className={`bug-builder ${className}`}>
-      <div className="max-w-md mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+    <div className={`bug-builder ${className} flex flex-col items-center align-center justify-center gap-4 md:flex-row`}>
+
+      <div className="md:w-1/2 max-w-4xla p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+        <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
           Bug Image URL Builder
         </h2>
         
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          </label>
+          <div className="flex">
+            <input
+              type="text"
+              value={generatedUrl}
+              readOnly
+              className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-l-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white text-sm font-mono"
+            />
+            <button
+              onClick={handleCopyUrl}
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-r-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+        
+        <div className="my-4">
+
+        <div className="grid grid-cols-6 gap-4 mb-4">
             <div>
               <label htmlFor="width" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Width
@@ -84,9 +105,7 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
               />
             </div>
-          </div>
-          
-          <div className="grid grid-cols-3 gap-4">
+
             <div>
               <label htmlFor="saturation" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Saturation
@@ -97,7 +116,7 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
                 onChange={(e) => setSaturation(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Default</option>
+                <option value="">None</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -120,7 +139,7 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
                 onChange={(e) => setBlur(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Default</option>
+                <option value="">None</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -143,7 +162,7 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
                 onChange={(e) => setContrast(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
               >
-                <option value="">Default</option>
+                <option value="">None</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -155,11 +174,10 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
                 <option value="9">9</option>
               </select>
             </div>
-          </div>
           
           <div>
             <label htmlFor="tint" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Tint Color
+              Tint
             </label>
             <div className="flex items-center space-x-3">
               <input
@@ -169,13 +187,13 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
                 onChange={(e) => setTint(e.target.value)}
                 className="w-12 h-10 border border-gray-300 dark:border-gray-600 rounded-md cursor-pointer"
               />
-              <input
+              {/* <input
                 type="text"
                 value={tint}
                 onChange={(e) => setTint(e.target.value)}
                 placeholder="#000000"
                 className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white font-mono text-sm"
-              />
+              /> */}
               {tint && (
                 <button
                   onClick={() => setTint('')}
@@ -185,117 +203,76 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
                 </button>
               )}
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Select a color to apply as a tint overlay to the image
-            </div>
-          </div>
-          
-          <div>
-            <label htmlFor="imageSelect" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Bug Image
-            </label>
-            <div className="relative">
-              <select
-                id="imageSelect"
-                value={selectedImage}
-                onChange={(e) => setSelectedImage(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-              >
-                <option value="">Random Bug Image</option>
-                <option value="0">0 - Big Brown Moth</option>
-                <option value="1">1 - Blue-eyed Dragonfly</option>
-                <option value="2">2 - Butterfly in Hand</option>
-                <option value="3">3 - Cotton Candy Moth</option>
-                <option value="4">4 - First Cicada of the Year</option>
-                <option value="5">5 - Grandfather Moth</option>
-                <option value="6">6 - Ladybug on Thumb 1</option>
-                <option value="7">7 - Ladybug on Thumb 2</option>
-                <option value="8">8 - Red-eyed Cicada</option>
-                <option value="9">9 - White Collar Country Boy</option>
-                <option value="10">10 - Beetle on a Leaf</option>
-                <option value="11">11 - Beetles Under Tree Bark 1</option>
-                <option value="12">12 - Beetles Under Tree Bark 2</option>
-                <option value="13">13 - Big Brown Moth 2</option>
-                <option value="14">14 - Big Fly</option>
-                <option value="15">15 - Big Harry Tarantula</option>
-                <option value="16">16 - Black Widow Underbelly</option>
-                <option value="17">17 - Bug Juice</option>
-                <option value="18">18 - Bug Silhouette on Screen</option>
-                <option value="19">19 - Bumble Bee</option>
-                <option value="20">20 - Cotton Candy Moth</option>
-                <option value="21">21 - Easter Bugs 1</option>
-                <option value="22">22 - Easter Bugs 2</option>
-                <option value="23">23 - Easter Bugs 3</option>
-                <option value="24">24 - Inch Worm Macro 1</option>
-                <option value="25">25 - Inch Worm Macro 2</option>
-                <option value="26">26 - Jumping Spider</option>
-                <option value="27">27 - Ladybug Macro</option>
-                <option value="28">28 - Ladybug Softy</option>
-                <option value="29">29 - Leaf-footed Bug on Window 1</option>
-                <option value="30">30 - Leaf-footed Bug on Window 2</option>
-                <option value="31">31 - Little Green Leaf Bug</option>
-                <option value="32">32 - Macro Fly</option>
-                <option value="33">33 - Potato Beetle</option>
-                <option value="34">34 - Rolley Polley</option>
-                <option value="35">35 - Spider in White</option>
-                <option value="36">36 - Under Ladybug Skirt</option>
-                <option value="37">37 - Unknown Red Bug</option>
-              </select>
-            </div>
-            
-            {/* Image Thumbnails Grid */}
-            {selectedImage && (
-              <div className="mt-3">
-                <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Selected Image Preview:
-                </div>
-                <div className="flex justify-center">
-                  <div className="relative">
-                    <Image
-                      src={`/api/50/50?image=${selectedImage}`}
-                      alt={`Bug image ${selectedImage}`}
-                      width={50}
-                      height={50}
-                      className="rounded-md border-2 border-blue-500 shadow-md"
-                    />
-                    <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                      {selectedImage}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-            
-            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Choose a specific bug image or leave as random
-            </div>
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Generated URL
-            </label>
-            <div className="flex">
-              <input
-                type="text"
-                value={generatedUrl}
-                readOnly
-                className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-l-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white text-sm font-mono"
-              />
-              <button
-                onClick={handleCopyUrl}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-r-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                Copy
-              </button>
-            </div>
-          </div>
-          
-          <div className="text-xs text-gray-500 dark:text-gray-400">
-            Copy this URL and paste it in a new tab to generate your bug image
           </div>
         </div>
+          
+          <div>
+            {/* <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+              Bug Image Selection
+            </label> */}
+            
+            {/* Random Image Option */}
+            {/* <div className="mb-4">
+              <button
+                onClick={() => setSelectedImage('')}
+                className={`w-full p-3 rounded-lg border-2 transition-all duration-200 ${
+                  selectedImage === '' 
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' 
+                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
+                }`}
+              >
+                <div className="text-center">
+                  <div className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                    🎲 Random Bug Image
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    Get a surprise bug each time
+                  </div>
+                </div>
+              </button>
+            </div> */}
+            
+            {/* Image Grid */}
+            <div className="my-4 grid grid-cols-10 gap-2 max-h-96 overflow-y-auto p-2 border border-gray-200 dark:border-gray-600 rounded-lg">
+              {Array.from({ length: 38 }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedImage(i.toString())}
+                  className={`relative group transition-all duration-200 ${
+                    selectedImage === i.toString()
+                      ? 'ring-2 ring-blue-500 ring-offset-2'
+                      : 'hover:ring-2 hover:ring-gray-300 dark:hover:ring-gray-500'
+                  }`}
+                >
+                  <Image
+                    src={`/api/60/60?image=${i}`}
+                    alt={`Bug image ${i}`}
+                    width={60}
+                    height={60}
+                    className="w-full h-auto rounded-md object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 bg-black/70 text-white text-xs px-1 py-0 font-mono">
+                    {i}
+                  </div>
+                  <div className={`absolute inset-0 rounded-md transition-opacity duration-200 ${
+                    selectedImage === i.toString()
+                      ? 'bg-blue-500/20'
+                      : 'group-hover:bg-black/10'
+                  }`} />
+                </button>
+              ))}
+            </div>
+            
+          </div>
+          
+          
+        </div>
       </div>
+    
+      <div className='md:w-1/2'>
+        <img src={generatedUrl} alt="Bug Image" />
+      </div>
+
     </div>
   );
 }
