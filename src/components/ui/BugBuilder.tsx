@@ -264,7 +264,7 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
       </div>
     
       <div className="bug-builder__image-wrapper flex items-center justify-center" >
-        <img src={generatedUrl} className="bug-builder__image" alt="Placeholder Bug Image" />
+        <img src={generatedUrl} className="bug-builder__image" alt="Placeholder Bug Image" width={width} height={height} />
       </div>
 
     </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { bugImages, getImageByIndex } from '@/lib/bug-images';
 import { gsap } from '@/lib/gsap';
 
@@ -151,9 +152,11 @@ export function ImageGallery() {
           {/* Top left - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">0</span>
-            <img
+            <Image
               src={`/api/500/500?image=0`}
               alt={getImageByIndex(0)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -161,9 +164,11 @@ export function ImageGallery() {
           {/* Top center - square (1 col, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">1</span>
-            <img
+            <Image
               src={`/api/500/500?image=1`}
               alt={getImageByIndex(1)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -171,9 +176,11 @@ export function ImageGallery() {
           {/* Top right - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">2</span>
-            <img
+            <Image
               src={`/api/500/500?image=2`}
               alt={getImageByIndex(2)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -181,9 +188,11 @@ export function ImageGallery() {
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">3</span>
-            <img
+            <Image
               src={`/api/500/500?image=3`}
               alt={getImageByIndex(3)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -191,9 +200,11 @@ export function ImageGallery() {
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">4</span>
-            <img
+            <Image
               src={`/api/500/500?image=4`}
               alt={getImageByIndex(4)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -201,9 +212,11 @@ export function ImageGallery() {
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">5</span>
-            <img
+            <Image
               src={`/api/500/500?image=5`}
               alt={getImageByIndex(5)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -211,9 +224,11 @@ export function ImageGallery() {
           {/* Bottom right - square (1 col, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">6</span>
-            <img
+            <Image
               src={`/api/500/500?image=6`}
               alt={getImageByIndex(6)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -224,9 +239,11 @@ export function ImageGallery() {
           {/* Top left - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">7</span>
-            <img
+            <Image
               src={`/api/500/500?image=7`}
               alt={getImageByIndex(7)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -234,9 +251,11 @@ export function ImageGallery() {
           {/* Top center - square (1 col, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">8</span>
-            <img
+            <Image
               src={`/api/500/500?image=8`}
               alt={getImageByIndex(8)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -244,9 +263,11 @@ export function ImageGallery() {
           {/* Top right - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">9</span>
-            <img
+            <Image
               src={`/api/500/500?image=9`}
               alt={getImageByIndex(9)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -254,9 +275,11 @@ export function ImageGallery() {
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">10</span>
-            <img
+            <Image
               src={`/api/500/500?image=10`}
               alt={getImageByIndex(10)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -264,9 +287,11 @@ export function ImageGallery() {
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">11</span>
-            <img
+            <Image
               src={`/api/500/500?image=11`}
               alt={getImageByIndex(11)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -274,9 +299,11 @@ export function ImageGallery() {
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">12</span>
-            <img
+            <Image
               src={`/api/500/500?image=12`}
               alt={getImageByIndex(12)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -284,9 +311,11 @@ export function ImageGallery() {
           {/* Bottom right - square (1 col, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">13</span>
-            <img
+            <Image
               src={`/api/500/500?image=13`}
               alt={getImageByIndex(13)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -297,9 +326,11 @@ export function ImageGallery() {
           {/* Top left - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">14</span>
-            <img
+            <Image
               src={`/api/500/500?image=14`}
               alt={getImageByIndex(14)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -307,9 +338,11 @@ export function ImageGallery() {
           {/* Top center - square (1 col, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">15</span>
-            <img
+            <Image
               src={`/api/500/500?image=15`}
               alt={getImageByIndex(15)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -317,9 +350,11 @@ export function ImageGallery() {
           {/* Top right - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">16</span>
-            <img
+            <Image
               src={`/api/500/500?image=16`}
               alt={getImageByIndex(16)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -327,9 +362,11 @@ export function ImageGallery() {
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">17</span>
-            <img
+            <Image
               src={`/api/500/500?image=17`}
               alt={getImageByIndex(17)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -337,9 +374,11 @@ export function ImageGallery() {
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">18</span>
-            <img
+            <Image
               src={`/api/500/500?image=18`}
               alt={getImageByIndex(18)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -347,9 +386,11 @@ export function ImageGallery() {
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">19</span>
-            <img
+            <Image
               src={`/api/500/500?image=19`}
               alt={getImageByIndex(19)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -357,9 +398,11 @@ export function ImageGallery() {
           {/* Bottom right - square (1 col, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">20</span>
-            <img
+            <Image
               src={`/api/500/500?image=20`}
               alt={getImageByIndex(20)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -371,9 +414,11 @@ export function ImageGallery() {
           {/* Top left - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">21</span>
-            <img
+            <Image
               src={`/api/500/500?image=21`}
               alt={getImageByIndex(21)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -381,9 +426,11 @@ export function ImageGallery() {
           {/* Top center - square (1 col, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">22</span>
-            <img
+            <Image
               src={`/api/500/500?image=22`}
               alt={getImageByIndex(22)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -391,9 +438,11 @@ export function ImageGallery() {
           {/* Top right - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">23</span>
-            <img
+            <Image
               src={`/api/500/500?image=23`}
               alt={getImageByIndex(23)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -401,9 +450,11 @@ export function ImageGallery() {
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">24</span>
-            <img
+            <Image
               src={`/api/500/500?image=24`}
               alt={getImageByIndex(24)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -411,9 +462,11 @@ export function ImageGallery() {
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">25</span>
-            <img
+            <Image
               src={`/api/500/500?image=25`}
               alt={getImageByIndex(25)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -421,9 +474,11 @@ export function ImageGallery() {
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">26</span>
-            <img
+            <Image
               src={`/api/500/500?image=26`}
               alt={getImageByIndex(26)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -431,9 +486,11 @@ export function ImageGallery() {
           {/* Bottom right - square (1 col, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">0</span>
-            <img
+            <Image
               src={`/api/500/500?image=0`}
               alt={getImageByIndex(0)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -444,9 +501,11 @@ export function ImageGallery() {
           {/* Top left - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">1</span>
-            <img
+            <Image
               src={`/api/500/500?image=1`}
               alt={getImageByIndex(1)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -454,9 +513,11 @@ export function ImageGallery() {
           {/* Top center - square (1 col, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">2</span>
-            <img
+            <Image
               src={`/api/500/500?image=2`}
               alt={getImageByIndex(2)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -464,9 +525,11 @@ export function ImageGallery() {
           {/* Top right - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">3</span>
-            <img
+            <Image
               src={`/api/500/500?image=3`}
               alt={getImageByIndex(3)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -474,9 +537,11 @@ export function ImageGallery() {
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">4</span>
-            <img
+            <Image
               src={`/api/500/500?image=4`}
               alt={getImageByIndex(4)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -484,9 +549,11 @@ export function ImageGallery() {
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">5</span>
-            <img
+            <Image
               src={`/api/500/500?image=5`}
               alt={getImageByIndex(5)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -494,9 +561,11 @@ export function ImageGallery() {
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">6</span>
-            <img
+            <Image
               src={`/api/500/500?image=6`}
               alt={getImageByIndex(6)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -504,9 +573,11 @@ export function ImageGallery() {
           {/* Bottom right - square (1 col, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">7</span>
-            <img
+            <Image
               src={`/api/500/500?image=7`}
               alt={getImageByIndex(7)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -517,9 +588,11 @@ export function ImageGallery() {
           {/* Top left - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">8</span>
-            <img
+            <Image
               src={`/api/500/500?image=8`}
               alt={getImageByIndex(8)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -527,9 +600,11 @@ export function ImageGallery() {
           {/* Top center - square (1 col, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">9</span>
-            <img
+            <Image
               src={`/api/500/500?image=9`}
               alt={getImageByIndex(9)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -537,9 +612,11 @@ export function ImageGallery() {
           {/* Top right - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">10</span>
-            <img
+            <Image
               src={`/api/500/500?image=10`}
               alt={getImageByIndex(10)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -547,9 +624,11 @@ export function ImageGallery() {
           {/* Left middle - tall rectangle (1 col, 2 rows) */}
           <div className="relative col-span-1 row-span-2">
             <span className="image-gallery-caption">11</span>
-            <img
+            <Image
               src={`/api/500/500?image=11`}
               alt={getImageByIndex(11)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -557,9 +636,11 @@ export function ImageGallery() {
           {/* Center middle - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">12</span>
-            <img
+            <Image
               src={`/api/500/500?image=12`}
               alt={getImageByIndex(12)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -567,9 +648,11 @@ export function ImageGallery() {
           {/* Center bottom - wide rectangle (2 cols, 1 row) */}
           <div className="relative col-span-1 row-span-1">
             <span className="image-gallery-caption">13</span>
-            <img
+            <Image
               src={`/api/500/500?image=13`}
               alt={getImageByIndex(13)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>
@@ -577,9 +660,11 @@ export function ImageGallery() {
           {/* Bottom right - square (1 col, 1 row) */}
           <div className="relative col-span-2 row-span-1">
             <span className="image-gallery-caption">14</span>
-            <img
+            <Image
               src={`/api/500/500?image=14`}
               alt={getImageByIndex(14)}
+              width={500}
+              height={500}
               className="object-cover w-full h-full rounded"
             />
           </div>

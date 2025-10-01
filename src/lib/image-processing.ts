@@ -168,6 +168,7 @@ async function processImageBuffer(params: ImageParams): Promise<Buffer> {
 }
 
 export async function processImage(params: ImageParams): Promise<Buffer> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { width, height, saturation, blur, tint, contrast, image, timestamp } = params;
   
   // For random images (no specific image parameter) OR when timestamp is provided, bypass cache entirely

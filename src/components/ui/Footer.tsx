@@ -13,7 +13,7 @@ export function Footer({ className = '', children }: FooterProps) {
 
 
 
-      <p className="m-0">It's not a bug... &nbsp; It's a feature. &nbsp; &nbsp;</p>
+      <p className="m-0">It&apos;s not a bug... &nbsp; It&apos;s a feature. &nbsp; &nbsp;</p>
 
     </footer> 
   );

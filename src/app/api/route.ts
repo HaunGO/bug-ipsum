@@ -1,11 +1,10 @@
-import { NextRequest } from 'next/server';
 import { processImage } from '@/lib/image-processing';
 
 // Force dynamic rendering for this route
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Add timestamp to force uniqueness and prevent Vercel edge caching
     const timestamp = Date.now();
