@@ -22,13 +22,10 @@ export default function HomePage() {
 
       <ImageGallery />
  
-      <BugBuilder />
-
-
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <Section title="Basic Width/Height" className="">
-          <h2>Basic <code>/{'{width}'}/{'{height}'}</code></h2>
+          <h2>Dimensions <code>/{'{width}'}/{'{height}'}</code></h2>
           <CardBox variant="scroll">
           
             {/* <ImageCard  /> */}
@@ -36,24 +33,24 @@ export default function HomePage() {
             <ImageCard 
               width={300}
               height={300}
-              title="Default"
+              title="Square"
               caption="/api"
-              src="/api/300/300?image=6"
+              src="/api/300/300?image=1"
             />
 
             <ImageCard 
               width={100}
               height={300}
-              title="Tall"
+              title="Portrait"
               caption="/100/300"
-              src="/api/100/300?image=19" />
+              src="/api/100/300?image=6" />
 
             <ImageCard 
               width={784}
               height={300}
-              title="Wide"
+              title="Landscape"
               caption="/784/300"
-              src="/api/784/300?image=16"
+              src="/api/784/300?image=20"
             />
           </CardBox>
         </Section>
@@ -68,21 +65,21 @@ export default function HomePage() {
               height={250}
               title="Min"
               caption="?saturation=1"
-              src="/api/300/251?image=6&saturation=1"
+              src="/api/300/251?image=18&saturation=1"
             />
             <ImageCard 
               width={400}
               height={251}
               title="Mid"
-              caption="?saturation=3"
-              src="/api/300/251?image=6&saturation=3"
+              caption="?saturation=2"
+              src="/api/300/251?image=18&saturation=2"
             />
             <ImageCard 
               width={400}
               height={251}
               title="Max"
               caption="?saturation=9"
-              src="/api/300/251?image=6&saturation=9"
+              src="/api/300/251?image=18&saturation=9"
             />
           </CardBox>
         </Section>
@@ -239,8 +236,10 @@ export default function HomePage() {
 
 
 
-        <Section title="Examples" className="">
-          <h2>Preset Styles</h2>
+
+
+        <Section title="Examples" className="hidden">
+          <h2>Examples</h2>
           <CardBox variant="wrap">
             <ImageCard 
               width={300}
@@ -261,7 +260,7 @@ export default function HomePage() {
               height={200}
               title="All Effects"
               caption="?saturation=6 &blur=2 &tint=ffd93d  &contrast=6"
-              src="/api/300/200?image=4&saturation=6&blur=2&tint=ffd93d&contrast=6"
+              src="/api/300/200?image=2&saturation=6&blur=2&tint=ffd93d&contrast=6"
             />
             <ImageCard 
               width={300}
@@ -282,7 +281,7 @@ export default function HomePage() {
               height={200}
               title="Cyberpunk"
               caption="?saturation=8 &contrast=7 &blur=2 &tint=00ffff"
-              src="/api/300/200?image=14&saturation=8&contrast=7&tint=00ffff"
+              src="/api/300/200?image=19&saturation=8&contrast=7&tint=00ffff"
             />
             <ImageCard 
               width={300}
@@ -302,7 +301,11 @@ export default function HomePage() {
           </CardBox>
         </Section>
 
-        <Section title="Sample URLs">
+
+
+
+
+        <Section title="Sample URLs" className="hidden">
           <h2>Ready-to-use examples</h2>
           <div>
             
@@ -389,8 +392,47 @@ export default function HomePage() {
           </div>
         </Section>
 
+
+
+
+        <Section title="Bug Builder" className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+          <BugBuilder />
+        </Section>
+
+
+        <Section title="About" >
+
+          <h3>About</h3>
+
+          <p className="lead max-w-3xl">This was a little side-project aspiration that I've had for a while now.. and though I've known each components necessary to build it, there simply was little incintive.  
+            Merely a trade of effort. <strong> But now<em>!</em> </strong>, with these amazing new modern tools, I was able to half-vibe-code this thing into existence!
+            <em> and I think that's pretty cool. </em> 
+          </p>
+          
+          <p>Next.js • TypeScript • Tailwind • GSAP • Sharp </p>
+
+
+        </Section>
+
+
+
+
       </div>
-      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <Footer />
     </div>
   );
