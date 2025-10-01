@@ -47,9 +47,9 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
   };
 
   return (
-    <div className={`bug-builder ${className} flex flex-col items-center align-center justify-center gap-4 md:flex-row`}>
+    <div className={`bug-builder ${className} flex flex-col items-center align-center justify-center md:flex-row`}>
 
-      <div className="md:w-1/2 max-w-4xla p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+      <div className="bug-builder__form md:w-1/2 max-w-4xl p-6"      >
         <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
           Bug Image URL Builder
         </h2>
@@ -75,7 +75,8 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
         
         <div className="my-4">
 
-        <div className="grid grid-cols-6 gap-4 mb-4">
+        <div className="grid grid-cols-3 gap-4 mb-4">
+
             <div>
               <label htmlFor="width" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Width
@@ -175,35 +176,37 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
               </select>
             </div>
           
-          <div>
-            <label htmlFor="tint" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Tint
-            </label>
-            <div className="flex items-center space-x-3">
-              <input
-                type="color"
-                id="tint"
-                value={tint}
-                onChange={(e) => setTint(e.target.value)}
-                className="w-12 h-10 border border-gray-300 dark:border-gray-600 rounded-md cursor-pointer"
-              />
-              {/* <input
-                type="text"
-                value={tint}
-                onChange={(e) => setTint(e.target.value)}
-                placeholder="#000000"
-                className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white font-mono text-sm"
-              /> */}
-              {tint && (
-                <button
-                  onClick={() => setTint('')}
-                  className="px-3 py-2 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
-                >
-                  Clear
-                </button>
-              )}
+            <div>
+              <label htmlFor="tint" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Tint
+              </label>
+              <div className="flex items-center space-x-3">
+                <input
+                  type="color"
+                  id="tint"
+                  value={tint}
+                  onChange={(e) => setTint(e.target.value)}
+                  className="w-12 h-10 border border-gray-300 dark:border-gray-600 rounded-md cursor-pointer"
+                />
+                {/* <input
+                  type="text"
+                  value={tint}
+                  onChange={(e) => setTint(e.target.value)}
+                  placeholder="#000000"
+                  className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white font-mono text-sm"
+                /> */}
+                {tint && (
+                  <button
+                    onClick={() => setTint('')}
+                    className="px-3 py-2 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
+        
+        
         </div>
           
           <div>
@@ -212,7 +215,7 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
             </label> */}
             
             {/* Random Image Option */}
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <button
                 onClick={() => setSelectedImage('')}
                 className={`w-full p-3 rounded-lg border-2 transition-all duration-200 ${
@@ -227,11 +230,11 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
                   </div>
                 </div>
               </button>
-            </div>
+            </div> */}
             
             {/* Image Grid */}
             <div className="my-4 grid grid-cols-10 gap-2 max-h-96 overflow-y-auto p-2 border border-gray-200 dark:border-gray-600 rounded-lg">
-              {Array.from({ length: 38 }, (_, i) => (
+              {Array.from({ length: 28 }, (_, i) => (
                 <button
                   key={i}
                   onClick={() => setSelectedImage(i.toString())}
@@ -241,13 +244,7 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
                       : 'hover:ring-2 hover:ring-gray-300 dark:hover:ring-gray-500'
                   }`}
                 >
-                  <Image
-                    src={`/api/60/60?image=${i}`}
-                    alt={`Bug image ${i}`}
-                    width={60}
-                    height={60}
-                    className="w-full h-auto rounded-md object-cover"
-                  />
+                  <Image src={`/api/60/60?image=${i}`} alt={`Bug image ${i}`} width={60} height={60} className="w-full h-auto rounded-md object-cover" />
                   <div className="absolute bottom-0 left-0 bg-black/70 text-white text-xs px-1 py-0 font-mono">
                     {i}
                   </div>
@@ -266,8 +263,8 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
         </div>
       </div>
     
-      <div className='md:w-1/2'>
-        <img src={generatedUrl} alt="Bug Image" />
+      <div className="bug-builder__image-wrapper flex items-center justify-center" >
+        <img src={generatedUrl} className="bug-builder__image" alt="Placeholder Bug Image" />
       </div>
 
     </div>
