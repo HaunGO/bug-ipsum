@@ -7,4 +7,5 @@ export { ImageGallery } from './ui/ImageGallery';
 export { AnimatedCard } from './ui/AnimatedCard';
 export { Navigation } from './ui/Navigation';
 export { ThemeToggle } from './ui/ThemeToggle';
-export { Footer } from './ui/Footer'; 
+export { Footer } from './ui/Footer';
+export { BugBuilder } from './ui/BugBuilder'; 

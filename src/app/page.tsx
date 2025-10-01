@@ -6,19 +6,24 @@ import { ImageGallery } from '@/components/ui/ImageGallery';
 import { Header } from '@/components/ui/Header';
 // import { AnimatedCard } from '@/components/ui/AnimatedCard';
 import { Footer } from '@/components/ui/Footer';
+import { BugBuilder } from '@/components/ui/BugBuilder';
+
 
 export default function HomePage() {
   return (
-    <div className="bg-white dark:bg-gray-900">
+    <div className="homepage">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <Header 
           title="Bug Ipsum"
-          subtitle="A buggy placeholder image service featuring real bug photography."
+          subtitle="A buggy little placeholder image service."
           className=""
         />
       </div>        
 
       <ImageGallery />
+ 
+      <BugBuilder />
+
 
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
 

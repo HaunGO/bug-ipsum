@@ -123,31 +123,14 @@ export function ImageGallery() {
     };
   }, []);
 
-  // Show empty state if no images
-  if (bugImages.length === 0) {
-    return (
-      <section className="relative">
-        <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-           <h1 
-            className="text-2xl lg:text-5xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-full p-4 lg:p-8 text-center pointer-events-none shadow-2xl whitespace-nowrap"
-            >No bug images found.
-           </h1>
-        </div>
-        <div className="h-[50vh] lg:h-[80vh] min-h-[300px] flex items-center justify-center">
-          <div className="text-gray-500">No images available in bugs/only directory</div>
-        </div>
-      </section>
-    );
-  }
-
   return (
-      <section className="relative">
-        <div className="absolute top-[32%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-           <h1 
-            className="text-2xl lg:text-5xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-full px-4 py-2 lg:px-8 lg:py-3 text-center pointer-events-none shadow-2xl whitespace-nowrap"
-            >A buggy little placeholder image service.
-           </h1>
-        </div>
+  <section className="relative">
+    <div className="absolute top-[32%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 ">
+        <h1 className="image-gallery-hero"
+        // className="text-2xl lg:text-5xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-full px-4 py-2 lg:px-8 lg:py-3 text-center pointer-events-none shadow-2xl whitespace-nowrap"
+        >A buggy little <br />placeholder <br />image service.
+        </h1>
+    </div>
 
     <div 
       ref={scrollContainerRef}
