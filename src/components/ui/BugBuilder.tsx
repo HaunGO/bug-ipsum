@@ -212,7 +212,7 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
             </label> */}
             
             {/* Random Image Option */}
-            {/* <div className="mb-4">
+            <div className="mb-4">
               <button
                 onClick={() => setSelectedImage('')}
                 className={`w-full p-3 rounded-lg border-2 transition-all duration-200 ${
@@ -223,14 +223,11 @@ export function BugBuilder({ className = '' }: BugBuilderProps) {
               >
                 <div className="text-center">
                   <div className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                    🎲 Random Bug Image
-                  </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
-                    Get a surprise bug each time
+                    🎲 Random Bug
                   </div>
                 </div>
               </button>
-            </div> */}
+            </div>
             
             {/* Image Grid */}
             <div className="my-4 grid grid-cols-10 gap-2 max-h-96 overflow-y-auto p-2 border border-gray-200 dark:border-gray-600 rounded-lg">
