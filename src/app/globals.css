@@ -94,8 +94,7 @@
 @layer components {
   /* Layout components */
   .site-footer {
-    @apply dark:px-8 py-4 text-center text-gray-600 dark:text-gray-300;
-    font-family: 'Mochiy Pop One', cursive;
+    @apply dark:px-8 py-4 text-center text-gray-600 dark:text-gray-300 font-mochiy;
     /* background-color:var(--my-dark-beige); */
   }
 
@@ -210,8 +209,7 @@ html.dark .homepage{
 .image-gallery-hero{
   /* border:1px solid red; */
   /* font-family: 'Schoolbell', cursive; */
-  font-family: 'Mochiy Pop One', cursive;
-  font-weight: 400;
+  @apply font-mochiy font-normal;
 
 
   text-transform: capitalize;
