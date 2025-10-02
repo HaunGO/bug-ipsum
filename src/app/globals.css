@@ -95,8 +95,8 @@
   /* Layout components */
   .site-footer {
     @apply dark:px-8 py-4 text-center text-gray-600 dark:text-gray-300;
+    font-family: 'Mochiy Pop One', cursive;
     /* background-color:var(--my-dark-beige); */
-    font-family: var(--font-mochiy-pop-one), sans-serif;
   }
 
   .main-nav {
@@ -210,9 +210,8 @@ html.dark .homepage{
 .image-gallery-hero{
   /* border:1px solid red; */
   /* font-family: 'Schoolbell', cursive; */
-  font-family: var(--font-mochiy-pop-one), sans-serif;
+  font-family: 'Mochiy Pop One', cursive;
   font-weight: 400;
-  font-style: normal;
 
 
   text-transform: capitalize;
@@ -238,7 +237,7 @@ html.dark .homepage{
               -2px 0px #017e7f;  
               */
 
-              text-shadow: 0 0 50px black;              
+              /* text-shadow: 0 0 50px rgba(0, 0, 0, 0.1);               */
 
               color: var(--my-dark-blue);
               -webkit-text-stroke-color:beige;
