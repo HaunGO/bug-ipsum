@@ -435,8 +435,8 @@ export default function HomePage() {
           <p className="lead max-w-3xl">A little side-project aspiration of mine for a long while now.. and though I&apos;ve known most every component necessary to build it, I merely avoided the effort.. .. <strong>Until now<em>! </em></strong>With these amazing new modern tools, I was able to half-vibe-code this thing into quick existence..<em> and I think that&apos;s pretty cool.</em> 
           </p>
 
-          <p>All photos are my own, and I'll surely be adding more.</p>
-          <p>Next.js • TypeScript • Tailwind • GSAP • Sharp • 20+Years of tinkerin' • </p>
+          <p>All photos are my own, and I&apos;ll surely be adding more.</p>
+          <p>Next.js • TypeScript • Tailwind • GSAP • Sharp • 20+Years of tinkerin&apos; • </p>
 
           <p>~<a href="https://brandonhaun.com" target="_blank" rel="noopener noreferrer">Brandon Haun .com</a></p>
 
