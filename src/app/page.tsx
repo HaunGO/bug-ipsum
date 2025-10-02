@@ -404,12 +404,12 @@ export default function HomePage() {
 
           <h3>About</h3>
 
-          <p className="lead max-w-3xl">This was a little side-project aspiration that I&apos;ve had for a while now.. and though I&apos;ve known each components necessary to build it, there simply was little incintive.  
-            Merely a trade of effort. <strong> But now<em>!</em> </strong>, with these amazing new modern tools, I was able to half-vibe-code this thing into existence!
+          <p className="lead max-w-3xl">This is a little side-project aspiration that I&apos;ve had for a while now.. and though I&apos;ve known each/most components necessary to build it, I merely avoided the effort.. .. <strong> Until now<em>!</em> </strong>, with these amazing new modern tools, I was able to half-vibe-code this thing into existence!
             <em> and I think that&apos;s pretty cool. </em> 
           </p>
           
-          <p>Next.js • TypeScript • Tailwind • GSAP • Sharp </p>
+          <p>Next.js • TypeScript • Tailwind • GSAP • Sharp • 20+Years • </p>
+          <p><a href="https://brandonhaun.com" target="_blank" rel="noopener noreferrer">BrandonHaun.com</a></p>
 
 
         </Section>

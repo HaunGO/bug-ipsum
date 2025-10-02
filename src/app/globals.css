@@ -1,5 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+/* Fonts are now loaded via Next.js font optimization in layout.tsx */
 
 
 
@@ -97,7 +96,7 @@
   .site-footer {
     @apply dark:px-8 py-4 text-center text-gray-600 dark:text-gray-300;
     /* background-color:var(--my-dark-beige); */
-    font-family: "Mochiy Pop One", sans-serif;
+    font-family: var(--font-mochiy-pop-one), sans-serif;
   }
 
   .main-nav {
@@ -211,7 +210,7 @@ html.dark .homepage{
 .image-gallery-hero{
   /* border:1px solid red; */
   /* font-family: 'Schoolbell', cursive; */
-  font-family: "Mochiy Pop One", sans-serif;
+  font-family: var(--font-mochiy-pop-one), sans-serif;
   font-weight: 400;
   font-style: normal;
 
