@@ -1,6 +1,6 @@
 # 🐛 BugIpsum.com
 
-A buggy little placeholder image service featuring my own custom photography of bugs. Perfect for developers, designers, and anyone who needs unique placeholder images with a mandibles!  
+A buggy little placeholder image service featuring my own custom photography of bugs. Perfect for developers, designers, and anyone who wants a quick placeholder image with mandibles!  
 
 All images are my own original photos, mostly also available on my Flickr account: https://www.flickr.com/photos/haungo/ 
 
