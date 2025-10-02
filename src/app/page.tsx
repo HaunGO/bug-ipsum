@@ -442,7 +442,7 @@ export default function HomePage() {
           */}
 
 
-            <p className="lead max-w-3xl">A buggy little placeholder image service featuring real photos of insects, spiders, moths, mantids and such.. Just for fun!.. and easy for anyone that wants a quick bug pic!</p>
+            <p className="lead max-w-3xl">A buggy little placeholder image service featuring my own real photos of insects, spiders, moths, and such.. <strong><em>Just for fun!</em></strong></p>
 
             <p>• Next.js • TypeScript • Tailwind • GSAP • Sharp • 20+Years of tinkerin&apos; • </p>
 

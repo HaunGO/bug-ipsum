@@ -144,7 +144,7 @@ export function ImageGallery() {
 
   return (
   <section className="relative">
-    <div className="absolute top-[32%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 ">
+    <div className="absolute top-[46%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 md:scale-125">
         <h1 className="image-gallery-hero"
         // className="text-2xl lg:text-5xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-full px-4 py-2 lg:px-8 lg:py-3 text-center pointer-events-none shadow-2xl whitespace-nowrap"
         >A buggy little <br />placeholder <br />image service.
