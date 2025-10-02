@@ -210,7 +210,7 @@ export default function HomePage() {
 
 
         <Section title="Tint of Color" className="">
-          <h2>Tint of Color <code>?tint={'{hex-color}'}</code></h2>
+          <h2>Tint<code>?tint={'{hex-color}'}</code></h2>
           <CardBox variant="fit">
             <ImageCard 
               width={200}
@@ -432,14 +432,21 @@ export default function HomePage() {
 
           <h3>What is the meaning of this?</h3>
 
+          {/* 
+          
           <p className="lead max-w-3xl">A little side-project aspiration of mine for a long while now.. and though I&apos;ve known most every component necessary to build it, I merely avoided the effort.. .. <strong>Until now<em>! </em></strong>With these amazing new modern tools, I was able to half-vibe-code this thing into quick existence..<em> and I think that&apos;s pretty cool.</em> 
-          </p>
+          </p> 
 
           <p>All photos are my own, and I&apos;ll surely be adding more.</p>
-          <p>Next.js • TypeScript • Tailwind • GSAP • Sharp • 20+Years of tinkerin&apos; • </p>
+          
+          */}
 
-          <p>~<a href="https://brandonhaun.com" target="_blank" rel="noopener noreferrer">Brandon Haun .com</a></p>
 
+            <p className="lead max-w-3xl">A buggy little placeholder image service featuring real photos of insects, spiders, moths, mantids and such.. Just for fun!.. and easy for anyone that wants a quick bug pic!</p>
+
+            <p>• Next.js • TypeScript • Tailwind • GSAP • Sharp • 20+Years of tinkerin&apos; • </p>
+
+            <p>~<a href="https://brandonhaun.com" target="_blank" rel="noopener noreferrer"> Brandon Haun .com</a></p>
 
           </Section>
 
