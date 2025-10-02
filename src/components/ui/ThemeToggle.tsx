@@ -1,15 +1,9 @@
 'use client';
 
 import { useTheme } from '../../lib/theme';
-import { useEffect, useState } from 'react';
 
 export function ThemeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { theme, setTheme, resolvedTheme, mounted } = useTheme();
 
   // Determine if we should show light or dark based on current theme
   const isDark = theme === 'dark' || (theme === 'system' && resolvedTheme === 'dark');

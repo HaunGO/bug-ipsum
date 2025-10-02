@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { bugImages, getImageByIndex } from '@/lib/bug-images';
 import { gsap } from '@/lib/gsap';
@@ -31,8 +31,14 @@ export function ImageGallery() {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const animationRef = useRef<gsap.core.Timeline | null>(null);
   const isAnimatingRef = useRef(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     const scrollContainer = scrollContainerRef.current;
     const content = contentRef.current;
     
@@ -122,7 +128,19 @@ export function ImageGallery() {
         animationRef.current.kill();
       }
     };
-  }, []);
+  }, [mounted]);
+
+  if (!mounted) {
+    return (
+      <section className="relative">
+        <div className="w-full h-[50vh] lg:h-[80vh] min-h-[300px] flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="image-gallery-hero">A buggy little placeholder image service.</h1>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
   <section className="relative">

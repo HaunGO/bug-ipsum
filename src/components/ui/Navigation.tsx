@@ -8,8 +8,10 @@ import { useTheme } from '../../lib/theme';
 
 export function Navigation() {
   const [mobileMenuOpen] = useState(false);
-  const { resolvedTheme } = useTheme();
-  const logoSrc = resolvedTheme === 'dark' ? '/images/logo-white.png' : '/images/logo-black.png';
+  const { resolvedTheme, mounted } = useTheme();
+  
+  // Use a default logo during SSR to prevent hydration mismatch
+  const logoSrc = mounted && resolvedTheme === 'dark' ? '/images/logo-white.png' : '/images/logo-black.png';
 
   return (
     <nav className="main-nav">
