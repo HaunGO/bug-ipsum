@@ -22,7 +22,38 @@ export default function HomePage() {
 
       <ImageGallery />
  
+
+
+
+
+
+
+
+
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+
+
+
+
+
+
+
+
+
+
+
+      <Section title="Bug Builder" className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+          <BugBuilder />
+        </Section>
+
+
+
+
+
+
+
+
+
 
         <Section title="Basic Width/Height" className="">
           <h2>Dimensions <code>/{'{width}'}/{'{height}'}</code></h2>
@@ -395,23 +426,23 @@ export default function HomePage() {
 
 
 
-        <Section title="Bug Builder" className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-          <BugBuilder />
-        </Section>
 
 
         <Section title="About" >
 
-          <h3>Wha.. Why?</h3>
+          <h3>What is the meaning of this?</h3>
 
-          <p className="lead max-w-3xl">This is a little side-project aspiration that I&apos;ve had for a long while.. and though I&apos;ve known most every component necessary to build it, I merely avoided the effort.. .. <strong> Until now<em>!</em> &nbsp; </strong> With these amazing new modern tools, I was able to half-vibe-code this thing into quick existence..<em> and I think that&apos;s pretty cool.</em> 
+          <p className="lead max-w-3xl">A little side-project aspiration of mine for a long while now.. and though I&apos;ve known most every component necessary to build it, I merely avoided the effort.. .. <strong>Until now<em>! </em></strong>With these amazing new modern tools, I was able to half-vibe-code this thing into quick existence..<em> and I think that&apos;s pretty cool.</em> 
           </p>
+
           <p>All photos are my own, and I'll surely be adding more.</p>
           <p>Next.js • TypeScript • Tailwind • GSAP • Sharp • 20+Years of tinkerin' • </p>
-          <p><a href="https://brandonhaun.com" target="_blank" rel="noopener noreferrer">BrandonHaun.com</a></p>
+
+          <p>~<a href="https://brandonhaun.com" target="_blank" rel="noopener noreferrer">Brandon Haun .com</a></p>
 
 
-        </Section>
+          </Section>
+
 
 
 
