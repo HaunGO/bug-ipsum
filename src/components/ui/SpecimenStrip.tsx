@@ -20,7 +20,7 @@ export function SpecimenStrip() {
   };
 
   return (
-    <section id="collection" aria-labelledby="collection-title" className="bg-raised">
+    <section id="collection" aria-labelledby="collection-title" className="bg-card">
       <div className="section-shell section-block">
         <header className="mb-12 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -44,7 +44,7 @@ export function SpecimenStrip() {
                   onClick={() => sendToBuilder(index)}
                   className="motion-lift group relative block w-full text-left"
                 >
-                  <span className="block overflow-hidden rounded-plate bg-sunken">
+                  <span className="block overflow-hidden rounded-plate bg-muted">
                     <Image
                       src={`/api/280/350?image=${index}`}
                       alt=""

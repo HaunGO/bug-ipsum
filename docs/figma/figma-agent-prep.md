@@ -44,7 +44,7 @@ Both are one mode. Nested names are folders. Plate and cabinet are folders of al
 | Group | What it holds | Figma variables import |
 | --- | --- | --- |
 | `color` | Primitives `paper` (50, 100, 200, 300), `ink` (1000, 950, 900, 700, 600, 400, 100), `pin` (700, 300). Each `$type` is `color`. `$value` is an sRGB object: `colorSpace`, `components` (0–1), `alpha`, `hex`. | Supported (via `.variables.json`) |
-| `color.plate` and `color.cabinet` | Semantic aliases: `surface-page`, `surface-raised`, `surface-sunken`, `text-primary`, `text-muted`, `line`, `accent`, `on-accent`, `focus`. Values are strings like `{color.paper.100}`. | Supported, as color aliases |
+| `color.plate` and `color.cabinet` | Semantic aliases: `surface-page`, `surface-raised`, `surface-sunken`, `text-primary`, `text-muted`, `line`, `accent`, `on-accent` (focus rings use `accent` via `--ring`). Values are strings like `{color.paper.100}`. | Supported, as color aliases |
 | `fontFamily` | `display` Fraunces, `text` Source Serif 4, `mono` Geist Mono. `$type` `fontFamily`, `$value` a single font name. | Supported, becomes a string variable |
 | `dimension` | `radius-plate` 2px, `button-min-height` 44px, `button-gap` 8px, `button-padding-inline-primary` 20px, `button-padding-inline-quiet` 16px, `button-border` 1px, `focus-outline` 2px, `focus-offset` 4px. `$type` `dimension`, unit `px`. | Supported (via `.variables.json`) |
 | `typography` | Nine composites: `display-hero`, `display-section`, `display-subsection`, `display-italic`, `body`, `body-lede`, `mono-label`, `mono-control`, `mono-url`. `$type` is `typography`. Values mix a font alias, weight, style, a px `fontSize`, unitless `lineHeight`, `letterSpacing` in **em**, and sometimes a `sizes` array. | Not a variable type |

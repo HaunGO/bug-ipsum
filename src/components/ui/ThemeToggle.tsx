@@ -18,12 +18,12 @@ export function ThemeToggle() {
       role="switch"
       aria-checked={isDark}
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="inline-flex min-h-11 items-center gap-3 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-ink"
+      className="inline-flex min-h-11 items-center gap-3 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground"
     >
       <span>Dark</span>
-      <span aria-hidden="true" className="relative inline-flex h-6 w-11 items-center rounded-plate border border-line bg-sunken">
+      <span aria-hidden="true" className="relative inline-flex h-6 w-11 items-center rounded-plate border border-border bg-muted">
         <span
-          className={`h-4 w-4 rounded-plate bg-accent transition-transform duration-200 motion-reduce:transition-none ${
+          className={`h-4 w-4 rounded-plate bg-primary transition-transform duration-200 motion-reduce:transition-none ${
             isDark ? 'translate-x-6' : 'translate-x-1'
           }`}
         />

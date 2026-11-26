@@ -120,7 +120,7 @@ export function BugBuilder() {
   const tintInvalid = tintDraft.trim() !== '' && !HEX_PATTERN.test(tintDraft.trim());
 
   return (
-    <section id="builder" aria-labelledby="builder-title" className="scroll-mt-16 bg-raised">
+    <section id="builder" aria-labelledby="builder-title" className="scroll-mt-16 bg-card">
       <div className="section-shell section-block">
         <header className="mb-8 flex flex-col gap-4 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -140,7 +140,7 @@ export function BugBuilder() {
           {/* Preview */}
           <div className="lg:order-2 lg:col-span-7">
             <div className="lg:sticky lg:top-24">
-              <div className="relative flex h-[min(52svh,420px)] items-center justify-center overflow-hidden rounded-plate bg-sunken p-4 sm:p-6 lg:h-[min(70svh,600px)]">
+              <div className="relative flex h-[min(52svh,420px)] items-center justify-center overflow-hidden rounded-plate bg-muted p-4 sm:p-6 lg:h-[min(70svh,600px)]">
                 {failedSrc === previewSrc ? (
                   <p className="max-w-xs text-center text-muted-foreground">
                     That one didn&apos;t develop. Check the size and tint, then try again.
@@ -182,14 +182,14 @@ export function BugBuilder() {
                 <p className="font-display text-2xl">
                   {specimen === null ? 'Any bug, at random' : getSpecimenLabel(specimen)}
                 </p>
-                <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 font-mono text-sm text-muted-foreground hover:text-ink">
+                <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 font-mono text-sm text-muted-foreground hover:text-foreground">
                   <input
                     type="radio"
                     name="specimen"
                     value="random"
                     checked={specimen === null}
                     onChange={() => setSpecimen(null)}
-                    className="h-4 w-4 accent-accent"
+                    className="h-4 w-4 accent-primary"
                   />
                   Random bug
                 </label>
@@ -219,7 +219,7 @@ export function BugBuilder() {
                         loading="lazy"
                         className="aspect-square w-full rounded-plate object-cover opacity-80 transition-opacity group-hover:opacity-100 peer-checked:opacity-100"
                       />
-                      <span className="pointer-events-none absolute inset-0 rounded-plate ring-inset peer-checked:ring-[3px] peer-checked:ring-accent peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent" />
+                      <span className="pointer-events-none absolute inset-0 rounded-plate ring-inset peer-checked:ring-[3px] peer-checked:ring-ring peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ring" />
                     </label>
                   );
                 })}
@@ -324,7 +324,7 @@ export function BugBuilder() {
                       aria-label="Pick a tint colour"
                       value={`#${tint || expandHex(DEFAULT_TINT)}`}
                       onChange={(e) => applyPickedTint(e.target.value)}
-                      className="h-11 w-14 shrink-0 cursor-pointer rounded-plate border border-line bg-sunken p-1"
+                      className="h-11 w-14 shrink-0 cursor-pointer rounded-plate border border-border bg-muted p-1"
                     />
                     <div className="relative flex-1">
                       <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-mono text-sm text-muted-foreground">#</span>

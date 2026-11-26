@@ -20,7 +20,6 @@ const semanticCssKeys: Record<string, string> = {
   line: '--line',
   accent: '--accent',
   'on-accent': '--on-accent',
-  focus: '--focus',
 }
 
 function semanticVarsFor(group: SemanticGroup): CSSProperties {
@@ -51,11 +50,15 @@ export const SEMANTIC_COLOR_TOKENS = [
   { key: 'surface-raised', cssVar: '--surface-raised', tailwind: 'bg-raised', kind: 'surface' as const },
   { key: 'surface-sunken', cssVar: '--surface-sunken', tailwind: 'bg-sunken', kind: 'surface' as const },
   { key: 'text-primary', cssVar: '--text-primary', tailwind: 'text-ink', kind: 'text' as const },
-  { key: 'text-muted', cssVar: '--text-muted', tailwind: 'text-muted-foreground', kind: 'text' as const },
+  {
+    key: 'text-muted',
+    cssVar: '--text-muted',
+    tailwind: 'text-muted-foreground (plate: ink-700, cabinet: ink-500)',
+    kind: 'text' as const,
+  },
   { key: 'line', cssVar: '--line', tailwind: 'border-line', kind: 'line' as const },
-  { key: 'accent', cssVar: '--accent', tailwind: 'bg-accent / text-accent', kind: 'accent' as const },
+  { key: 'accent', cssVar: '--accent', tailwind: 'bg-accent / text-accent / ring-ring', kind: 'accent' as const },
   { key: 'on-accent', cssVar: '--on-accent', tailwind: 'text-on-accent', kind: 'text' as const },
-  { key: 'focus', cssVar: '--focus', tailwind: 'ring-focus', kind: 'accent' as const },
 ] as const
 
 /** shadcn/ui CSS variables in globals.css — each aliases a Bug Ipsum semantic token. */
@@ -63,14 +66,18 @@ export const SHADCN_THEME_ALIASES = [
   { shadcnVar: '--background', semanticVar: '--surface-page', tailwind: 'bg-background · bg-page' },
   { shadcnVar: '--foreground', semanticVar: '--text-primary', tailwind: 'text-foreground · text-ink' },
   { shadcnVar: '--card', semanticVar: '--surface-raised', tailwind: 'bg-card · bg-raised' },
-  { shadcnVar: '--card-foreground', semanticVar: '--text-primary', tailwind: 'text-card-foreground' },
+  { shadcnVar: '--card-foreground', semanticVar: '--foreground', tailwind: 'text-card-foreground · text-foreground' },
+  { shadcnVar: '--popover', semanticVar: '--card', tailwind: 'bg-popover · bg-card' },
+  { shadcnVar: '--popover-foreground', semanticVar: '--foreground', tailwind: 'text-popover-foreground' },
+  { shadcnVar: '--secondary', semanticVar: '--card', tailwind: 'bg-secondary · bg-card' },
+  { shadcnVar: '--secondary-foreground', semanticVar: '--foreground', tailwind: 'text-secondary-foreground' },
   { shadcnVar: '--muted', semanticVar: '--surface-sunken', tailwind: 'bg-muted · bg-sunken' },
   { shadcnVar: '--muted-foreground', semanticVar: '--text-muted', tailwind: 'text-muted-foreground' },
   { shadcnVar: '--primary', semanticVar: '--accent', tailwind: 'bg-primary · bg-accent' },
   { shadcnVar: '--primary-foreground', semanticVar: '--on-accent', tailwind: 'text-primary-foreground · text-on-accent' },
   { shadcnVar: '--border', semanticVar: '--line', tailwind: 'border-border · border-line' },
-  { shadcnVar: '--input', semanticVar: '--line', tailwind: 'border-input' },
-  { shadcnVar: '--ring', semanticVar: '--focus', tailwind: 'ring-ring · ring-focus' },
+  { shadcnVar: '--input', semanticVar: '--border', tailwind: 'border-input · border-border' },
+  { shadcnVar: '--ring', semanticVar: '--accent', tailwind: 'ring-ring · ring-accent' },
   { shadcnVar: '--radius', semanticVar: '--radius-plate', tailwind: 'rounded-plate' },
 ] as const
 
@@ -80,6 +87,40 @@ function tokenHex(value: unknown): string | null {
   if (typeof value !== 'object' || value === null) return null
   const hex = (value as { hex?: string }).hex
   return typeof hex === 'string' ? hex : null
+}
+
+export type PrimitiveColorEntry = {
+  group: string
+  name: string
+  cssVar: string
+  hex: string | null
+  description: string | null
+}
+
+/** Figma/import tier — paper, ink, pin primitives from handoff JSON. */
+export function primitiveColorEntries(): PrimitiveColorEntry[] {
+  const colorTree = tokens.color as unknown as Record<
+    string,
+    Record<string, { $value?: unknown; $description?: string }>
+  >
+  const groups = ['paper', 'ink', 'pin'] as const
+  const entries: PrimitiveColorEntry[] = []
+
+  for (const group of groups) {
+    const bucket = colorTree[group]
+    if (!bucket) continue
+    for (const [name, node] of Object.entries(bucket)) {
+      entries.push({
+        group,
+        name,
+        cssVar: `--${group}-${name}`,
+        hex: tokenHex(node.$value),
+        description: typeof node.$description === 'string' ? node.$description : null,
+      })
+    }
+  }
+
+  return entries.sort((a, b) => a.cssVar.localeCompare(b.cssVar))
 }
 
 /** Resolved primitive hex for a semantic token (from Figma handoff aliases). */

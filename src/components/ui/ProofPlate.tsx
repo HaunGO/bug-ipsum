@@ -19,10 +19,10 @@ export function ProofPlate({ plate, className = '', style }: ProofPlateProps) {
           height={height}
           unoptimized
           loading="lazy"
-          className="h-auto w-full bg-sunken"
+          className="h-auto w-full bg-muted"
         />
         <figcaption className="mt-2 flex flex-col gap-1">
-          <code className="break-all font-mono text-sm text-ink group-hover:underline group-hover:underline-offset-4">
+          <code className="break-all font-mono text-sm text-foreground group-hover:underline group-hover:underline-offset-4">
             {caption}
           </code>
           {note && <span className="font-mono text-xs text-muted-foreground">{note}</span>}

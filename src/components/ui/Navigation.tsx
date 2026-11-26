@@ -4,7 +4,7 @@ import { ThemeToggle } from './ThemeToggle';
 
 export function Navigation() {
   return (
-    <nav aria-label="Main" className="sticky top-0 z-50 border-b border-line bg-page">
+    <nav aria-label="Main" className="sticky top-0 z-50 border-b border-border bg-background">
       <div className="section-shell flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center">
           {/* Both logos render; CSS picks one so there's no theme flash or hydration swap. */}

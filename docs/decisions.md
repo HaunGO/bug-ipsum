@@ -46,6 +46,10 @@ Locked choices made while implementing [frontend-refresh-brief.md](frontend-refr
 
 ---
 
+## `.next` and dev server`
+
+Do not run `npm run build` while `npm run dev` is listening on port **3001** (Turbopack). Production build rewrites `.next` and the running dev process then 500s with missing `postcss.js` / build manifests. **`npm run build`** runs [`scripts/check-dev-port.mjs`](../scripts/check-dev-port.mjs) first and exits with an error if that port is in use. CI and fresh clones are unaffected (no local dev). Override port with `BUG_IPSUM_DEV_PORT` if you change the dev script.
+
 ## Known gaps
 
 1. Comps A and C (Dribbble / Behance) couldn't be fetched during the teardown; the patterns attributed to them come from the brief's description.

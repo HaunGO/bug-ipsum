@@ -36,7 +36,7 @@ export function HeroPlate({ imageIndex }: HeroPlateProps) {
           </Button>
           <a
             href="/api/640/480"
-            className="font-mono text-sm text-muted-foreground underline decoration-line underline-offset-4 hover:text-ink hover:decoration-current"
+            className="font-mono text-sm text-muted-foreground underline decoration-border underline-offset-4 hover:text-foreground hover:decoration-current"
           >
             or just use /api/640/480
           </a>
@@ -44,7 +44,7 @@ export function HeroPlate({ imageIndex }: HeroPlateProps) {
       </div>
 
       <figure className="flex flex-col lg:col-span-7">
-        <div className="relative h-[52svh] min-h-[320px] overflow-hidden bg-raised lg:h-auto lg:flex-1">
+        <div className="relative h-[52svh] min-h-[320px] overflow-hidden bg-card lg:h-auto lg:flex-1">
           <picture>
             <source media="(min-width: 1024px)" srcSet={`/api/1400/1300?image=${imageIndex}`} />
             <source media="(min-width: 640px)" srcSet={`/api/1200/800?image=${imageIndex}`} />

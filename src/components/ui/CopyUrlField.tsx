@@ -52,7 +52,7 @@ export function CopyUrlField({ origin, path, className = '' }: CopyUrlFieldProps
     <div className={className}>
       <div
         data-copied={status === 'copied'}
-        className="flex flex-col gap-3 rounded-plate border-2 border-line bg-sunken p-3 transition-colors data-[copied=true]:border-accent sm:flex-row sm:items-center sm:p-4"
+        className="flex flex-col gap-3 rounded-plate border-2 border-border bg-muted p-3 transition-colors data-[copied=true]:border-primary sm:flex-row sm:items-center sm:p-4"
       >
         <code
           ref={urlRef}
@@ -63,9 +63,9 @@ export function CopyUrlField({ origin, path, className = '' }: CopyUrlFieldProps
           {/* inline-block keeps the path whole and wraps the query as a unit on narrow screens */}
           <span className="inline-block">
             <span className="text-muted-foreground">{origin}</span>
-            <span className="text-ink">{pathname}</span>
+            <span className="text-foreground">{pathname}</span>
           </span>
-          {query && <span className="inline-block text-accent">?{query}</span>}
+          {query && <span className="inline-block text-primary">?{query}</span>}
         </code>
         <div className="flex shrink-0 gap-2">
           <Button

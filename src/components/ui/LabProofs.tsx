@@ -32,11 +32,11 @@ export function LabProofs() {
         ))}
       </div>
 
-      <Card className="mt-20 grid gap-6 bg-raised p-6 sm:p-8 lg:mt-28 lg:grid-cols-12 lg:gap-12">
+      <Card className="mt-20 grid gap-6 bg-card p-6 sm:p-8 lg:mt-28 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-3">
           <h3 className="type-subsection">Quick reference</h3>
           <p className="mt-3 text-muted-foreground">
-            Combine anything with <code className="text-ink">&amp;</code>. Output is JPEG.
+            Combine anything with <code className="text-foreground">&amp;</code>. Output is JPEG.
           </p>
         </div>
         <div className="lg:col-span-9">
@@ -44,7 +44,7 @@ export function LabProofs() {
             {REFERENCE.map(({ term, detail }) => (
               <div key={term}>
                 <dt>
-                  <code className="font-mono text-sm text-accent">{term}</code>
+                  <code className="font-mono text-sm text-primary">{term}</code>
                 </dt>
                 <dd className="mt-0.5 text-muted-foreground">{detail}</dd>
               </div>
@@ -52,7 +52,7 @@ export function LabProofs() {
           </dl>
           <p className="mt-6 break-all font-mono text-sm">
             <span className="text-muted-foreground">e.g. </span>
-            <a href="/api/800/600?image=3&saturation=7&contrast=6&tint=ff6b6b" className="underline decoration-line underline-offset-4 hover:decoration-current">
+            <a href="/api/800/600?image=3&saturation=7&contrast=6&tint=ff6b6b" className="underline decoration-border underline-offset-4 hover:decoration-current">
               /api/800/600?image=3&amp;saturation=7&amp;contrast=6&amp;tint=ff6b6b
             </a>
           </p>

@@ -16,7 +16,7 @@ export function LabProofSection({ proof, number }: LabProofSectionProps) {
         <h3 id={headingId} className="type-subsection mt-1">
           {proof.title}
         </h3>
-        <code className="mt-2 block font-mono text-sm text-accent">{proof.syntax}</code>
+        <code className="mt-2 block font-mono text-sm text-primary">{proof.syntax}</code>
         <p className="type-lede mt-3 max-w-sm">{proof.description}</p>
       </header>
 

@@ -50,7 +50,6 @@ const config: Config = {
         ink: 'var(--text-primary)',
         line: 'var(--line)',
         'on-accent': 'var(--on-accent)',
-        focus: 'var(--focus)',
       },
       fontFamily: {
         display: ['var(--font-display)', 'Georgia', 'serif'],

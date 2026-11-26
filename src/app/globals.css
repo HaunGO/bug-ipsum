@@ -16,11 +16,11 @@
     --paper-300: #c9cbc4;
 
     /* Primitives — cabinet + ink */
-    --ink-1000: #0b0c0b;
     --ink-950: #0f1110;
     --ink-900: #181b19;
     --ink-700: #343935;
     --ink-600: #4f544f;
+    --ink-500: #858a86;
     --ink-400: #9da39c;
     --ink-100: #e9ebe6;
 
@@ -33,11 +33,10 @@
     --surface-raised: var(--paper-200);
     --surface-sunken: var(--paper-50);
     --text-primary: var(--ink-950);
-    --text-muted: var(--ink-600);
+    --text-muted: var(--ink-700);
     --line: var(--paper-300);
     --accent: var(--pin-700);
     --on-accent: var(--paper-50);
-    --focus: var(--pin-700);
 
     --radius-plate: 2px;
     --ease-settle: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -46,20 +45,20 @@
     --background: var(--surface-page);
     --foreground: var(--text-primary);
     --card: var(--surface-raised);
-    --card-foreground: var(--text-primary);
-    --popover: var(--surface-raised);
-    --popover-foreground: var(--text-primary);
+    --card-foreground: var(--foreground);
+    --popover: var(--card);
+    --popover-foreground: var(--foreground);
     --primary: var(--accent);
     --primary-foreground: var(--on-accent);
-    --secondary: var(--surface-raised);
-    --secondary-foreground: var(--text-primary);
+    --secondary: var(--card);
+    --secondary-foreground: var(--foreground);
     --muted: var(--surface-sunken);
     --muted-foreground: var(--text-muted);
     --destructive: #b91c1c;
     --destructive-foreground: var(--paper-50);
     --border: var(--line);
-    --input: var(--line);
-    --ring: var(--focus);
+    --input: var(--border);
+    --ring: var(--accent);
     --radius: var(--radius-plate);
 
     color-scheme: light;
@@ -69,13 +68,12 @@
     /* Semantic — cabinet (dark); shadcn aliases follow automatically */
     --surface-page: var(--ink-950);
     --surface-raised: var(--ink-900);
-    --surface-sunken: var(--ink-1000);
+    --surface-sunken: var(--ink-950);
     --text-primary: var(--ink-100);
-    --text-muted: var(--ink-400);
+    --text-muted: var(--ink-500);
     --line: var(--ink-700);
     --accent: var(--pin-300);
     --on-accent: var(--ink-950);
-    --focus: var(--pin-300);
 
     color-scheme: dark;
   }
@@ -90,7 +88,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--focus);
+    outline: 2px solid var(--accent);
     outline-offset: 4px;
   }
 
@@ -175,10 +173,10 @@
     outline: none;
   }
   .lab-range:focus-visible::-webkit-slider-thumb {
-    box-shadow: 0 0 0 3px var(--surface-raised), 0 0 0 5px var(--focus);
+    box-shadow: 0 0 0 3px var(--surface-raised), 0 0 0 5px var(--accent);
   }
   .lab-range:focus-visible::-moz-range-thumb {
-    box-shadow: 0 0 0 3px var(--surface-raised), 0 0 0 5px var(--focus);
+    box-shadow: 0 0 0 3px var(--surface-raised), 0 0 0 5px var(--accent);
   }
   .lab-range[data-off='true']::-webkit-slider-thumb {
     background: var(--text-muted);

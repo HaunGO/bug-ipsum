@@ -76,7 +76,7 @@
       },
       "400": {
         "$type": "color",
-        "$description": "Muted text in the cabinet.",
+        "$description": "Legacy cabinet muted.",
         "$value": {
           "colorSpace": "srgb",
           "components": [
@@ -88,9 +88,23 @@
           "hex": "#9da39c"
         }
       },
+      "500": {
+        "$type": "color",
+        "$description": "Muted text in the cabinet.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5215686274509804,
+            0.5411764705882353,
+            0.5254901960784314
+          ],
+          "alpha": 1,
+          "hex": "#858a86"
+        }
+      },
       "600": {
         "$type": "color",
-        "$description": "Muted text on the plate.",
+        "$description": "Legacy mid ink.",
         "$value": {
           "colorSpace": "srgb",
           "components": [
@@ -104,7 +118,7 @@
       },
       "700": {
         "$type": "color",
-        "$description": "Rules and borders in the cabinet.",
+        "$description": "Plate muted text; rules and borders in the cabinet.",
         "$value": {
           "colorSpace": "srgb",
           "components": [
@@ -142,20 +156,6 @@
           ],
           "alpha": 1,
           "hex": "#0f1110"
-        }
-      },
-      "1000": {
-        "$type": "color",
-        "$description": "Input wells in the cabinet.",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.043137254901960784,
-            0.047058823529411764,
-            0.043137254901960784
-          ],
-          "alpha": 1,
-          "hex": "#0b0c0b"
         }
       }
     },
@@ -213,7 +213,7 @@
       "text-muted": {
         "$type": "color",
         "$description": "text-muted",
-        "$value": "{color.ink.600}"
+        "$value": "{color.ink.700}"
       },
       "line": {
         "$type": "color",
@@ -229,11 +229,6 @@
         "$type": "color",
         "$description": "text-on-accent",
         "$value": "{color.paper.50}"
-      },
-      "focus": {
-        "$type": "color",
-        "$description": "focus-visible outline",
-        "$value": "{color.pin.700}"
       }
     },
     "cabinet": {
@@ -249,8 +244,8 @@
       },
       "surface-sunken": {
         "$type": "color",
-        "$description": "bg-sunken",
-        "$value": "{color.ink.1000}"
+        "$description": "bg-sunken (aliases cabinet page / ink-950)",
+        "$value": "{color.ink.950}"
       },
       "text-primary": {
         "$type": "color",
@@ -260,7 +255,7 @@
       "text-muted": {
         "$type": "color",
         "$description": "text-muted",
-        "$value": "{color.ink.400}"
+        "$value": "{color.ink.500}"
       },
       "line": {
         "$type": "color",
@@ -276,11 +271,6 @@
         "$type": "color",
         "$description": "text-on-accent",
         "$value": "{color.ink.950}"
-      },
-      "focus": {
-        "$type": "color",
-        "$description": "focus-visible outline",
-        "$value": "{color.pin.300}"
       }
     }
   },

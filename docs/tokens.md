@@ -1,13 +1,15 @@
 # Design tokens
 
-Source: [`src/app/globals.css`](../src/app/globals.css), mapped into Tailwind in [`tailwind.config.ts`](../tailwind.config.ts).
+**Living reference:** run the app and open `/styleguide` for specimens, shadcn mapping, and system audit notes.
+
+Source: [`src/app/globals.css`](../src/app/globals.css), mapped into Tailwind in [`tailwind.config.ts`](../tailwind.config.ts). shadcn theme variables alias the same semantics (see style guide).
 
 Two tiers. **Primitives** are raw values and are never used directly in components. **Semantic** tokens are what components use; each theme reassigns them.
 
 - **Plate** (light) — specimen mount board: cool neutral paper, near-black ink.
 - **Cabinet** (dark) — a dark specimen cabinet: green-black surfaces, pale ink.
 
-The photographs carry the colour. The UI stays neutral apart from one accent, *specimen-pin green*, used for the primary action, focus, slider thumbs, and the "copied" state.
+The photographs carry the colour. The UI stays neutral apart from one accent, *specimen-pin green*, used for the primary action, focus rings (`--ring` → `--accent`), slider thumbs, and the "copied" state.
 
 ## Primitives
 
@@ -17,12 +19,12 @@ The photographs carry the colour. The UI stays neutral apart from one accent, *s
 | `--paper-100` | `#eeeeea` | Page (plate) |
 | `--paper-200` | `#e4e4de` | Raised panels (plate) |
 | `--paper-300` | `#c9cbc4` | Rules / borders (plate) |
-| `--ink-1000` | `#0b0c0b` | Input wells (cabinet) |
-| `--ink-950` | `#0f1110` | Page (cabinet), primary text (plate) |
+| `--ink-950` | `#0f1110` | Page (cabinet), primary text (plate), cabinet sunken wells |
 | `--ink-900` | `#181b19` | Raised panels (cabinet) |
 | `--ink-700` | `#343935` | Rules / borders (cabinet) |
-| `--ink-600` | `#4f544f` | Muted text (plate) |
-| `--ink-400` | `#9da39c` | Muted text (cabinet) |
+| `--ink-600` | `#4f544f` | Legacy mid ink |
+| `--ink-500` | `#858a86` | Muted text (cabinet) |
+| `--ink-400` | `#9da39c` | Legacy cabinet muted |
 | `--ink-100` | `#e9ebe6` | Primary text (cabinet) |
 | `--pin-700` | `#1f6b4f` | Accent (plate) |
 | `--pin-300` | `#7fd1a8` | Accent (cabinet) |
@@ -33,13 +35,12 @@ The photographs carry the colour. The UI stays neutral apart from one accent, *s
 |-------|----------|-------|---------|
 | `--surface-page` | `bg-page` | paper-100 | ink-950 |
 | `--surface-raised` | `bg-raised` | paper-200 | ink-900 |
-| `--surface-sunken` | `bg-sunken` | paper-50 | ink-1000 |
+| `--surface-sunken` | `bg-sunken` | paper-50 | ink-950 |
 | `--text-primary` | `text-ink` | ink-950 | ink-100 |
-| `--text-muted` | `text-muted` | ink-600 | ink-400 |
+| `--text-muted` | `text-muted-foreground` | ink-700 | ink-500 |
 | `--line` | `border-line` | paper-300 | ink-700 |
 | `--accent` | `bg-accent` / `text-accent` | pin-700 | pin-300 |
 | `--on-accent` | `text-on-accent` | paper-50 | ink-950 |
-| `--focus` | `outline-focus` / `ring-focus` | pin-700 | pin-300 |
 | `--radius-plate` | `rounded-plate` | 2px | 2px |
 | `--ease-settle` | — | `cubic-bezier(0.2, 0.7, 0.2, 1)` | same |
 
@@ -50,7 +51,7 @@ Approximate ratios, measured on the darkest surface each pair appears on:
 | Pair | Plate | Cabinet |
 |------|-------|---------|
 | Primary text on page | ~16:1 | ~15:1 |
-| Muted text on raised | ~6.0:1 | ~6.6:1 |
+| Muted text on raised | ~9.2:1 | ~5.4:1 |
 | Accent on raised (links, labels) | ~5.0:1 | ~10:1 |
 | On-accent text on accent (button) | ~5.9:1 | ~10:1 |
 
@@ -84,7 +85,7 @@ Figma import: [`docs/figma/bug-ipsum-refresh.variables.json`](figma/bug-ipsum-re
 
 ## Component primitives (in `globals.css`)
 
-Layout: `.section-shell`, `.section-block`. Surfaces: `.surface-page`, `.surface-raised`, `.surface-sunken`. Controls: `.btn-primary`, `.btn-quiet`, `.field-input`, `.lab-range` (slider; `data-off="true"` greys the thumb when an effect is off). Type: `.specimen-label`, `.type-section`, `.type-subsection`, `.type-lede`, `.type-lede-hero`, `.type-display-italic`.
+Layout: `.section-shell`, `.section-block`. Surfaces: use shadcn `Card` and Tailwind `bg-background` / `bg-card` / `bg-muted` (alias semantics). Controls: shadcn `Button`, `Input`, plus `.lab-range` (slider; `data-off="true"` greys the thumb when an effect is off). Type: `.specimen-label`, `.type-section`, `.type-subsection`, `.type-lede`, `.type-lede-hero`, `.type-display-italic`.
 
 ## Motion
 

@@ -22,7 +22,7 @@ export function AboutPlate() {
               href="https://www.flickr.com/photos/haungo/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ink underline decoration-line underline-offset-4 hover:decoration-current"
+              className="text-foreground underline decoration-border underline-offset-4 hover:decoration-current"
             >
               my Flickr
             </a>
@@ -37,7 +37,7 @@ export function AboutPlate() {
               href="https://brandonhaun.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-display text-2xl italic underline decoration-line underline-offset-4 hover:decoration-current"
+              className="font-display text-2xl italic underline decoration-border underline-offset-4 hover:decoration-current"
             >
               Brandon Haun
             </a>
