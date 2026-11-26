@@ -10,34 +10,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: 'var(--color-primary-50)',
-          100: 'var(--color-primary-100)',
-          200: 'var(--color-primary-200)',
-          300: 'var(--color-primary-300)',
-          400: 'var(--color-primary-400)',
-          500: 'var(--color-primary-500)',
-          600: 'var(--color-primary-600)',
-          700: 'var(--color-primary-700)',
-          800: 'var(--color-primary-800)',
-          900: 'var(--color-primary-900)',
-          950: 'var(--color-primary-950)',
-        },
+        page: 'var(--surface-page)',
+        raised: 'var(--surface-raised)',
+        sunken: 'var(--surface-sunken)',
+        ink: 'var(--text-primary)',
+        muted: 'var(--text-muted)',
+        line: 'var(--line)',
+        accent: 'var(--accent)',
+        'on-accent': 'var(--on-accent)',
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-geist-mono)', 'monospace'],
-        'mochiy': ['var(--font-mochiy-pop-one)', 'cursive'],
+        display: ['var(--font-display)', 'Georgia', 'serif'],
+        text: ['var(--font-text)', 'Georgia', 'serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
-      fontSize: {
-        xs: ['0.5rem', { lineHeight: '0.9rem' }], // Even smaller than default 0.75rem
+      borderRadius: {
+        plate: 'var(--radius-plate)',
+      },
+      minHeight: {
+        11: '2.75rem',
       },
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
+    require('@tailwindcss/forms')({ strategy: 'class' }),
   ],
 }
 
-export default config 
+export default config

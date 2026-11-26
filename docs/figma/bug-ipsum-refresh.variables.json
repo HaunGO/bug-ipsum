@@ -1,0 +1,370 @@
+{
+  "$description": "Figma Variables import only (color, fontFamily, dimension). Full handoff: bug-ipsum-refresh.tokens.json",
+  "color": {
+    "paper": {
+      "50": {
+        "$type": "color",
+        "$description": "Input wells on the plate.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9686274509803922,
+            0.9686274509803922,
+            0.9568627450980393
+          ],
+          "alpha": 1,
+          "hex": "#f7f7f4"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$description": "Page on the plate.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9333333333333333,
+            0.9333333333333333,
+            0.9176470588235294
+          ],
+          "alpha": 1,
+          "hex": "#eeeeea"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$description": "Raised panels on the plate.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8941176470588236,
+            0.8941176470588236,
+            0.8705882352941177
+          ],
+          "alpha": 1,
+          "hex": "#e4e4de"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$description": "Rules and borders on the plate.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.788235294117647,
+            0.796078431372549,
+            0.7686274509803922
+          ],
+          "alpha": 1,
+          "hex": "#c9cbc4"
+        }
+      }
+    },
+    "ink": {
+      "100": {
+        "$type": "color",
+        "$description": "Primary text in the cabinet.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9137254901960784,
+            0.9215686274509803,
+            0.9019607843137255
+          ],
+          "alpha": 1,
+          "hex": "#e9ebe6"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$description": "Muted text in the cabinet.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.615686274509804,
+            0.6392156862745098,
+            0.611764705882353
+          ],
+          "alpha": 1,
+          "hex": "#9da39c"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$description": "Muted text on the plate.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.30980392156862746,
+            0.32941176470588235,
+            0.30980392156862746
+          ],
+          "alpha": 1,
+          "hex": "#4f544f"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$description": "Rules and borders in the cabinet.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.20392156862745098,
+            0.2235294117647059,
+            0.20784313725490197
+          ],
+          "alpha": 1,
+          "hex": "#343935"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$description": "Raised panels in the cabinet.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.09411764705882353,
+            0.10588235294117647,
+            0.09803921568627451
+          ],
+          "alpha": 1,
+          "hex": "#181b19"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$description": "Page in the cabinet. Primary text on the plate.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.058823529411764705,
+            0.06666666666666667,
+            0.06274509803921569
+          ],
+          "alpha": 1,
+          "hex": "#0f1110"
+        }
+      },
+      "1000": {
+        "$type": "color",
+        "$description": "Input wells in the cabinet.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.043137254901960784,
+            0.047058823529411764,
+            0.043137254901960784
+          ],
+          "alpha": 1,
+          "hex": "#0b0c0b"
+        }
+      }
+    },
+    "pin": {
+      "300": {
+        "$type": "color",
+        "$description": "Specimen-pin green. Accent in the cabinet.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4980392156862745,
+            0.8196078431372549,
+            0.6588235294117647
+          ],
+          "alpha": 1,
+          "hex": "#7fd1a8"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$description": "Specimen-pin green. Accent on the plate.",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.12156862745098039,
+            0.4196078431372549,
+            0.30980392156862746
+          ],
+          "alpha": 1,
+          "hex": "#1f6b4f"
+        }
+      }
+    },
+    "plate": {
+      "surface-page": {
+        "$type": "color",
+        "$description": "bg-page",
+        "$value": "{color.paper.100}"
+      },
+      "surface-raised": {
+        "$type": "color",
+        "$description": "bg-raised",
+        "$value": "{color.paper.200}"
+      },
+      "surface-sunken": {
+        "$type": "color",
+        "$description": "bg-sunken",
+        "$value": "{color.paper.50}"
+      },
+      "text-primary": {
+        "$type": "color",
+        "$description": "text-ink",
+        "$value": "{color.ink.950}"
+      },
+      "text-muted": {
+        "$type": "color",
+        "$description": "text-muted",
+        "$value": "{color.ink.600}"
+      },
+      "line": {
+        "$type": "color",
+        "$description": "border-line",
+        "$value": "{color.paper.300}"
+      },
+      "accent": {
+        "$type": "color",
+        "$description": "bg-accent / text-accent",
+        "$value": "{color.pin.700}"
+      },
+      "on-accent": {
+        "$type": "color",
+        "$description": "text-on-accent",
+        "$value": "{color.paper.50}"
+      },
+      "focus": {
+        "$type": "color",
+        "$description": "focus-visible outline",
+        "$value": "{color.pin.700}"
+      }
+    },
+    "cabinet": {
+      "surface-page": {
+        "$type": "color",
+        "$description": "bg-page",
+        "$value": "{color.ink.950}"
+      },
+      "surface-raised": {
+        "$type": "color",
+        "$description": "bg-raised",
+        "$value": "{color.ink.900}"
+      },
+      "surface-sunken": {
+        "$type": "color",
+        "$description": "bg-sunken",
+        "$value": "{color.ink.1000}"
+      },
+      "text-primary": {
+        "$type": "color",
+        "$description": "text-ink",
+        "$value": "{color.ink.100}"
+      },
+      "text-muted": {
+        "$type": "color",
+        "$description": "text-muted",
+        "$value": "{color.ink.400}"
+      },
+      "line": {
+        "$type": "color",
+        "$description": "border-line",
+        "$value": "{color.ink.700}"
+      },
+      "accent": {
+        "$type": "color",
+        "$description": "bg-accent / text-accent",
+        "$value": "{color.pin.300}"
+      },
+      "on-accent": {
+        "$type": "color",
+        "$description": "text-on-accent",
+        "$value": "{color.ink.950}"
+      },
+      "focus": {
+        "$type": "color",
+        "$description": "focus-visible outline",
+        "$value": "{color.pin.300}"
+      }
+    }
+  },
+  "fontFamily": {
+    "display": {
+      "$type": "fontFamily",
+      "$description": "Fraunces via --font-display. Axes: opsz, SOFT, WONK. Normal and italic.",
+      "$value": "Fraunces"
+    },
+    "text": {
+      "$type": "fontFamily",
+      "$description": "Source Serif 4 via --font-text. Axis: opsz. Body default.",
+      "$value": "Source Serif 4"
+    },
+    "mono": {
+      "$type": "fontFamily",
+      "$description": "Geist Mono via --font-mono.",
+      "$value": "Geist Mono"
+    }
+  },
+  "dimension": {
+    "radius-plate": {
+      "$type": "dimension",
+      "$description": "--radius-plate / rounded-plate",
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      }
+    },
+    "button-min-height": {
+      "$type": "dimension",
+      "$description": "min-h-11",
+      "$value": {
+        "value": 44,
+        "unit": "px"
+      }
+    },
+    "button-gap": {
+      "$type": "dimension",
+      "$description": "gap-2",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "button-padding-inline-primary": {
+      "$type": "dimension",
+      "$description": "px-5",
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      }
+    },
+    "button-padding-inline-quiet": {
+      "$type": "dimension",
+      "$description": "px-4",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "button-border": {
+      "$type": "dimension",
+      "$description": "border",
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      }
+    },
+    "focus-outline": {
+      "$type": "dimension",
+      "$description": "outline width",
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      }
+    },
+    "focus-offset": {
+      "$type": "dimension",
+      "$description": "outline-offset",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      }
+    }
+  }
+}

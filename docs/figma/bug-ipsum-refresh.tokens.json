@@ -1,0 +1,345 @@
+{
+  "$description": "Bug Ipsum Refresh design handoff for Figma file Bug Ipsum Refresh (eoEasW5XkZ54fXEwS5yE6P). Source: src/app/globals.css, tailwind.config.ts, src/app/layout.tsx. Import variables from docs/figma/bug-ipsum-refresh.variables.json (color, fontFamily, dimension only). This file adds typography composites, component notes, and codeConnect metadata. Plate is the light mount board. Cabinet is the dark specimen cabinet. Both live in one collection as folders, not as a second mode.",
+  "color": {
+    "paper": {
+      "50": {
+        "$type": "color",
+        "$description": "Input wells on the plate.",
+        "$value": { "colorSpace": "srgb", "components": [0.9686274509803922, 0.9686274509803922, 0.9568627450980393], "alpha": 1, "hex": "#f7f7f4" }
+      },
+      "100": {
+        "$type": "color",
+        "$description": "Page on the plate.",
+        "$value": { "colorSpace": "srgb", "components": [0.9333333333333333, 0.9333333333333333, 0.9176470588235294], "alpha": 1, "hex": "#eeeeea" }
+      },
+      "200": {
+        "$type": "color",
+        "$description": "Raised panels on the plate.",
+        "$value": { "colorSpace": "srgb", "components": [0.8941176470588236, 0.8941176470588236, 0.8705882352941177], "alpha": 1, "hex": "#e4e4de" }
+      },
+      "300": {
+        "$type": "color",
+        "$description": "Rules and borders on the plate.",
+        "$value": { "colorSpace": "srgb", "components": [0.788235294117647, 0.796078431372549, 0.7686274509803922], "alpha": 1, "hex": "#c9cbc4" }
+      }
+    },
+    "ink": {
+      "1000": {
+        "$type": "color",
+        "$description": "Input wells in the cabinet.",
+        "$value": { "colorSpace": "srgb", "components": [0.043137254901960784, 0.047058823529411764, 0.043137254901960784], "alpha": 1, "hex": "#0b0c0b" }
+      },
+      "950": {
+        "$type": "color",
+        "$description": "Page in the cabinet. Primary text on the plate.",
+        "$value": { "colorSpace": "srgb", "components": [0.058823529411764705, 0.06666666666666667, 0.06274509803921569], "alpha": 1, "hex": "#0f1110" }
+      },
+      "900": {
+        "$type": "color",
+        "$description": "Raised panels in the cabinet.",
+        "$value": { "colorSpace": "srgb", "components": [0.09411764705882353, 0.10588235294117647, 0.09803921568627451], "alpha": 1, "hex": "#181b19" }
+      },
+      "700": {
+        "$type": "color",
+        "$description": "Rules and borders in the cabinet.",
+        "$value": { "colorSpace": "srgb", "components": [0.20392156862745098, 0.2235294117647059, 0.20784313725490197], "alpha": 1, "hex": "#343935" }
+      },
+      "600": {
+        "$type": "color",
+        "$description": "Muted text on the plate.",
+        "$value": { "colorSpace": "srgb", "components": [0.30980392156862746, 0.32941176470588235, 0.30980392156862746], "alpha": 1, "hex": "#4f544f" }
+      },
+      "400": {
+        "$type": "color",
+        "$description": "Muted text in the cabinet.",
+        "$value": { "colorSpace": "srgb", "components": [0.615686274509804, 0.6392156862745098, 0.611764705882353], "alpha": 1, "hex": "#9da39c" }
+      },
+      "100": {
+        "$type": "color",
+        "$description": "Primary text in the cabinet.",
+        "$value": { "colorSpace": "srgb", "components": [0.9137254901960784, 0.9215686274509803, 0.9019607843137255], "alpha": 1, "hex": "#e9ebe6" }
+      }
+    },
+    "pin": {
+      "700": {
+        "$type": "color",
+        "$description": "Specimen-pin green. Accent on the plate.",
+        "$value": { "colorSpace": "srgb", "components": [0.12156862745098039, 0.4196078431372549, 0.30980392156862746], "alpha": 1, "hex": "#1f6b4f" }
+      },
+      "300": {
+        "$type": "color",
+        "$description": "Specimen-pin green. Accent in the cabinet.",
+        "$value": { "colorSpace": "srgb", "components": [0.4980392156862745, 0.8196078431372549, 0.6588235294117647], "alpha": 1, "hex": "#7fd1a8" }
+      }
+    },
+    "plate": {
+      "surface-page": { "$type": "color", "$description": "bg-page", "$value": "{color.paper.100}" },
+      "surface-raised": { "$type": "color", "$description": "bg-raised", "$value": "{color.paper.200}" },
+      "surface-sunken": { "$type": "color", "$description": "bg-sunken", "$value": "{color.paper.50}" },
+      "text-primary": { "$type": "color", "$description": "text-ink", "$value": "{color.ink.950}" },
+      "text-muted": { "$type": "color", "$description": "text-muted", "$value": "{color.ink.600}" },
+      "line": { "$type": "color", "$description": "border-line", "$value": "{color.paper.300}" },
+      "accent": { "$type": "color", "$description": "bg-accent / text-accent", "$value": "{color.pin.700}" },
+      "on-accent": { "$type": "color", "$description": "text-on-accent", "$value": "{color.paper.50}" },
+      "focus": { "$type": "color", "$description": "focus-visible outline", "$value": "{color.pin.700}" }
+    },
+    "cabinet": {
+      "surface-page": { "$type": "color", "$description": "bg-page", "$value": "{color.ink.950}" },
+      "surface-raised": { "$type": "color", "$description": "bg-raised", "$value": "{color.ink.900}" },
+      "surface-sunken": { "$type": "color", "$description": "bg-sunken", "$value": "{color.ink.1000}" },
+      "text-primary": { "$type": "color", "$description": "text-ink", "$value": "{color.ink.100}" },
+      "text-muted": { "$type": "color", "$description": "text-muted", "$value": "{color.ink.400}" },
+      "line": { "$type": "color", "$description": "border-line", "$value": "{color.ink.700}" },
+      "accent": { "$type": "color", "$description": "bg-accent / text-accent", "$value": "{color.pin.300}" },
+      "on-accent": { "$type": "color", "$description": "text-on-accent", "$value": "{color.ink.950}" },
+      "focus": { "$type": "color", "$description": "focus-visible outline", "$value": "{color.pin.300}" }
+    }
+  },
+  "fontFamily": {
+    "display": { "$type": "fontFamily", "$description": "Fraunces via --font-display. Axes: opsz, SOFT, WONK. Normal and italic.", "$value": "Fraunces" },
+    "text": { "$type": "fontFamily", "$description": "Source Serif 4 via --font-text. Axis: opsz. Body default.", "$value": "Source Serif 4" },
+    "mono": { "$type": "fontFamily", "$description": "Geist Mono via --font-mono.", "$value": "Geist Mono" }
+  },
+  "dimension": {
+    "radius-plate": { "$type": "dimension", "$description": "--radius-plate / rounded-plate", "$value": { "value": 2, "unit": "px" } },
+    "button-min-height": { "$type": "dimension", "$description": "min-h-11", "$value": { "value": 44, "unit": "px" } },
+    "button-gap": { "$type": "dimension", "$description": "gap-2", "$value": { "value": 8, "unit": "px" } },
+    "button-padding-inline-primary": { "$type": "dimension", "$description": "px-5", "$value": { "value": 20, "unit": "px" } },
+    "button-padding-inline-quiet": { "$type": "dimension", "$description": "px-4", "$value": { "value": 16, "unit": "px" } },
+    "button-border": { "$type": "dimension", "$description": "border", "$value": { "value": 1, "unit": "px" } },
+    "focus-outline": { "$type": "dimension", "$description": "outline width", "$value": { "value": 2, "unit": "px" } },
+    "focus-offset": { "$type": "dimension", "$description": "outline-offset", "$value": { "value": 4, "unit": "px" } }
+  },
+  "typography": {
+    "display-hero": {
+      "$type": "typography",
+      "$description": "Hero wordmark. font-display font-normal leading-[0.82] tracking-[-0.035em]. Size is clamp(5rem, 22vw, 8rem), and from lg clamp(6rem, 10.5vw, 10.5rem). The px size below is the 10.5rem cap.",
+      "$value": {
+        "fontFamily": "{fontFamily.display}",
+        "fontWeight": 400,
+        "fontStyle": "normal",
+        "fontSize": { "value": 168, "unit": "px" },
+        "lineHeight": 0.82,
+        "letterSpacing": { "value": -0.035, "unit": "em" },
+        "letterSpacingPx": -5.88
+      }
+    },
+    "display-section": {
+      "$type": "typography",
+      "$description": "Section headlines. font-display font-normal tracking-tight. text-5xl, sm:text-6xl. Builder title adds lg:text-7xl.",
+      "$value": {
+        "fontFamily": "{fontFamily.display}",
+        "fontWeight": 400,
+        "fontStyle": "normal",
+        "fontSize": { "value": 48, "unit": "px" },
+        "lineHeight": 1,
+        "letterSpacing": { "value": -0.025, "unit": "em" },
+        "letterSpacingPx": -1.2,
+        "sizes": [
+          { "breakpoint": "default", "fontSize": 48, "lineHeightPx": 48 },
+          { "breakpoint": "sm", "fontSize": 60, "lineHeightPx": 60 },
+          { "breakpoint": "lg", "fontSize": 72, "lineHeightPx": 72, "usedBy": "Bug Builder title only" }
+        ]
+      }
+    },
+    "display-subsection": {
+      "$type": "typography",
+      "$description": "Proof headings. font-display font-normal text-3xl sm:text-4xl.",
+      "$value": {
+        "fontFamily": "{fontFamily.display}",
+        "fontWeight": 400,
+        "fontStyle": "normal",
+        "fontSize": { "value": 30, "unit": "px" },
+        "lineHeightPx": 36,
+        "letterSpacing": { "value": 0, "unit": "em" },
+        "sizes": [
+          { "breakpoint": "default", "fontSize": 30, "lineHeightPx": 36 },
+          { "breakpoint": "sm", "fontSize": 36, "lineHeightPx": 40 }
+        ]
+      }
+    },
+    "display-italic": {
+      "$type": "typography",
+      "$description": "About title. font-display font-normal italic tracking-tight text-4xl sm:text-5xl.",
+      "$value": {
+        "fontFamily": "{fontFamily.display}",
+        "fontWeight": 400,
+        "fontStyle": "italic",
+        "fontSize": { "value": 36, "unit": "px" },
+        "lineHeightPx": 40,
+        "letterSpacing": { "value": -0.025, "unit": "em" },
+        "letterSpacingPx": -0.9,
+        "sizes": [
+          { "breakpoint": "default", "fontSize": 36, "lineHeightPx": 40 },
+          { "breakpoint": "sm", "fontSize": 48, "lineHeightPx": 48 }
+        ]
+      }
+    },
+    "body": {
+      "$type": "typography",
+      "$description": "Default body. font-text, set on body.",
+      "$value": {
+        "fontFamily": "{fontFamily.text}",
+        "fontWeight": 400,
+        "fontStyle": "normal",
+        "fontSize": { "value": 16, "unit": "px" },
+        "lineHeightPx": 24,
+        "letterSpacing": { "value": 0, "unit": "em" }
+      }
+    },
+    "body-lede": {
+      "$type": "typography",
+      "$description": "Section ledes. text-lg leading-relaxed text-muted. Hero lede adds sm:text-xl.",
+      "$value": {
+        "fontFamily": "{fontFamily.text}",
+        "fontWeight": 400,
+        "fontStyle": "normal",
+        "fontSize": { "value": 18, "unit": "px" },
+        "lineHeight": 1.625,
+        "lineHeightPx": 29.25,
+        "letterSpacing": { "value": 0, "unit": "em" },
+        "color": "{color.plate.text-muted}",
+        "sizes": [
+          { "breakpoint": "default", "fontSize": 18, "lineHeightPx": 29.25 },
+          { "breakpoint": "sm", "fontSize": 20, "lineHeightPx": 32.5, "usedBy": "Hero lede" }
+        ]
+      }
+    },
+    "mono-label": {
+      "$type": "typography",
+      "$description": ".specimen-label. font-mono text-xs uppercase tracking-[0.14em] text-muted.",
+      "$value": {
+        "fontFamily": "{fontFamily.mono}",
+        "fontWeight": 400,
+        "fontStyle": "normal",
+        "fontSize": { "value": 12, "unit": "px" },
+        "lineHeightPx": 16,
+        "letterSpacing": { "value": 0.14, "unit": "em" },
+        "letterSpacingPx": 1.68,
+        "textCase": "uppercase",
+        "color": "{color.plate.text-muted}"
+      }
+    },
+    "mono-control": {
+      "$type": "typography",
+      "$description": "Control labels and button text. font-mono text-sm. Primary buttons add font-medium (500).",
+      "$value": {
+        "fontFamily": "{fontFamily.mono}",
+        "fontWeight": 400,
+        "fontWeightPrimary": 500,
+        "fontStyle": "normal",
+        "fontSize": { "value": 14, "unit": "px" },
+        "lineHeightPx": 20,
+        "letterSpacing": { "value": 0, "unit": "em" }
+      }
+    },
+    "mono-url": {
+      "$type": "typography",
+      "$description": "Generated URL. font-mono text-base leading-relaxed sm:text-lg.",
+      "$value": {
+        "fontFamily": "{fontFamily.mono}",
+        "fontWeight": 400,
+        "fontStyle": "normal",
+        "fontSize": { "value": 16, "unit": "px" },
+        "lineHeight": 1.625,
+        "lineHeightPx": 26,
+        "letterSpacing": { "value": 0, "unit": "em" },
+        "sizes": [
+          { "breakpoint": "default", "fontSize": 16, "lineHeightPx": 26 },
+          { "breakpoint": "sm", "fontSize": 18, "lineHeightPx": 29.25 }
+        ]
+      }
+    }
+  },
+  "component": {
+    "button": {
+      "$description": "There is no Button React component. Both kinds are classes in src/app/globals.css. Primary is used by HeroPlate and CopyUrlField. Quiet is used by CopyUrlField and BugBuilder. Disabled is not defined in the stylesheet, so no disabled colors are invented here.",
+      "primary": {
+        "className": "btn-primary",
+        "layout": {
+          "display": "inline-flex",
+          "alignItems": "center",
+          "justifyContent": "center",
+          "gap": "{dimension.button-gap}",
+          "minHeight": "{dimension.button-min-height}",
+          "paddingInline": "{dimension.button-padding-inline-primary}",
+          "paddingBlock": { "value": 12, "unit": "px", "note": "Derived so 14/20 text sits in the 44px min height. The class sets min-h-11 and items-center, not an explicit py." },
+          "borderRadius": "{dimension.radius-plate}",
+          "borderWidth": { "value": 0, "unit": "px" }
+        },
+        "text": "{typography.mono-control}",
+        "fontWeight": 500,
+        "default": {
+          "fill": "{color.plate.accent}",
+          "color": "{color.plate.on-accent}",
+          "opacity": 1
+        },
+        "hover": {
+          "fill": "{color.plate.accent}",
+          "color": "{color.plate.on-accent}",
+          "opacity": 0.9,
+          "source": "hover:opacity-90"
+        },
+        "disabled": {
+          "definedInSource": false,
+          "note": "No :disabled rule. Do not paint a disabled color until the stylesheet has one."
+        }
+      },
+      "quiet": {
+        "className": "btn-quiet",
+        "layout": {
+          "display": "inline-flex",
+          "alignItems": "center",
+          "justifyContent": "center",
+          "gap": "{dimension.button-gap}",
+          "minHeight": "{dimension.button-min-height}",
+          "paddingInline": "{dimension.button-padding-inline-quiet}",
+          "paddingBlock": { "value": 12, "unit": "px", "note": "Same 44px min height as primary. px-4, no explicit py." },
+          "borderRadius": "{dimension.radius-plate}",
+          "borderWidth": "{dimension.button-border}"
+        },
+        "text": "{typography.mono-control}",
+        "fontWeight": 400,
+        "default": {
+          "fill": "transparent",
+          "color": "{color.plate.text-primary}",
+          "borderColor": "{color.plate.line}",
+          "opacity": 1
+        },
+        "hover": {
+          "fill": "transparent",
+          "color": "{color.plate.text-primary}",
+          "borderColor": "{color.plate.text-primary}",
+          "opacity": 1,
+          "source": "hover:border-ink"
+        },
+        "disabled": {
+          "definedInSource": false,
+          "note": "No :disabled rule. Do not paint a disabled color until the stylesheet has one."
+        }
+      }
+    }
+  },
+  "codeConnect": {
+    "fileKey": "eoEasW5XkZ54fXEwS5yE6P",
+    "fileUrl": "https://www.figma.com/design/eoEasW5XkZ54fXEwS5yE6P/Bug-Ipsum-Refresh",
+    "config": "figma.config.json",
+    "template": "src/components/ui/Button.figma.ts",
+    "mappings": [
+      {
+        "figmaComponent": "Button",
+        "kind": "Primary",
+        "code": "className=\"btn-primary\"",
+        "source": "src/app/globals.css",
+        "usedIn": ["src/components/ui/HeroPlate.tsx", "src/components/ui/CopyUrlField.tsx"]
+      },
+      {
+        "figmaComponent": "Button",
+        "kind": "Quiet",
+        "code": "className=\"btn-quiet\"",
+        "source": "src/app/globals.css",
+        "usedIn": ["src/components/ui/CopyUrlField.tsx", "src/components/ui/BugBuilder.tsx"]
+      }
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 import sharp from 'sharp';
 import path from 'path';
 import crypto from 'crypto';
+import { bugImages } from './bug-images';
 
 // In-memory cache for processed images
 const imageCache = new Map<string, { buffer: Buffer; timestamp: number }>();
@@ -79,37 +80,7 @@ function mapContrast(scale: number): number {
 async function processImageBuffer(params: ImageParams): Promise<Buffer> {
   const { width, height, saturation, blur, tint, contrast, image } = params;
   
-  // Updated image list with the new bug images
-  const imageFiles = [
-    'leaf-footed-bug-on-a-window-2.jpg',
-    'black-widow-underbelly.jpg',
-    'leaf-footed-bug-on-a-window-1.jpg',
-    'big-brown-moth-2.jpg',
-    'cotton-candy-moth.jpg',
-    'easter-bugs-3.jpg',
-    'ladybug-softy.jpg',
-    'easter-bugs-1.jpg',
-    'easter-bugs-2.jpg',
-    'ladybug-macro.jpg',
-    'beetle-on-a-leaf_27937308242_o.jpg',
-    'macro-fly.jpg',
-    'little-green-leaf-bug.jpg',
-    'bug-juice.jpg',
-    'jumping-spider.jpg',
-    'rolley-polley.jpg',
-    'big-harry-tarantula.jpg',
-    'inch-worm-macro-2.jpg',
-    'inch-worm-macro-1.jpg',
-    'spider-in-white.jpg',
-    'unknown-red-bug.jpg',
-    'under-ladybug-skirt.jpg',
-    'beetles-under-tree-bark-macro-1.jpg',
-    'beetles-under-tree-bark-macro-2.jpg',
-    'bug-silhouette-on-screen.jpg',
-    'bumble-bee.jpg',
-    'potato-beetle.jpg',
-    'big-fly.jpg'
-  ];
+  const imageFiles = bugImages;
   
   let selectedImage: string;
   

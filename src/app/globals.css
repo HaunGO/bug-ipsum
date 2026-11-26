@@ -1,325 +1,226 @@
-/* Fonts are now loaded via Next.js font optimization in layout.tsx */
-
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Tokens: primitives are raw values, semantic tokens are what components use.
+ * Light = "plate" (mount board), dark = "cabinet". See docs/tokens.md.
+ */
 @layer base {
   :root {
-    --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
-    
-    /* Primary color variables */
-    --color-primary-50: #f8fafc;
-    --color-primary-100: #f1f5f9;
-    --color-primary-200: #e2e8f0;
-    --color-primary-300: #cbd5e1;
-    --color-primary-400: #94a3b8;
-    --color-primary-500: #64748b;
-    --color-primary-600: #475569;
-    --color-primary-700: #334155;
-    --color-primary-800: #1e293b;
-    --color-primary-900: #0f172a;
-    --color-primary-950: #020617;
-  
-    --my-dark-blue:rgba(17, 24, 39, 1);
-    /* --my-beige:beige; */
-    --my-beige:#ebe6db;
-    --my-dark-beige:#d8d4cb;
+    /* Primitives — mount board */
+    --paper-50: #f7f7f4;
+    --paper-100: #eeeeea;
+    --paper-200: #e4e4de;
+    --paper-300: #c9cbc4;
 
+    /* Primitives — cabinet + ink */
+    --ink-1000: #0b0c0b;
+    --ink-950: #0f1110;
+    --ink-900: #181b19;
+    --ink-700: #343935;
+    --ink-600: #4f544f;
+    --ink-400: #9da39c;
+    --ink-100: #e9ebe6;
 
-    --breakpoint-sm: 640px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 1024px;
-    --breakpoint-xl: 1280px;
-    --breakpoint-2xl: 1536px;
+    /* Primitives — specimen-pin green */
+    --pin-700: #1f6b4f;
+    --pin-300: #7fd1a8;
 
+    /* Semantic — plate (light) */
+    --surface-page: var(--paper-100);
+    --surface-raised: var(--paper-200);
+    --surface-sunken: var(--paper-50);
+    --text-primary: var(--ink-950);
+    --text-muted: var(--ink-600);
+    --line: var(--paper-300);
+    --accent: var(--pin-700);
+    --on-accent: var(--paper-50);
+    --focus: var(--pin-700);
+
+    --radius-plate: 2px;
+    --ease-settle: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    color-scheme: light;
   }
 
-  /* Add smooth transitions for theme changes */
-  *, *::before, *::after {
-    @apply transition-colors duration-300;
+  html.dark {
+    /* Semantic — cabinet (dark) */
+    --surface-page: var(--ink-950);
+    --surface-raised: var(--ink-900);
+    --surface-sunken: var(--ink-1000);
+    --text-primary: var(--ink-100);
+    --text-muted: var(--ink-400);
+    --line: var(--ink-700);
+    --accent: var(--pin-300);
+    --on-accent: var(--ink-950);
+    --focus: var(--pin-300);
+
+    color-scheme: dark;
   }
 
-  /* Base typography */
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply font-sans antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    @apply font-text antialiased bg-page text-ink;
+    font-optical-sizing: auto;
   }
 
-  /* Headings */
-  h1 {
-    @apply text-4xl font-bold text-gray-900 dark:text-white mt-4;
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 4px;
   }
 
-  h2 {
-    @apply text-3xl font-bold text-gray-800 dark:text-gray-100 mb-3;
+  ::selection {
+    background-color: var(--accent);
+    color: var(--on-accent);
   }
 
-  h3 {
-    @apply text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-3;
-  }
-
-  h4 {
-    @apply text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2;
-  }
-
-  h5 {
-    @apply text-lg font-medium text-gray-800 dark:text-gray-100 mb-2;
-  }
-
-  h6 {
-    @apply text-base font-medium text-gray-800 dark:text-gray-100 mb-2;
-  }
-
-  /* Paragraphs and inline text */
-  p {
-    @apply text-gray-600 dark:text-gray-300 mb-4;
-  }
-
-  .lead {
-    @apply text-xl text-gray-600 dark:text-gray-300;
-  }
-
-  strong {
-    @apply font-semibold text-gray-900 dark:text-white;
-  }
-
-  code {
-    @apply font-mono text-sm bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded;
+  code,
+  kbd,
+  samp {
+    @apply font-mono;
   }
 }
 
 @layer components {
-  /* Layout components */
-  .site-footer {
-    @apply dark:px-8 py-4 text-center text-gray-600 dark:text-gray-300;
-    font-family: var(--font-mochiy-pop-one), cursive;
-    /* background-color:var(--my-dark-beige); */
+  /* Tracked mono caption used for catalog numbers and parameter labels. */
+  .specimen-label {
+    @apply font-mono text-xs uppercase tracking-[0.14em] text-muted;
   }
 
-  .main-nav {
-    /* @apply bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50; */
-    @apply border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50;
-    background-color: var(--my-beige);
-    border-bottom:1px solid var(--my-dark-beige);
-  }
-  html.dark .main-nav {
-    background-color: var(--my-dark-blue);
-    border-bottom:1px solid var(--color-primary-800);
+  .section-shell {
+    @apply mx-auto w-full max-w-screen-xl px-5 sm:px-8;
   }
 
-  .nav-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  /* Lines the hero label column up with .section-shell while the photo bleeds to the viewport edge. */
+  @media (min-width: 1024px) {
+    .hero-label-inset {
+      padding-inline-start: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+    }
   }
 
-  .nav-brand {
-    @apply flex-shrink-0 flex items-center;
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-plate bg-accent px-5 font-mono text-sm font-medium text-on-accent transition-opacity hover:opacity-90;
   }
 
-  .nav-brand-text {
-    @apply text-xl font-bold text-gray-900 dark:text-white;
+  .btn-quiet {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-plate border border-line px-4 font-mono text-sm text-ink transition-colors hover:border-ink;
   }
 
-  .nav-menu {
-    @apply hidden md:ml-6 md:flex md:space-x-8;
+  .field-input {
+    @apply w-full rounded-plate border border-line bg-sunken px-3 py-2 font-mono text-sm text-ink;
   }
 
-  .nav-link {
-    @apply inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors;
+  /* Range slider: thin rule with a square "pin" thumb. */
+  .lab-range {
+    @apply h-11 w-full cursor-pointer appearance-none bg-transparent;
   }
-
-  .nav-link-active {
-    @apply border-blue-500 text-gray-900 dark:text-white;
+  .lab-range::-webkit-slider-runnable-track {
+    height: 2px;
+    background: var(--line);
   }
-
-  .nav-link-inactive {
-    @apply border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200;
+  .lab-range::-moz-range-track {
+    height: 2px;
+    background: var(--line);
   }
-
-  .mobile-menu-button {
-    @apply md:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800;
+  .lab-range::-webkit-slider-thumb {
+    appearance: none;
+    margin-top: -9px;
+    height: 20px;
+    width: 20px;
+    border-radius: var(--radius-plate);
+    background: var(--accent);
   }
-
-  /* Section components */
-  .content-section {
-    @apply py-4 border-b border-gray-600 dark:border-gray-700;
+  .lab-range::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border: 0;
+    border-radius: var(--radius-plate);
+    background: var(--accent);
   }
-
-  .section-title {
-    @apply text-2xl font-bold mb-6 text-gray-900 dark:text-white;
+  /* Focus ring sits on the thumb instead of around the whole 44px hit area. */
+  .lab-range:focus-visible {
+    outline: none;
   }
-
-  /* Theme toggle */
-  .theme-toggle {
-    @apply relative bg-gray-300 dark:bg-gray-700 inline-flex h-8 w-16 items-center rounded-full transition-colors duration-200 ease-in-out cursor-pointer;
+  .lab-range:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px var(--surface-raised), 0 0 0 5px var(--focus);
   }
-
-  .theme-toggle__inner {
-    @apply inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-transform duration-200 ease-in-out;
+  .lab-range:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px var(--surface-raised), 0 0 0 5px var(--focus);
   }
-
-  /* Header */
-  /* .page-header {
-    @apply border-b border-gray-200 dark:border-gray-700 py-12;
+  .lab-range[data-off='true']::-webkit-slider-thumb {
+    background: var(--text-muted);
   }
-
-  .page-header__container {
-    @apply max-w-4xl mx-auto;
-  } */
-
-  /* Image Cards */
-  /* .image-card {
-    @apply overflow-hidden;
-  }
-
-  .image-card-title {
-    @apply text-base font-semibold mb-3 text-gray-900 dark:text-white;
-  }
-
-  .image-card-code {
-    @apply bg-gray-50 dark:bg-gray-900 p-3 rounded font-mono text-sm text-gray-700 dark:text-gray-300 mb-3 overflow-x-auto;
-  }
-
-  .image-card-image {
-    @apply w-full h-auto;
-  } */
-
-  /* Utility classes */
-  /* .sectionScroller {
-    @apply w-screen -ml-[70vw] left-1/2 relative overflow-x-auto px-8;
-  } */
-}
-
-
-.image-gallery-caption {
-  @apply text-sm text-gray-300 absolute bottom-0 left-0 bg-black/70 px-2 py-0.5 rounded-tr font-mono;
-}
-
-
-
-.homepage{
-  background-color: var(--my-beige);
-}
-
-html.dark .homepage{
-  background-color: var(--my-dark-blue);
-}
-
-.image-gallery-hero{
-  /* border:1px solid red; */
-  /* font-family: 'Schoolbell', cursive; */
-  font-family: var(--font-mochiy-pop-one), cursive;
-  font-weight: 400;
-
-
-  text-transform: capitalize;
-  white-space: nowrap;
-  @apply text-4xl lg:text-6xl;
-  @apply text-center pointer-events-none shadow-2xl;
-
-
-
-  
-  /* bg-white dark:bg-gray-900 */
-  /* @apply rounded-full px-4 py-2 lg:px-8 lg:py-3; */
-              /* 
-              text-shadow:     
-              1px 1px 0px #eb452b,  
-              0px 0px 5px #017e7f,
-              1px 1px 3px #017e7f; 
-  
-              text-shadow:    
-              0px -2px #017e7f, 
-              2px 0px #017e7f,
-              0px 2px #017e7f, 
-              -2px 0px #017e7f;  
-              */
-
-              /* text-shadow: 0 0 50px rgba(0, 0, 0, 0.1);               */
-
-              color: var(--my-dark-blue);
-              -webkit-text-stroke-color:beige;
-              -webkit-text-stroke-width: 10px; 
-              paint-order: stroke fill;
-              
-
-    } 
-
-        
-
-/* .image-gallery-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, #ff8a00, #e52e71);
-  mix-blend-mode:multiply;
-} */
-
-
-
-
-html.dark .image-gallery-hero{
-  color:beige;
-  -webkit-text-stroke-color: var(--my-dark-blue);
-} 
-
-
-
-.bug-builder__form{
-  border: 5px solid var(--my-dark-beige);
-  background-color: var(--my-dark-beige);
-  border-radius: 5px;
-}
-
-
-/* bg-stone-100 dark:bg-gray-800 */
-
-
-
-.bug-builder__image-wrapper{
-  background-color: var(--my-dark-beige);
-  border: 5px solid var(--my-dark-beige);
-  border-radius: 5px;
-  position: relative;
-}
-
-@media (max-width: 768px) {
-  .bug-builder__image-wrapper {
-    top:-5px;
-    /* border-top-right-radius: 0; 
-    border-bottom-right-radius: 5px; 
-    border-bottom-left-radius: 5px; */
-    /* border-top:0; */
+  .lab-range[data-off='true']::-moz-range-thumb {
+    background: var(--text-muted);
   }
 }
 
-@media (min-width: 768px) {
-  .bug-builder__image-wrapper {
-    top:0px;
-    left:-5px;
-    /* 
-    border-top-right-radius: 5px; 
-    border-bottom-right-radius: 5px; 
-    border-bottom-left-radius: 0; 
-    */  
+/* Motion 1: hero plate settles in on load. */
+@keyframes plate-settle {
+  from {
+    opacity: 0.35;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
-
-html.dark .bug-builder__form{
-  background-color: var(--color-primary-800);
+@keyframes label-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-html.dark .bug-builder__form{
-  border: 5px solid var(--color-primary-800);
-  background: var(--color-primary-800);
+.motion-plate-settle {
+  animation: plate-settle 1.2s var(--ease-settle) both;
 }
 
-html.dark .bug-builder__image-wrapper{
-  background-color: var(--color-primary-800);
-  border: 5px solid var(--color-primary-800);
+.motion-label-rise {
+  animation: label-rise 0.8s 0.15s var(--ease-settle) both;
 }
 
+/* Motion 2: builder preview crossfades between renders. */
+.motion-preview {
+  transition: opacity 0.35s var(--ease-settle);
+}
 
+/* Motion 3: collection plates lift slightly on hover/focus. */
+.motion-lift img {
+  transition: transform 0.6s var(--ease-settle);
+}
+.motion-lift:hover img,
+.motion-lift:focus-visible img {
+  transform: scale(1.035);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .motion-plate-settle,
+  .motion-label-rise {
+    animation: none;
+  }
+
+  .motion-preview,
+  .motion-lift img {
+    transition: none;
+  }
+
+  .motion-lift:hover img,
+  .motion-lift:focus-visible img {
+    transform: none;
+  }
+}

@@ -1,20 +1,10 @@
-interface FooterProps {
-  className?: string;
-  children?: React.ReactNode;
-}
-
-export function Footer({ className = '', children }: FooterProps) {
+export function Footer() {
   return (
-    <footer className={`site-footer ${className}`} >
-
-      <div>
-        {children}
+    <footer className="border-t border-line">
+      <div className="section-shell flex flex-col gap-2 py-8 sm:flex-row sm:items-baseline sm:justify-between">
+        <p className="font-display text-xl italic">It&apos;s not a bug… it&apos;s a feature.</p>
+        <p className="font-mono text-xs text-muted">Photos © Brandon Haun · bugipsum.com</p>
       </div>
-
-
-
-      <p className="m-0">It&apos;s not a bug... &nbsp; It&apos;s a feature. &nbsp; &nbsp;</p>
-
-    </footer> 
+    </footer>
   );
-} 
+}

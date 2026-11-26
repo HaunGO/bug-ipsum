@@ -1,50 +1,18 @@
-'use client';
-
 import Link from 'next/link';
-import { useState } from 'react';
-import { ThemeToggle } from './ThemeToggle';
 import Image from 'next/image';
-import { useTheme } from '../../lib/theme';
+import { ThemeToggle } from './ThemeToggle';
 
 export function Navigation() {
-  const [mobileMenuOpen] = useState(false);
-  const { resolvedTheme, mounted } = useTheme();
-  
-  // Use a default logo during SSR to prevent hydration mismatch
-  const logoSrc = mounted && resolvedTheme === 'dark' ? '/images/logo-white.png' : '/images/logo-black.png';
-
   return (
-    <nav className="main-nav">
-      <div className="nav-container">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <Link href="/" className="nav-brand">
-              <Image 
-                  src={logoSrc}
-                  alt="Bug Ipsum Logo"
-                  width={100}
-                  height={40}
-                  style={{ objectFit: 'contain' }}
-                />
-            </Link>
-            
-            <div className="nav-menu">
-            </div>
-          </div>
-          
-          <div className="flex items-center space-x-4">
-            <ThemeToggle />
-          </div>
-        </div>
-        
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200 dark:border-gray-500">
-            </div>
-          </div>
-        )}
+    <nav aria-label="Main" className="sticky top-0 z-50 border-b border-line bg-page">
+      <div className="section-shell flex h-16 items-center justify-between">
+        <Link href="/" className="flex items-center">
+          {/* Both logos render; CSS picks one so there's no theme flash or hydration swap. */}
+          <Image src="/images/logo-black.png" alt="Bug Ipsum home" width={96} height={44} className="h-9 w-auto dark:hidden" priority />
+          <Image src="/images/logo-white.png" alt="Bug Ipsum home" width={96} height={44} className="hidden h-9 w-auto dark:block" priority />
+        </Link>
+        <ThemeToggle />
       </div>
     </nav>
   );
-} 
+}

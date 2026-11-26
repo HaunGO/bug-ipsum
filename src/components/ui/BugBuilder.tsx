@@ -1,279 +1,362 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import { CopyUrlField } from './CopyUrlField';
+import { useSpecimen } from './SpecimenContext';
+import { bugImages } from '@/lib/bug-images';
+import { formatPlateNumber, getSpecimenLabel } from '@/lib/specimen-labels';
 
-interface BugBuilderProps {
-  className?: string;
+const MAX_DIMENSION = 5000;
+const PREVIEW_DEBOUNCE_MS = 250;
+const DEFAULT_TINT = '#4ecdc4';
+const HEX_PATTERN = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i;
+
+type EffectKey = 'saturation' | 'blur' | 'contrast';
+
+const EFFECT_MAX = 9;
+const THUMB_PX = 20;
+
+const EFFECTS: { key: EffectKey; label: string; ticks: [number, string][] }[] = [
+  { key: 'saturation', label: 'Saturation', ticks: [[0, 'off'], [1, 'grey'], [5, 'natural'], [9, 'vivid']] },
+  { key: 'blur', label: 'Blur', ticks: [[0, 'off'], [1, 'soft'], [9, 'heavy']] },
+  { key: 'contrast', label: 'Contrast', ticks: [[0, 'off'], [1, 'flat'], [5, 'natural'], [9, 'harsh']] },
+];
+
+// Centres a tick label under the slider thumb position for `value`.
+function tickStyle(value: number): React.CSSProperties {
+  const shift = value === 0 ? `-${THUMB_PX / 2}px` : value === EFFECT_MAX ? `calc(-100% + ${THUMB_PX / 2}px)` : '-50%';
+  return {
+    left: `calc(${value / EFFECT_MAX} * (100% - ${THUMB_PX}px) + ${THUMB_PX / 2}px)`,
+    transform: `translateX(${shift})`,
+  };
 }
 
-export function BugBuilder({ className = '' }: BugBuilderProps) {
-  const [width, setWidth] = useState(300);
-  const [height, setHeight] = useState(300);
-  const [saturation, setSaturation] = useState('');
-  const [blur, setBlur] = useState('');
-  const [contrast, setContrast] = useState('');
+function parseDimension(value: string): number | null {
+  const n = Number.parseInt(value, 10);
+  if (Number.isNaN(n) || n < 1) return null;
+  return Math.min(n, MAX_DIMENSION);
+}
+
+function expandHex(hex: string): string {
+  const raw = hex.replace('#', '').toLowerCase();
+  return raw.length === 3 ? raw.split('').map((c) => c + c).join('') : raw;
+}
+
+export function BugBuilder() {
+  const { specimen, setSpecimen } = useSpecimen();
+  const [origin, setOrigin] = useState('https://bugipsum.com');
+
+  const [width, setWidth] = useState(640);
+  const [height, setHeight] = useState(480);
+  const [widthDraft, setWidthDraft] = useState('640');
+  const [heightDraft, setHeightDraft] = useState('480');
+  const [effects, setEffects] = useState<Record<EffectKey, number>>({ saturation: 0, blur: 0, contrast: 0 });
   const [tint, setTint] = useState('');
-  const [selectedImage, setSelectedImage] = useState('');
+  const [tintDraft, setTintDraft] = useState('');
 
-  const generatedUrl = useMemo(() => {
-    // Use a fallback for server-side rendering
-    const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
-    let url = `${baseUrl}/api/${width}/${height}`;
-    
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
+
+  const path = useMemo(() => {
     const params = new URLSearchParams();
-    if (saturation) params.append('saturation', saturation);
-    if (blur) params.append('blur', blur);
-    if (contrast) params.append('contrast', contrast);
-    if (tint) params.append('tint', tint);
-    if (selectedImage) params.append('image', selectedImage);
-    
-    const queryString = params.toString();
-    if (queryString) {
-      url += `?${queryString}`;
+    if (specimen !== null) params.set('image', String(specimen));
+    for (const { key } of EFFECTS) {
+      if (effects[key] > 0) params.set(key, String(effects[key]));
     }
-    
-    return url;
-  }, [width, height, saturation, blur, contrast, tint, selectedImage]);
+    if (tint) params.set('tint', tint);
+    const query = params.toString();
+    return `/api/${width}/${height}${query ? `?${query}` : ''}`;
+  }, [specimen, width, height, effects, tint]);
 
-  const handleCopyUrl = async () => {
-    try {
-      await navigator.clipboard.writeText(generatedUrl);
-      // You could add a toast notification here later
-      console.log('URL copied to clipboard:', generatedUrl);
-    } catch (err) {
-      console.error('Failed to copy URL:', err);
-    }
+  // Copy URL updates instantly; the preview request waits for the controls to settle.
+  const [previewSrc, setPreviewSrc] = useState(path);
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const previewRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (path === previewSrc) return;
+    const timer = setTimeout(() => setPreviewSrc(path), PREVIEW_DEBOUNCE_MS);
+    return () => clearTimeout(timer);
+  }, [path, previewSrc]);
+
+  useEffect(() => {
+    const img = previewRef.current;
+    if (img?.complete && img.naturalWidth > 0) setLoadedSrc(previewSrc);
+  }, [previewSrc]);
+
+  const isDeveloping = loadedSrc !== previewSrc && failedSrc !== previewSrc;
+
+  const handleDimension = (axis: 'width' | 'height', value: string) => {
+    const setDraft = axis === 'width' ? setWidthDraft : setHeightDraft;
+    const setValue = axis === 'width' ? setWidth : setHeight;
+    setDraft(value);
+    const n = parseDimension(value);
+    if (n !== null) setValue(n);
   };
 
+  const handleTintDraft = (value: string) => {
+    setTintDraft(value);
+    if (value.trim() === '') setTint('');
+    else if (HEX_PATTERN.test(value.trim())) setTint(expandHex(value.trim()));
+  };
+
+  const applyPickedTint = (hex: string) => {
+    setTint(expandHex(hex));
+    setTintDraft(hex.replace('#', ''));
+  };
+
+  const clearTint = () => {
+    setTint('');
+    setTintDraft('');
+  };
+
+  const widthTooBig = Number.parseInt(widthDraft, 10) > MAX_DIMENSION;
+  const heightTooBig = Number.parseInt(heightDraft, 10) > MAX_DIMENSION;
+  const tintInvalid = tintDraft.trim() !== '' && !HEX_PATTERN.test(tintDraft.trim());
+
   return (
-    <div className={`bug-builder ${className} flex flex-col items-center align-center justify-center md:flex-row`}>
-
-      <div className="bug-builder__form md:w-1/2 max-w-4xl p-6"      >
-        <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-          Bug Image URL Builder
-        </h2>
-        
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          </label>
-          <div className="flex">
-            <input
-              type="text"
-              value={generatedUrl}
-              readOnly
-              className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-l-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white text-sm font-mono"
-            />
-            <button
-              onClick={handleCopyUrl}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-r-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            >
-              Copy
-            </button>
+    <section id="builder" aria-labelledby="builder-title" className="scroll-mt-16 bg-raised">
+      <div className="section-shell py-16 lg:py-24">
+        <header className="mb-8 flex flex-col gap-4 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="specimen-label">01 — The bench</p>
+            <h2 id="builder-title" className="mt-2 font-display text-5xl font-normal tracking-tight sm:text-6xl lg:text-7xl">
+              Bug Builder
+            </h2>
           </div>
-        </div>
-        
-        <div className="my-4">
+          <p className="max-w-md text-lg leading-relaxed text-muted">
+            Pick a specimen, set the size and effects, copy the URL. The preview is the real image your URL returns.
+          </p>
+        </header>
 
-        <div className="grid grid-cols-3 gap-4 mb-4">
+        <CopyUrlField origin={origin} path={path} />
 
-            <div>
-              <label htmlFor="width" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Width
-              </label>
-              <input
-                type="number"
-                id="width"
-                value={width}
-                onChange={(e) => setWidth(Number(e.target.value))}
-                min="1"
-                max="2000"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="height" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Height
-              </label>
-              <input
-                type="number"
-                id="height"
-                value={height}
-                onChange={(e) => setHeight(Number(e.target.value))}
-                min="1"
-                max="2000"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="saturation" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Saturation
-              </label>
-              <select
-                id="saturation"
-                value={saturation}
-                onChange={(e) => setSaturation(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-              >
-                <option value="">None</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-              </select>
-            </div>
-            
-            <div>
-              <label htmlFor="blur" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Blur
-              </label>
-              <select
-                id="blur"
-                value={blur}
-                onChange={(e) => setBlur(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-              >
-                <option value="">None</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-              </select>
-            </div>
-            
-            <div>
-              <label htmlFor="contrast" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Contrast
-              </label>
-              <select
-                id="contrast"
-                value={contrast}
-                onChange={(e) => setContrast(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-              >
-                <option value="">None</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-              </select>
-            </div>
-          
-            <div>
-              <label htmlFor="tint" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Tint
-              </label>
-              <div className="flex items-center space-x-3">
-                <input
-                  type="color"
-                  id="tint"
-                  value={tint}
-                  onChange={(e) => setTint(e.target.value)}
-                  className="w-12 h-10 border border-gray-300 dark:border-gray-600 rounded-md cursor-pointer"
-                />
-                {/* <input
-                  type="text"
-                  value={tint}
-                  onChange={(e) => setTint(e.target.value)}
-                  placeholder="#000000"
-                  className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white font-mono text-sm"
-                /> */}
-                {tint && (
-                  <button
-                    onClick={() => setTint('')}
-                    className="px-3 py-2 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
-                  >
-                    Clear
-                  </button>
+        <div className="mt-6 grid gap-10 lg:grid-cols-12 lg:gap-12">
+          {/* Preview */}
+          <div className="lg:order-2 lg:col-span-7">
+            <div className="lg:sticky lg:top-24">
+              <div className="relative flex h-[min(52svh,420px)] items-center justify-center overflow-hidden rounded-plate bg-sunken p-4 sm:p-6 lg:h-[min(70svh,600px)]">
+                {failedSrc === previewSrc ? (
+                  <p className="max-w-xs text-center text-muted">
+                    That one didn&apos;t develop. Check the size and tint, then try again.
+                  </p>
+                ) : (
+                  <Image
+                    ref={previewRef}
+                    src={previewSrc}
+                    alt={specimen === null ? 'Preview: a random bug' : `Preview: ${getSpecimenLabel(specimen)}`}
+                    width={width}
+                    height={height}
+                    unoptimized
+                    onLoad={() => setLoadedSrc(previewSrc)}
+                    onError={() => setFailedSrc(previewSrc)}
+                    className={`motion-preview h-auto max-h-full w-auto max-w-full ${isDeveloping ? 'opacity-40' : 'opacity-100'}`}
+                  />
                 )}
               </div>
+              <div className="mt-3 flex items-baseline justify-between gap-4">
+                <span className="specimen-label">
+                  {width} × {height} px
+                  {specimen === null ? ' · random' : ` · ${formatPlateNumber(specimen)}`}
+                </span>
+                <span className="font-mono text-xs text-muted" aria-hidden="true">
+                  {isDeveloping ? 'Developing…' : 'Scaled to fit'}
+                </span>
+              </div>
+              {specimen === null && (
+                <p className="mt-2 text-sm text-muted">Random mode: every load of this URL returns a different bug.</p>
+              )}
             </div>
-        
-        
-        </div>
-          
-          <div>
-            {/* <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-              Bug Image Selection
-            </label> */}
-            
-            {/* Random Image Option */}
-            {/* <div className="mb-4">
-              <button
-                onClick={() => setSelectedImage('')}
-                className={`w-full p-3 rounded-lg border-2 transition-all duration-200 ${
-                  selectedImage === '' 
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' 
-                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
-                }`}
-              >
-                <div className="text-center">
-                  <div className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                    🎲 Random Bug
-                  </div>
-                </div>
-              </button>
-            </div> */}
-            
-            {/* Image Grid */}
-            <div className="my-4 grid grid-cols-10 gap-2 max-h-96 overflow-y-auto p-2 border border-gray-200 dark:border-gray-600 rounded-lg">
-              {Array.from({ length: 28 }, (_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setSelectedImage(i.toString())}
-                  className={`relative group transition-all duration-200 ${
-                    selectedImage === i.toString()
-                      ? 'ring-2 ring-blue-500 ring-offset-2'
-                      : 'hover:ring-2 hover:ring-gray-300 dark:hover:ring-gray-500'
-                  }`}
-                >
-                  <Image src={`/api/60/60?image=${i}`} alt={`Bug image ${i}`} width={60} height={60} className="w-full h-auto rounded-md object-cover" />
-                  <div className="absolute bottom-0 left-0 bg-black/70 text-white text-xs px-1 py-0 font-mono">
-                    {i}
-                  </div>
-                  <div className={`absolute inset-0 rounded-md transition-opacity duration-200 ${
-                    selectedImage === i.toString()
-                      ? 'bg-blue-500/20'
-                      : 'group-hover:bg-black/10'
-                  }`} />
-                </button>
-              ))}
-            </div>
-            
           </div>
-          
-          
+
+          {/* Controls */}
+          <div className="space-y-10 lg:order-1 lg:col-span-5">
+            <fieldset>
+              <legend className="specimen-label">Specimen</legend>
+              <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <p className="font-display text-2xl">
+                  {specimen === null ? 'Any bug, at random' : getSpecimenLabel(specimen)}
+                </p>
+                <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 font-mono text-sm text-muted hover:text-ink">
+                  <input
+                    type="radio"
+                    name="specimen"
+                    value="random"
+                    checked={specimen === null}
+                    onChange={() => setSpecimen(null)}
+                    className="h-4 w-4 accent-accent"
+                  />
+                  Random bug
+                </label>
+              </div>
+              <div className="mt-3 grid grid-cols-7 gap-1.5">
+                {bugImages.map((filename, index) => {
+                  const label = getSpecimenLabel(index);
+                  return (
+                    <label key={filename} title={`${formatPlateNumber(index)} · ${label}`} className="group relative block cursor-pointer">
+                      <input
+                        type="radio"
+                        name="specimen"
+                        value={index}
+                        checked={specimen === index}
+                        onChange={() => setSpecimen(index)}
+                        className="peer sr-only"
+                      />
+                      <span className="sr-only">
+                        {formatPlateNumber(index)}, {label}
+                      </span>
+                      <Image
+                        src={`/api/96/96?image=${index}`}
+                        alt=""
+                        width={96}
+                        height={96}
+                        unoptimized
+                        loading="lazy"
+                        className="aspect-square w-full rounded-plate object-cover opacity-80 transition-opacity group-hover:opacity-100 peer-checked:opacity-100"
+                      />
+                      <span className="pointer-events-none absolute inset-0 rounded-plate ring-inset peer-checked:ring-[3px] peer-checked:ring-accent peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent" />
+                    </label>
+                  );
+                })}
+              </div>
+              <p className="mt-2 font-mono text-xs text-muted">
+                Number = <code>?image=</code> value. Arrow keys move between specimens.
+              </p>
+            </fieldset>
+
+            <fieldset>
+              <legend className="specimen-label">Size</legend>
+              <div className="mt-3 flex items-end gap-3">
+                <div className="flex-1">
+                  <label htmlFor="builder-width" className="mb-1 block font-mono text-sm">
+                    Width
+                  </label>
+                  <input
+                    id="builder-width"
+                    type="number"
+                    inputMode="numeric"
+                    min={1}
+                    max={MAX_DIMENSION}
+                    value={widthDraft}
+                    onChange={(e) => handleDimension('width', e.target.value)}
+                    onBlur={() => setWidthDraft(String(width))}
+                    aria-describedby="builder-size-hint"
+                    aria-invalid={widthTooBig}
+                    className="field-input min-h-11"
+                  />
+                </div>
+                <span className="pb-3 font-mono text-muted" aria-hidden="true">
+                  ×
+                </span>
+                <div className="flex-1">
+                  <label htmlFor="builder-height" className="mb-1 block font-mono text-sm">
+                    Height
+                  </label>
+                  <input
+                    id="builder-height"
+                    type="number"
+                    inputMode="numeric"
+                    min={1}
+                    max={MAX_DIMENSION}
+                    value={heightDraft}
+                    onChange={(e) => handleDimension('height', e.target.value)}
+                    onBlur={() => setHeightDraft(String(height))}
+                    aria-describedby="builder-size-hint"
+                    aria-invalid={heightTooBig}
+                    className="field-input min-h-11"
+                  />
+                </div>
+              </div>
+              <p id="builder-size-hint" className="mt-2 font-mono text-xs text-muted">
+                {widthTooBig || heightTooBig ? `Capped at ${MAX_DIMENSION}px per side.` : `Pixels, 1–${MAX_DIMENSION} per side.`}
+              </p>
+            </fieldset>
+
+            <fieldset>
+              <legend className="specimen-label">Effects</legend>
+              <div className="mt-3 space-y-5">
+                {EFFECTS.map(({ key, label, ticks }) => {
+                  const value = effects[key];
+                  const id = `builder-${key}`;
+                  return (
+                    <div key={key}>
+                      <div className="flex items-baseline justify-between">
+                        <label htmlFor={id} className="font-mono text-sm">
+                          {label}
+                        </label>
+                        <span className="font-mono text-sm text-muted" aria-hidden="true">
+                          {value === 0 ? 'off' : value}
+                        </span>
+                      </div>
+                      <input
+                        id={id}
+                        type="range"
+                        min={0}
+                        max={EFFECT_MAX}
+                        step={1}
+                        value={value}
+                        data-off={value === 0}
+                        aria-valuetext={value === 0 ? 'off' : String(value)}
+                        onChange={(e) => setEffects((prev) => ({ ...prev, [key]: Number(e.target.value) }))}
+                        className="lab-range"
+                      />
+                      <div className="relative h-4 font-mono text-xs text-muted" aria-hidden="true">
+                        {ticks.map(([tickValue, word]) => (
+                          <span key={tickValue} className="absolute top-0 whitespace-nowrap" style={tickStyle(tickValue)}>
+                            {word}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+
+                <div>
+                  <label htmlFor="builder-tint" className="font-mono text-sm">
+                    Tint
+                  </label>
+                  <div className="mt-1 flex items-center gap-2">
+                    <input
+                      type="color"
+                      aria-label="Pick a tint colour"
+                      value={`#${tint || expandHex(DEFAULT_TINT)}`}
+                      onChange={(e) => applyPickedTint(e.target.value)}
+                      className="h-11 w-14 shrink-0 cursor-pointer rounded-plate border border-line bg-sunken p-1"
+                    />
+                    <div className="relative flex-1">
+                      <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-mono text-sm text-muted">#</span>
+                      <input
+                        id="builder-tint"
+                        type="text"
+                        autoComplete="off"
+                        spellCheck={false}
+                        maxLength={7}
+                        placeholder="none"
+                        value={tintDraft}
+                        onChange={(e) => handleTintDraft(e.target.value)}
+                        aria-describedby="builder-tint-hint"
+                        aria-invalid={tintInvalid}
+                        className="field-input min-h-11 pl-7"
+                      />
+                    </div>
+                    {tint && (
+                      <button type="button" onClick={clearTint} className="btn-quiet">
+                        Clear<span className="sr-only"> tint</span>
+                      </button>
+                    )}
+                  </div>
+                  <p id="builder-tint-hint" className="mt-2 font-mono text-xs text-muted">
+                    {tintInvalid ? 'Use a 3- or 6-digit hex colour, like ff6b6b.' : 'Hex colour, no # needed in the URL.'}
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </div>
         </div>
       </div>
-    
-      <div className="bug-builder__image-wrapper flex items-center justify-center" >
-        <Image 
-          src={generatedUrl} 
-          className="bug-builder__image" 
-          alt="Placeholder Bug Image" 
-          width={width} 
-          height={height}
-          unoptimized={true}
-        />
-      </div>
-
-    </div>
+    </section>
   );
 }
