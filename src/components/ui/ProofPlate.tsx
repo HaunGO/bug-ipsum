@@ -21,11 +21,11 @@ export function ProofPlate({ plate, className = '', style }: ProofPlateProps) {
           loading="lazy"
           className="h-auto w-full bg-sunken"
         />
-        <figcaption className="mt-2 flex flex-col gap-0.5">
+        <figcaption className="mt-2 flex flex-col gap-1">
           <code className="break-all font-mono text-sm text-ink group-hover:underline group-hover:underline-offset-4">
             {caption}
           </code>
-          {note && <span className="font-mono text-xs text-muted">{note}</span>}
+          {note && <span className="font-mono text-xs text-muted-foreground">{note}</span>}
           <span className="sr-only"> — open this image URL in a new tab</span>
         </figcaption>
       </a>

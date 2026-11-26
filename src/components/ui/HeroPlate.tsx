@@ -1,4 +1,5 @@
 import { formatPlateNumber, getSpecimenLabel } from '@/lib/specimen-labels';
+import { Button } from '@/components/ui/button';
 
 interface HeroPlateProps {
   imageIndex: number;
@@ -23,17 +24,19 @@ export function HeroPlate({ imageIndex }: HeroPlateProps) {
           <em className="italic">Ipsum</em>
         </h1>
 
-        <p className="mt-8 max-w-[26rem] text-lg leading-relaxed text-muted sm:text-xl">
+        <p className="type-lede-hero mt-8 max-w-[26rem]">
           A buggy little placeholder image service: real bugs from my own macro photography, sized and styled by URL.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <a href="#builder" className="btn-primary">
-            Build a URL with this bug <span aria-hidden="true">↓</span>
-          </a>
+          <Button asChild>
+            <a href="#builder">
+              Build a URL with this bug <span aria-hidden="true">↓</span>
+            </a>
+          </Button>
           <a
             href="/api/640/480"
-            className="font-mono text-sm text-muted underline decoration-line underline-offset-4 hover:text-ink hover:decoration-current"
+            className="font-mono text-sm text-muted-foreground underline decoration-line underline-offset-4 hover:text-ink hover:decoration-current"
           >
             or just use /api/640/480
           </a>
@@ -59,7 +62,7 @@ export function HeroPlate({ imageIndex }: HeroPlateProps) {
           <span className="specimen-label">
             {formatPlateNumber(imageIndex)} · {label}
           </span>
-          <code className="font-mono text-xs text-muted">?image={imageIndex}</code>
+          <code className="font-mono text-xs text-muted-foreground">?image={imageIndex}</code>
         </figcaption>
       </figure>
     </section>

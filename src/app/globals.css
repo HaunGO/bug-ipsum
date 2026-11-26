@@ -4,7 +4,8 @@
 
 /*
  * Tokens: primitives are raw values, semantic tokens are what components use.
- * Light = "plate" (mount board), dark = "cabinet". See docs/tokens.md.
+ * Light = "plate" (mount board), dark = "cabinet". Shadcn theme vars alias semantics.
+ * See docs/tokens.md.
  */
 @layer base {
   :root {
@@ -41,11 +42,31 @@
     --radius-plate: 2px;
     --ease-settle: cubic-bezier(0.2, 0.7, 0.2, 1);
 
+    /* shadcn/ui → Bug Ipsum semantics */
+    --background: var(--surface-page);
+    --foreground: var(--text-primary);
+    --card: var(--surface-raised);
+    --card-foreground: var(--text-primary);
+    --popover: var(--surface-raised);
+    --popover-foreground: var(--text-primary);
+    --primary: var(--accent);
+    --primary-foreground: var(--on-accent);
+    --secondary: var(--surface-raised);
+    --secondary-foreground: var(--text-primary);
+    --muted: var(--surface-sunken);
+    --muted-foreground: var(--text-muted);
+    --destructive: #b91c1c;
+    --destructive-foreground: var(--paper-50);
+    --border: var(--line);
+    --input: var(--line);
+    --ring: var(--focus);
+    --radius: var(--radius-plate);
+
     color-scheme: light;
   }
 
   html.dark {
-    /* Semantic — cabinet (dark) */
+    /* Semantic — cabinet (dark); shadcn aliases follow automatically */
     --surface-page: var(--ink-950);
     --surface-raised: var(--ink-900);
     --surface-sunken: var(--ink-1000);
@@ -64,7 +85,7 @@
   }
 
   body {
-    @apply font-text antialiased bg-page text-ink;
+    @apply bg-background font-text text-foreground antialiased;
     font-optical-sizing: auto;
   }
 
@@ -86,35 +107,44 @@
 }
 
 @layer components {
-  /* Tracked mono caption used for catalog numbers and parameter labels. */
   .specimen-label {
-    @apply font-mono text-xs uppercase tracking-[0.14em] text-muted;
+    @apply font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground;
   }
 
   .section-shell {
     @apply mx-auto w-full max-w-screen-xl px-5 sm:px-8;
   }
 
-  /* Lines the hero label column up with .section-shell while the photo bleeds to the viewport edge. */
+  .section-block {
+    @apply py-16 lg:py-24;
+  }
+
+  .type-section {
+    @apply font-display text-5xl font-normal tracking-tight sm:text-6xl;
+  }
+
+  .type-subsection {
+    @apply font-display text-3xl font-normal sm:text-4xl;
+  }
+
+  .type-lede {
+    @apply text-lg leading-relaxed text-muted-foreground;
+  }
+
+  .type-lede-hero {
+    @apply text-lg leading-relaxed text-muted-foreground sm:text-xl;
+  }
+
+  .type-display-italic {
+    @apply font-display text-4xl font-normal italic tracking-tight sm:text-5xl;
+  }
+
   @media (min-width: 1024px) {
     .hero-label-inset {
       padding-inline-start: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
     }
   }
 
-  .btn-primary {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-plate bg-accent px-5 font-mono text-sm font-medium text-on-accent transition-opacity hover:opacity-90;
-  }
-
-  .btn-quiet {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-plate border border-line px-4 font-mono text-sm text-ink transition-colors hover:border-ink;
-  }
-
-  .field-input {
-    @apply w-full rounded-plate border border-line bg-sunken px-3 py-2 font-mono text-sm text-ink;
-  }
-
-  /* Range slider: thin rule with a square "pin" thumb. */
   .lab-range {
     @apply h-11 w-full cursor-pointer appearance-none bg-transparent;
   }
@@ -141,7 +171,6 @@
     border-radius: var(--radius-plate);
     background: var(--accent);
   }
-  /* Focus ring sits on the thumb instead of around the whole 44px hit area. */
   .lab-range:focus-visible {
     outline: none;
   }
@@ -159,7 +188,6 @@
   }
 }
 
-/* Motion 1: hero plate settles in on load. */
 @keyframes plate-settle {
   from {
     opacity: 0.35;
@@ -190,12 +218,10 @@
   animation: label-rise 0.8s 0.15s var(--ease-settle) both;
 }
 
-/* Motion 2: builder preview crossfades between renders. */
 .motion-preview {
   transition: opacity 0.35s var(--ease-settle);
 }
 
-/* Motion 3: collection plates lift slightly on hover/focus. */
 .motion-lift img {
   transition: transform 0.6s var(--ease-settle);
 }

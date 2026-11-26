@@ -33,36 +33,31 @@ File key `eoEasW5XkZ54fXEwS5yE6P`. Personal account `haungo@gmail.com`, team “
 
 Stay on that account. Do not use the work login (`bhaun@johngroup.com`, The Johnson Group). One mode only. Do not publish a library.
 
-## Tokens file
+## Token files
 
-`docs/figma/bug-ipsum-refresh.tokens.json`
+**Figma Variables import:** `docs/figma/bug-ipsum-refresh.variables.json` — only `color`, `fontFamily`, and `dimension`. Drag this file into Variables.
 
-It is one DTCG-style JSON document, meant as a single mode. Nested names are folders. Plate and cabinet are folders of aliases inside `color`, not a second mode.
+**Design handoff (not importable as variables):** `docs/figma/bug-ipsum-refresh.tokens.json` — adds `typography`, `component`, and `codeConnect` metadata on top of the same color/font/dimension values.
+
+Both are one mode. Nested names are folders. Plate and cabinet are folders of aliases inside `color`, not a second mode.
 
 | Group | What it holds | Figma variables import |
 | --- | --- | --- |
-| `color` | Primitives `paper` (50, 100, 200, 300), `ink` (1000, 950, 900, 850, 700, 600, 400, 100), `pin` (700, 300). Each `$type` is `color`. `$value` is an sRGB object: `colorSpace`, `components` (0–1), `alpha`, `hex`. | Supported |
+| `color` | Primitives `paper` (50, 100, 200, 300), `ink` (1000, 950, 900, 700, 600, 400, 100), `pin` (700, 300). Each `$type` is `color`. `$value` is an sRGB object: `colorSpace`, `components` (0–1), `alpha`, `hex`. | Supported (via `.variables.json`) |
 | `color.plate` and `color.cabinet` | Semantic aliases: `surface-page`, `surface-raised`, `surface-sunken`, `text-primary`, `text-muted`, `line`, `accent`, `on-accent`, `focus`. Values are strings like `{color.paper.100}`. | Supported, as color aliases |
 | `fontFamily` | `display` Fraunces, `text` Source Serif 4, `mono` Geist Mono. `$type` `fontFamily`, `$value` a single font name. | Supported, becomes a string variable |
-| `dimension` | `radius-plate` 2px, `button-min-height` 44px, `button-gap` 8px, `button-padding-inline-primary` 20px, `button-padding-inline-quiet` 16px, `button-border` 1px, `focus-outline` 2px, `focus-offset` 3px. `$type` `dimension`, unit `px`. | Supported, becomes a number variable |
+| `dimension` | `radius-plate` 2px, `button-min-height` 44px, `button-gap` 8px, `button-padding-inline-primary` 20px, `button-padding-inline-quiet` 16px, `button-border` 1px, `focus-outline` 2px, `focus-offset` 4px. `$type` `dimension`, unit `px`. | Supported (via `.variables.json`) |
 | `typography` | Nine composites: `display-hero`, `display-section`, `display-subsection`, `display-italic`, `body`, `body-lede`, `mono-label`, `mono-control`, `mono-url`. `$type` is `typography`. Values mix a font alias, weight, style, a px `fontSize`, unitless `lineHeight`, `letterSpacing` in **em**, and sometimes a `sizes` array. | Not a variable type |
 | `component` | Button notes for `primary` (`btn-primary`) and `quiet` (`btn-quiet`): layout, default, hover, and `disabled.definedInSource: false`. No `$type` or `$value` on those objects. | Not a token group |
 | `codeConnect` | File key, links to `figma.config.json` and `src/components/ui/Button.figma.ts`, and class mappings. Includes a `mappings` array. No `$type` or `$value`. | Not a token group |
 
-Hex values match `globals.css`: paper `#f7f7f4` `#eeeeea` `#e4e4de` `#c9cbc4`; ink `#0b0c0b` `#0f1110` `#181b19` `#1f2320` `#343935` `#4f544f` `#9da39c` `#e9ebe6`; pin `#1f6b4f` `#7fd1a8`.
+Hex values match `globals.css`: paper `#f7f7f4` `#eeeeea` `#e4e4de` `#c9cbc4`; ink `#0b0c0b` `#0f1110` `#181b19` `#343935` `#4f544f` `#9da39c` `#e9ebe6`; pin `#1f6b4f` `#7fd1a8`.
 
-## Known import error
+## Variables import
 
-Importing `docs/figma/bug-ipsum-refresh.tokens.json` into Figma variables fails with “encountered an error importing tokens.”
+Import **`docs/figma/bug-ipsum-refresh.variables.json`** only. The full `bug-ipsum-refresh.tokens.json` still fails if dragged into Variables because it includes unsupported `typography` composites and non-token `component` / `codeConnect` groups. Use the handoff file for text styles and component specs; use `.variables.json` for the collection.
 
-Figma’s variables import accepts a DTCG JSON file, and only these token types: `color` (sRGB or HSL object), `dimension` (unit must be `px`), `fontFamily` (one font name, not an array), `duration` (seconds), `number`, and `string`. See [Modes for variables](https://help.figma.com/hc/en-us/articles/15343816063383-Modes-for-variables).
-
-This file is rejected as a whole because it also contains:
-
-1. Unsupported composite types. `typography.*` uses `$type: "typography"`. Figma will not turn that into a variable. The values are also outside the dimension rules: `letterSpacing` is in `em`, and `lineHeight` is a unitless number. `sizes` is an array.
-2. Groups with no token type. `component` and `codeConnect` are ordinary JSON (strings, numbers, and arrays) and are not tokens with `$type` and `$value`.
-
-`color`, `fontFamily`, and `dimension` in the same file already match the schema. Do not keep re-importing the full file. Either recreate those three groups by hand, or import a copy that contains only `color`, `fontFamily`, and `dimension`. Leave the original tokens file in place; it is still the handoff for type and buttons.
+Semantic theme previews in the app read plate/cabinet aliases from the handoff file via `src/lib/semantic-theme.ts` (no duplicate hex maps in components).
 
 ## What to build
 
@@ -71,7 +66,7 @@ This file is rejected as a whole because it also contains:
 In Bug Ipsum Refresh, one collection, one mode.
 
 - Color variables for every `color` primitive, then plate and cabinet semantics as aliases to those primitives (same paths as the JSON).
-- Number variables for every `dimension` (px numbers: 2, 44, 8, 20, 16, 1, 2, 3).
+- Number variables for every `dimension` (px numbers: 2, 44, 8, 20, 16, 1, 2, 4).
 - String variables for the three font families.
 
 Do not add a second mode for cabinet. Do not add a disabled color.
@@ -111,9 +106,10 @@ No disabled variant.
 Mapping files already in the repo:
 
 - `figma.config.json` — parser `react`, include `src/**/*.figma.ts`, label `React`.
-- `src/components/ui/Button.figma.ts` — parserless template (`import figma from 'figma'`, not `figma.connect()`). `Kind` Primary → `btn-primary`, Quiet → `btn-quiet`. Snippet: `<button type="button" className="${kind}">${text}</button>`. The `url=` comment still points at page node `0:1` because no Button component exists yet.
+- `src/components/ui/Button.figma.ts` — parserless template. `url=` → Button component `node-id=4-63`. `Kind` Primary → `btn-primary`, Quiet → `btn-quiet`. Snippet: `<button type="button" className="${kind}">${text}</button>`.
+- `src/components/ui/FieldInput.figma.ts` — maps to `className="field-input"`. Point `url=` at the Figma Input component when it exists. Property `Placeholder` optional on the text layer.
 
-After the component exists, point that `url=` comment at the component’s node, and keep the property names `Kind` and `Label` so `getEnum('Kind')` and `findText('Label')` match. `tsconfig.json` excludes `**/*.figma.ts` so `import figma from 'figma'` does not break the app. Do not rename the template to `.figma.tsx`.
+Keep property names aligned with Figma (`Kind`, `Label`, `Placeholder`). `tsconfig.json` excludes `**/*.figma.ts`. Do not rename templates to `.figma.tsx`.
 
 Live Code Connect publish needs a published library component and an Organization or Enterprise plan. This file is on Professional, so creating the component and correcting the template URL is the setup. Do not switch to the work org to publish, and do not install `@figma/code-connect` unless asked.
 

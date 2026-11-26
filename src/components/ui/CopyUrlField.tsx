@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 interface CopyUrlFieldProps {
   origin: string;
@@ -61,17 +62,17 @@ export function CopyUrlField({ origin, path, className = '' }: CopyUrlFieldProps
         >
           {/* inline-block keeps the path whole and wraps the query as a unit on narrow screens */}
           <span className="inline-block">
-            <span className="text-muted">{origin}</span>
+            <span className="text-muted-foreground">{origin}</span>
             <span className="text-ink">{pathname}</span>
           </span>
           {query && <span className="inline-block text-accent">?{query}</span>}
         </code>
         <div className="flex shrink-0 gap-2">
-          <button
+          <Button
             type="button"
             onClick={handleCopy}
             aria-describedby="generated-url"
-            className="btn-primary min-w-[9.5rem] flex-1 sm:flex-none"
+            className="min-w-[9.5rem] flex-1 sm:flex-none"
           >
             {status === 'copied' ? (
               <>
@@ -83,13 +84,15 @@ export function CopyUrlField({ origin, path, className = '' }: CopyUrlFieldProps
             ) : (
               'Copy URL'
             )}
-          </button>
-          <a href={path} target="_blank" rel="noopener noreferrer" className="btn-quiet">
-            Open<span className="sr-only"> image in a new tab</span>
-          </a>
+          </Button>
+          <Button variant="quiet" asChild>
+            <a href={path} target="_blank" rel="noopener noreferrer">
+              Open<span className="sr-only"> image in a new tab</span>
+            </a>
+          </Button>
         </div>
       </div>
-      <p role="status" aria-live="polite" className="mt-2 min-h-5 font-mono text-xs text-muted">
+      <p role="status" aria-live="polite" className="mt-2 min-h-5 font-mono text-xs text-muted-foreground">
         {status === 'copied' && 'Copied to your clipboard. Paste it anywhere an image goes.'}
         {status === 'failed' && 'Clipboard is blocked here — the URL is selected, press Ctrl/⌘ + C.'}
       </p>

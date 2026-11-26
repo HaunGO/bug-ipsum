@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Geist_Mono, Source_Serif_4 } from "next/font/google";
+import { Fraunces, Geist_Mono, Source_Serif_4, Geist } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "../lib/theme";
 import { Navigation } from "../components/ui/Navigation";
 import { Footer } from "../components/ui/Footer";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const display = Fraunces({
   variable: "--font-display",
@@ -58,7 +61,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${display.variable} ${text.variable} ${mono.variable}`}
+      className={cn(display.variable, text.variable, mono.variable, "font-sans", geist.variable)}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />

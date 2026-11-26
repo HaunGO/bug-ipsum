@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { CopyUrlField } from './CopyUrlField';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useSpecimen } from './SpecimenContext';
 import { bugImages } from '@/lib/bug-images';
 import { formatPlateNumber, getSpecimenLabel } from '@/lib/specimen-labels';
@@ -119,15 +121,15 @@ export function BugBuilder() {
 
   return (
     <section id="builder" aria-labelledby="builder-title" className="scroll-mt-16 bg-raised">
-      <div className="section-shell py-16 lg:py-24">
+      <div className="section-shell section-block">
         <header className="mb-8 flex flex-col gap-4 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="specimen-label">01 — The bench</p>
-            <h2 id="builder-title" className="mt-2 font-display text-5xl font-normal tracking-tight sm:text-6xl lg:text-7xl">
+            <h2 id="builder-title" className="type-section mt-2 lg:text-7xl">
               Bug Builder
             </h2>
           </div>
-          <p className="max-w-md text-lg leading-relaxed text-muted">
+          <p className="type-lede max-w-md">
             Pick a specimen, set the size and effects, copy the URL. The preview is the real image your URL returns.
           </p>
         </header>
@@ -140,7 +142,7 @@ export function BugBuilder() {
             <div className="lg:sticky lg:top-24">
               <div className="relative flex h-[min(52svh,420px)] items-center justify-center overflow-hidden rounded-plate bg-sunken p-4 sm:p-6 lg:h-[min(70svh,600px)]">
                 {failedSrc === previewSrc ? (
-                  <p className="max-w-xs text-center text-muted">
+                  <p className="max-w-xs text-center text-muted-foreground">
                     That one didn&apos;t develop. Check the size and tint, then try again.
                   </p>
                 ) : (
@@ -162,12 +164,12 @@ export function BugBuilder() {
                   {width} × {height} px
                   {specimen === null ? ' · random' : ` · ${formatPlateNumber(specimen)}`}
                 </span>
-                <span className="font-mono text-xs text-muted" aria-hidden="true">
+                <span className="font-mono text-xs text-muted-foreground" aria-hidden="true">
                   {isDeveloping ? 'Developing…' : 'Scaled to fit'}
                 </span>
               </div>
               {specimen === null && (
-                <p className="mt-2 text-sm text-muted">Random mode: every load of this URL returns a different bug.</p>
+                <p className="mt-2 text-sm text-muted-foreground">Random mode: every load of this URL returns a different bug.</p>
               )}
             </div>
           </div>
@@ -180,7 +182,7 @@ export function BugBuilder() {
                 <p className="font-display text-2xl">
                   {specimen === null ? 'Any bug, at random' : getSpecimenLabel(specimen)}
                 </p>
-                <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 font-mono text-sm text-muted hover:text-ink">
+                <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 font-mono text-sm text-muted-foreground hover:text-ink">
                   <input
                     type="radio"
                     name="specimen"
@@ -192,7 +194,7 @@ export function BugBuilder() {
                   Random bug
                 </label>
               </div>
-              <div className="mt-3 grid grid-cols-7 gap-1.5">
+              <div className="mt-3 grid grid-cols-7 gap-2">
                 {bugImages.map((filename, index) => {
                   const label = getSpecimenLabel(index);
                   return (
@@ -222,7 +224,7 @@ export function BugBuilder() {
                   );
                 })}
               </div>
-              <p className="mt-2 font-mono text-xs text-muted">
+              <p className="mt-2 font-mono text-xs text-muted-foreground">
                 Number = <code>?image=</code> value. Arrow keys move between specimens.
               </p>
             </fieldset>
@@ -234,7 +236,7 @@ export function BugBuilder() {
                   <label htmlFor="builder-width" className="mb-1 block font-mono text-sm">
                     Width
                   </label>
-                  <input
+                  <Input
                     id="builder-width"
                     type="number"
                     inputMode="numeric"
@@ -245,17 +247,16 @@ export function BugBuilder() {
                     onBlur={() => setWidthDraft(String(width))}
                     aria-describedby="builder-size-hint"
                     aria-invalid={widthTooBig}
-                    className="field-input min-h-11"
                   />
                 </div>
-                <span className="pb-3 font-mono text-muted" aria-hidden="true">
+                <span className="pb-3 font-mono text-muted-foreground" aria-hidden="true">
                   ×
                 </span>
                 <div className="flex-1">
                   <label htmlFor="builder-height" className="mb-1 block font-mono text-sm">
                     Height
                   </label>
-                  <input
+                  <Input
                     id="builder-height"
                     type="number"
                     inputMode="numeric"
@@ -266,11 +267,10 @@ export function BugBuilder() {
                     onBlur={() => setHeightDraft(String(height))}
                     aria-describedby="builder-size-hint"
                     aria-invalid={heightTooBig}
-                    className="field-input min-h-11"
                   />
                 </div>
               </div>
-              <p id="builder-size-hint" className="mt-2 font-mono text-xs text-muted">
+              <p id="builder-size-hint" className="mt-2 font-mono text-xs text-muted-foreground">
                 {widthTooBig || heightTooBig ? `Capped at ${MAX_DIMENSION}px per side.` : `Pixels, 1–${MAX_DIMENSION} per side.`}
               </p>
             </fieldset>
@@ -287,7 +287,7 @@ export function BugBuilder() {
                         <label htmlFor={id} className="font-mono text-sm">
                           {label}
                         </label>
-                        <span className="font-mono text-sm text-muted" aria-hidden="true">
+                        <span className="font-mono text-sm text-muted-foreground" aria-hidden="true">
                           {value === 0 ? 'off' : value}
                         </span>
                       </div>
@@ -303,7 +303,7 @@ export function BugBuilder() {
                         onChange={(e) => setEffects((prev) => ({ ...prev, [key]: Number(e.target.value) }))}
                         className="lab-range"
                       />
-                      <div className="relative h-4 font-mono text-xs text-muted" aria-hidden="true">
+                      <div className="relative h-4 font-mono text-xs text-muted-foreground" aria-hidden="true">
                         {ticks.map(([tickValue, word]) => (
                           <span key={tickValue} className="absolute top-0 whitespace-nowrap" style={tickStyle(tickValue)}>
                             {word}
@@ -327,8 +327,8 @@ export function BugBuilder() {
                       className="h-11 w-14 shrink-0 cursor-pointer rounded-plate border border-line bg-sunken p-1"
                     />
                     <div className="relative flex-1">
-                      <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-mono text-sm text-muted">#</span>
-                      <input
+                      <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-mono text-sm text-muted-foreground">#</span>
+                      <Input
                         id="builder-tint"
                         type="text"
                         autoComplete="off"
@@ -339,16 +339,16 @@ export function BugBuilder() {
                         onChange={(e) => handleTintDraft(e.target.value)}
                         aria-describedby="builder-tint-hint"
                         aria-invalid={tintInvalid}
-                        className="field-input min-h-11 pl-7"
+                        className="pl-7"
                       />
                     </div>
                     {tint && (
-                      <button type="button" onClick={clearTint} className="btn-quiet">
+                      <Button type="button" variant="quiet" onClick={clearTint}>
                         Clear<span className="sr-only"> tint</span>
-                      </button>
+                      </Button>
                     )}
                   </div>
-                  <p id="builder-tint-hint" className="mt-2 font-mono text-xs text-muted">
+                  <p id="builder-tint-hint" className="mt-2 font-mono text-xs text-muted-foreground">
                     {tintInvalid ? 'Use a 3- or 6-digit hex colour, like ff6b6b.' : 'Hex colour, no # needed in the URL.'}
                   </p>
                 </div>

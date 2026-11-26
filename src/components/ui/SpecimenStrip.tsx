@@ -21,15 +21,15 @@ export function SpecimenStrip() {
 
   return (
     <section id="collection" aria-labelledby="collection-title" className="bg-raised">
-      <div className="section-shell py-20 lg:py-28">
+      <div className="section-shell section-block">
         <header className="mb-12 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="specimen-label">03 — The collection</p>
-            <h2 id="collection-title" className="mt-2 font-display text-5xl font-normal tracking-tight sm:text-6xl">
+            <h2 id="collection-title" className="type-section mt-2">
               {SPECIMEN_COUNT} specimens
             </h2>
           </div>
-          <p className="max-w-md text-lg leading-relaxed text-muted">
+          <p className="type-lede max-w-md">
             All photographed by me, mostly in my own backyard. Pick one to load it into the Bug Builder.
           </p>
         </header>
@@ -55,7 +55,7 @@ export function SpecimenStrip() {
                       className="h-auto w-full"
                     />
                   </span>
-                  <span className="mt-2 block font-mono text-xs text-muted">{formatPlateNumber(index)}</span>
+                  <span className="mt-2 block font-mono text-xs text-muted-foreground">{formatPlateNumber(index)}</span>
                   <span className="block text-sm leading-snug group-hover:underline group-hover:underline-offset-4">
                     {label}
                   </span>

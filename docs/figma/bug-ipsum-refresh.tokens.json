@@ -318,13 +318,45 @@
           "note": "No :disabled rule. Do not paint a disabled color until the stylesheet has one."
         }
       }
+    },
+    "fieldInput": {
+      "$description": "No React wrapper. class field-input in globals.css. Used in BugBuilder for width, height, and tint hex.",
+      "className": "field-input",
+      "layout": {
+        "display": "block",
+        "width": "100%",
+        "paddingInline": { "value": 12, "unit": "px", "source": "px-3" },
+        "paddingBlock": { "value": 8, "unit": "px", "source": "py-2" },
+        "borderRadius": "{dimension.radius-plate}",
+        "borderWidth": "{dimension.button-border}"
+      },
+      "text": "{typography.mono-control}",
+      "default": {
+        "fill": "{color.plate.surface-sunken}",
+        "color": "{color.plate.text-primary}",
+        "borderColor": "{color.plate.line}"
+      }
+    },
+    "surface": {
+      "$description": "Bordered plates. surface-page, surface-raised, surface-sunken in globals.css map to semantic fills.",
+      "page": { "className": "surface-page" },
+      "raised": { "className": "surface-raised" },
+      "sunken": { "className": "surface-sunken" }
+    },
+    "labRange": {
+      "$description": "Native range input. Thumb and track styled with pseudo-elements; data-off=true greys thumb. Figma documents behavior only.",
+      "className": "lab-range",
+      "dataAttributes": ["data-off"]
     }
   },
   "codeConnect": {
     "fileKey": "eoEasW5XkZ54fXEwS5yE6P",
     "fileUrl": "https://www.figma.com/design/eoEasW5XkZ54fXEwS5yE6P/Bug-Ipsum-Refresh",
     "config": "figma.config.json",
-    "template": "src/components/ui/Button.figma.ts",
+    "templates": [
+      "src/components/ui/Button.figma.ts",
+      "src/components/ui/FieldInput.figma.ts"
+    ],
     "mappings": [
       {
         "figmaComponent": "Button",
@@ -339,6 +371,13 @@
         "code": "className=\"btn-quiet\"",
         "source": "src/app/globals.css",
         "usedIn": ["src/components/ui/CopyUrlField.tsx", "src/components/ui/BugBuilder.tsx"]
+      },
+      {
+        "figmaComponent": "Field input",
+        "code": "className=\"field-input\"",
+        "source": "src/app/globals.css",
+        "template": "src/components/ui/FieldInput.figma.ts",
+        "usedIn": ["src/components/ui/BugBuilder.tsx"]
       }
     ]
   }

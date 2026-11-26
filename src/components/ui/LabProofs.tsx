@@ -1,6 +1,7 @@
 import { labProofs } from '@/lib/lab-proofs';
 import { SPECIMEN_COUNT } from '@/lib/bug-images';
 import { LabProofSection } from './LabProofSection';
+import { Card } from '@/components/ui/card';
 
 const REFERENCE: { term: string; detail: string }[] = [
   { term: '/api/{width}/{height}', detail: 'Image at that size, 1–5000 px per side.' },
@@ -14,13 +15,13 @@ const REFERENCE: { term: string; detail: string }[] = [
 
 export function LabProofs() {
   return (
-    <section id="proofs" aria-labelledby="proofs-title" className="section-shell py-20 lg:py-28">
+    <section id="proofs" aria-labelledby="proofs-title" className="section-shell section-block">
       <header className="mb-14 max-w-2xl lg:mb-20">
         <p className="specimen-label">02 — Lab proofs</p>
-        <h2 id="proofs-title" className="mt-2 font-display text-5xl font-normal tracking-tight sm:text-6xl">
+        <h2 id="proofs-title" className="type-section mt-2">
           Every parameter, proven
         </h2>
-        <p className="mt-4 text-lg leading-relaxed text-muted">
+        <p className="type-lede mt-4">
           Each plate is a live request to the API. Select one to open its exact URL.
         </p>
       </header>
@@ -31,10 +32,10 @@ export function LabProofs() {
         ))}
       </div>
 
-      <div className="mt-20 grid gap-6 rounded-plate bg-raised p-6 sm:p-8 lg:mt-28 lg:grid-cols-12 lg:gap-12">
+      <Card className="mt-20 grid gap-6 bg-raised p-6 sm:p-8 lg:mt-28 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-3">
-          <h3 className="font-display text-3xl font-normal">Quick reference</h3>
-          <p className="mt-3 text-muted">
+          <h3 className="type-subsection">Quick reference</h3>
+          <p className="mt-3 text-muted-foreground">
             Combine anything with <code className="text-ink">&amp;</code>. Output is JPEG.
           </p>
         </div>
@@ -45,18 +46,18 @@ export function LabProofs() {
                 <dt>
                   <code className="font-mono text-sm text-accent">{term}</code>
                 </dt>
-                <dd className="mt-0.5 text-muted">{detail}</dd>
+                <dd className="mt-0.5 text-muted-foreground">{detail}</dd>
               </div>
             ))}
           </dl>
           <p className="mt-6 break-all font-mono text-sm">
-            <span className="text-muted">e.g. </span>
+            <span className="text-muted-foreground">e.g. </span>
             <a href="/api/800/600?image=3&saturation=7&contrast=6&tint=ff6b6b" className="underline decoration-line underline-offset-4 hover:decoration-current">
               /api/800/600?image=3&amp;saturation=7&amp;contrast=6&amp;tint=ff6b6b
             </a>
           </p>
         </div>
-      </div>
+      </Card>
     </section>
   );
 }

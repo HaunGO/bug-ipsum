@@ -39,7 +39,7 @@ The photographs carry the colour. The UI stays neutral apart from one accent, *s
 | `--line` | `border-line` | paper-300 | ink-700 |
 | `--accent` | `bg-accent` / `text-accent` | pin-700 | pin-300 |
 | `--on-accent` | `text-on-accent` | paper-50 | ink-950 |
-| `--focus` | (outline) | pin-700 | pin-300 |
+| `--focus` | `outline-focus` / `ring-focus` | pin-700 | pin-300 |
 | `--radius-plate` | `rounded-plate` | 2px | 2px |
 | `--ease-settle` | — | `cubic-bezier(0.2, 0.7, 0.2, 1)` | same |
 
@@ -66,9 +66,25 @@ There is no text on top of photographs anywhere, so there's no text-on-photo con
 
 `.specimen-label` is the tracked uppercase mono caption (12px, `0.14em` tracking, muted) used for catalog numbers and parameter labels.
 
+Composite text recipes (mirror Figma `typography.*` in the handoff JSON): `.type-section`, `.type-subsection`, `.type-lede`, `.type-lede-hero`, `.type-display-italic`. Hero wordmark stays a local `clamp()` on `HeroPlate`; builder title adds `lg:text-7xl` on top of `.type-section`.
+
+## Spacing
+
+No spacing CSS variables — use Tailwind’s default scale (4px base). Preferred steps: **4, 8, 12, 16, 24, 32, 40, 48, 64** px (`1`–`4`, `6`, `8`, `10`, `12`, `16`).
+
+| Recipe | Class / utilities | Use |
+|--------|-------------------|-----|
+| Page width + gutters | `.section-shell` (`px-5 sm:px-8`) | Horizontal layout |
+| Section vertical rhythm | `.section-block` (`py-16 lg:py-24`) | Major sections |
+| Primary button padding | `px-5` (20px) | Documented in Figma `button-padding-inline-primary`; intentional exception on the 4px ladder |
+
+`border-2` on the URL well when copied is emphasis, not part of the scale.
+
+Figma import: [`docs/figma/bug-ipsum-refresh.variables.json`](figma/bug-ipsum-refresh.variables.json). Full handoff: [`docs/figma/bug-ipsum-refresh.tokens.json`](figma/bug-ipsum-refresh.tokens.json).
+
 ## Component primitives (in `globals.css`)
 
-`.section-shell` (page width + gutters), `.btn-primary`, `.btn-quiet`, `.field-input`, `.lab-range` (slider; `data-off="true"` greys the thumb when an effect is off).
+Layout: `.section-shell`, `.section-block`. Surfaces: `.surface-page`, `.surface-raised`, `.surface-sunken`. Controls: `.btn-primary`, `.btn-quiet`, `.field-input`, `.lab-range` (slider; `data-off="true"` greys the thumb when an effect is off). Type: `.specimen-label`, `.type-section`, `.type-subsection`, `.type-lede`, `.type-lede-hero`, `.type-display-italic`.
 
 ## Motion
 
