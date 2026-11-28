@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { Wordmark } from '@/components/ui/Wordmark'
 import { Section } from '../Section'
 
 const INSTALLED = [
@@ -35,6 +36,14 @@ export function ComponentsSection() {
       lede="shadcn/ui new-york style (components.json). Additions via npx shadcn@latest add — not bespoke duplicates."
     >
       <div className="space-y-10">
+        <div className="motion-plate-settle flex flex-wrap items-center justify-between gap-6 rounded-plate border border-border bg-muted/20 p-6">
+          <div>
+            <p className="specimen-label">Product lockup</p>
+            <Wordmark size="nav" className="mt-4" />
+          </div>
+          <Wordmark size="footer" showRule />
+        </div>
+
         <Card className="bg-background">
           <CardContent className="p-0">
             <ul className="divide-y divide-border border-y border-border">

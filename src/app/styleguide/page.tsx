@@ -11,8 +11,9 @@ import { ComponentsSection } from '@/components/styleguide/sections/ComponentsSe
 import { AuditSection } from '@/components/styleguide/sections/AuditSection'
 
 export const metadata: Metadata = {
-  title: 'Style guide — Bug Ipsum',
-  description: 'Living reference for color, type, spacing, and shadcn/ui components.',
+  title: 'Living design system — Bug Ipsum',
+  description:
+    'Editorial reference for plate and cabinet themes: color semantics, typography, spacing, components, and system audit.',
 }
 
 export default function StyleGuidePage() {

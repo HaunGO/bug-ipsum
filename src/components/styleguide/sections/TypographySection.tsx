@@ -21,6 +21,15 @@ export function TypographySection() {
       title="Typography and scale"
       lede="Display, text, and mono roles from layout fonts. Composite recipes mirror Figma typography tokens and globals utilities."
     >
+      <div className="mb-12 space-y-2 rounded-plate border border-border bg-muted/25 p-6 sm:p-8">
+        <p className="type-display-italic text-foreground">Bugs on demand.</p>
+        <p className="font-display text-3xl tracking-[-0.03em] text-foreground sm:text-4xl">Editorial specimen plate</p>
+        <p className="mt-4 max-w-xl font-text text-lg leading-relaxed text-muted-foreground">
+          Source Serif 4 carries long-form reading; Fraunces owns display lockups; Geist Mono labels specimens.
+        </p>
+        <p className="specimen-label mt-6">No. 010 · HELICONIUS · PLATE MOUNT</p>
+      </div>
+
       <div className="space-y-12">
         <div>
           <h3 className="font-mono text-sm text-foreground">Font roles</h3>

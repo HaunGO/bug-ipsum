@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { siteNav } from '@/lib/site-nav'
+import { mainSiteNav, styleGuideNavItem } from '@/lib/site-nav'
 import { Wordmark } from '@/components/ui/Wordmark'
 
 export function Footer() {
@@ -13,11 +13,14 @@ export function Footer() {
           <p className="hidden font-mono text-xs uppercase tracking-[0.14em] sm:block">A buggy little API.</p>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap items-center gap-x-6 gap-y-2">
-          {siteNav.map((item) => (
+          {mainSiteNav.map((item) => (
             <Link key={item.label} href={item.href} className="font-text text-base hover:opacity-70">
               {item.label}
             </Link>
           ))}
+          <Link href={styleGuideNavItem.href} className="font-text text-base hover:opacity-70">
+            {styleGuideNavItem.label}
+          </Link>
         </nav>
       </div>
     </footer>

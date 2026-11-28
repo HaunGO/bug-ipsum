@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { siteNav } from '@/lib/site-nav'
+import { mainSiteNav } from '@/lib/site-nav'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { Wordmark } from '@/components/ui/Wordmark'
@@ -18,7 +18,7 @@ export function Navigation() {
           </p>
         </div>
         <nav aria-label="Main" className="flex flex-wrap items-center gap-x-6 gap-y-2">
-          {siteNav.map((item) => (
+          {mainSiteNav.map((item) => (
             <Link
               key={item.label}
               href={item.href}

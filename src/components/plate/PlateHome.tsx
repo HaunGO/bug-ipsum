@@ -11,10 +11,8 @@ const specimenName = filenameToLabel(specimenFile)
 
 const nav = [
   { href: `/api/640/480?image=${SPECIMEN}`, label: 'API' },
-  { href: '/styleguide', label: 'Docs' },
   { href: '/contact-sheet', label: 'Examples' },
   { href: '/contact-sheet', label: 'Gallery' },
-  { href: '/styleguide', label: 'Style Guide' },
 ]
 
 const definitions = [
