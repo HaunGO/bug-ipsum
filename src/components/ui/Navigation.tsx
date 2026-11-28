@@ -8,10 +8,8 @@ import { Wordmark } from '@/components/ui/Wordmark'
 export function Navigation() {
   return (
     <header className="relative border-b border-border bg-background">
-      <div className="absolute right-3 top-2 z-30">
-        <ThemeToggle />
-      </div>
-      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-x-8 gap-y-4 px-6 py-4 pr-28 lg:h-[88px] lg:flex-nowrap lg:py-0 lg:pl-14 lg:pr-32">
+      <ThemeToggle />
+      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-x-8 gap-y-4 px-6 py-4 pr-14 lg:h-[88px] lg:flex-nowrap lg:py-0 lg:pl-14 lg:pr-16">
         <div className="flex min-w-0 items-center gap-7">
           <Wordmark />
           <span aria-hidden className="hidden h-9 w-px bg-border sm:block" />

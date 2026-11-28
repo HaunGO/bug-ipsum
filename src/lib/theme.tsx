@@ -1,8 +1,8 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 
-type Theme = 'light' | 'dark' | 'system';
+type Theme = 'light' | 'dark';
 
 interface ThemeContextType {
   theme: Theme;
@@ -13,48 +13,37 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+function paintTheme(theme: Theme, persist: boolean) {
+  const root = document.documentElement;
+  root.classList.remove('light', 'dark');
+  root.classList.add(theme);
+  document.querySelector('meta[name="theme-color"]')?.setAttribute(
+    'content',
+    theme === 'dark' ? '#0f1110' : '#eeeeea',
+  );
+  if (persist) localStorage.setItem('theme', theme);
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('system');
+  const [theme, setThemeState] = useState<Theme>('light');
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
   const [mounted, setMounted] = useState(false);
+  const chosen = useRef(false);
 
-  // Initialize theme from localStorage after component mounts
+  function setTheme(next: Theme) {
+    chosen.current = true;
+    setThemeState(next);
+  }
+
   useEffect(() => {
     setMounted(true);
-    
-    // Get theme from localStorage or default to system
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else {
-      // If no saved theme, check system preference
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      setResolvedTheme(systemTheme);
-      const root = window.document.documentElement;
-      root.classList.remove('light', 'dark');
-      root.classList.add(systemTheme);
-    }
+    paintTheme('light', false);
   }, []);
 
   useEffect(() => {
     if (!mounted) return;
-    
-    const root = window.document.documentElement;
-    
-    // Remove existing classes
-    root.classList.remove('light', 'dark');
-    
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      root.classList.add(systemTheme);
-      setResolvedTheme(systemTheme);
-    } else {
-      root.classList.add(theme);
-      setResolvedTheme(theme);
-    }
-    
-    // Save to localStorage
-    localStorage.setItem('theme', theme);
+    setResolvedTheme(theme);
+    paintTheme(theme, chosen.current);
   }, [theme, mounted]);
 
   return (
@@ -70,4 +59,4 @@ export function useTheme() {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
-} 
+}

@@ -3,8 +3,7 @@ import { Fraunces, Geist_Mono, Instrument_Serif, Source_Serif_4, Geist } from "n
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "../lib/theme";
-import { Navigation } from "../components/ui/Navigation";
-import { Footer } from "../components/ui/Footer";
+import { SiteFrame } from "../components/ui/SiteFrame";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -51,14 +50,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#eeeeea" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f1110" },
-  ],
+  themeColor: "#eeeeea",
 };
 
-// Applies the saved/system theme before first paint so dark visitors don't see a light flash.
-const themeBootScript = `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||((!t||t==='system')&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.add(d?'dark':'light');}catch(e){}})();`;
+// Every load starts light. A stored or system preference is not applied until the visitor uses the toggle.
+const themeBootScript = `(function(){try{document.documentElement.classList.remove('dark');document.documentElement.classList.add('light');}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -95,11 +91,7 @@ export default function RootLayout({
           >
             Skip to the collection
           </a>
-          <Navigation />
-          <main>
-            {children}
-          </main>
-          <Footer />
+          <SiteFrame>{children}</SiteFrame>
         </ThemeProvider>
       </body>
     </html>
