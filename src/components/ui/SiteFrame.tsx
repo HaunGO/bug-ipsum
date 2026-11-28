@@ -6,7 +6,11 @@ import { Footer } from '@/components/ui/Footer'
 import { Navigation } from '@/components/ui/Navigation'
 
 export function SiteFrame({ children }: { children: React.ReactNode }) {
-  const home = usePathname() === '/'
+  const pathname = usePathname()
+  const home = pathname === '/'
+  const standalone = pathname === '/mark-studies'
+
+  if (standalone) return <main>{children}</main>
 
   return (
     <>
