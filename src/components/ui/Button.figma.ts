@@ -6,16 +6,35 @@ import { Button } from './button'
 
 const instance = figma.selectedInstance
 
-const kind = instance.getEnum('Kind', {
-  Primary: 'default',
+const variant = instance.getEnum('Variant', {
+  Default: 'default',
   Quiet: 'quiet',
+  Outline: 'outline',
+  Ghost: 'ghost',
+  Link: 'link',
+})
+
+const size = instance.getEnum('Size', {
+  Default: 'default',
+  Small: 'sm',
+  Icon: 'icon',
+})
+
+const state = instance.getEnum('State', {
+  Default: 'default',
+  Hover: 'hover',
+  Focus: 'focus',
+  Disabled: 'disabled',
 })
 
 const label = instance.findText('Label')
-const text = label?.textContent ?? 'Label'
+const text = label?.textContent ?? 'Button'
+
+const sizeProp = size === 'default' ? '' : ` size="${size}"`
+const disabledProp = state === 'disabled' ? ' disabled' : ''
 
 export default {
-  example: figma.code`<Button variant="${kind}">${text}</Button>`,
+  example: figma.code`<Button variant="${variant}"${sizeProp}${disabledProp}>${text}</Button>`,
   id: 'button',
   metadata: {
     nestable: true,
