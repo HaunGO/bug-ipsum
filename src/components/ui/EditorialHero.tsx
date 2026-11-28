@@ -33,18 +33,19 @@ export function EditorialHero() {
   return (
     <section className="flex h-[100vh] flex-col overflow-hidden">
       <Navigation />
-      <div className="mx-auto grid min-h-0 w-full max-w-[1440px] flex-1 grid-rows-[auto_minmax(0,1fr)] gap-10 px-6 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,776px)] lg:grid-rows-1 lg:gap-8 lg:px-14 lg:pb-16 lg:pt-8">
+      <div className="mx-auto grid min-h-0 w-full max-w-[1440px] flex-1 grid-rows-[auto_minmax(0,1fr)] gap-10 px-6 py-12 lg:grid-cols-[minmax(22rem,1fr)_minmax(0,776px)] lg:grid-rows-1 lg:gap-8 lg:px-14 lg:pb-16 lg:pt-8">
       <div className="max-w-[40rem] min-h-0">
         <div className="flex items-center gap-6">
           <p className="font-mono text-sm uppercase tracking-[0.14em]">No. {plate}</p>
           <span aria-hidden className="h-px w-40 bg-border" />
         </div>
-        <h1 className="mt-8 font-editorial text-[clamp(3.4rem,8vw,8.25rem)] leading-[0.77] tracking-[-0.028em] text-foreground">
-          Beautiful
-          <br />
-          bug photos
-          <br />
-          <span className="italic">on demand.</span>
+        <h1 className="mt-8 font-editorial text-foreground">
+          <span className="block font-normal leading-[0.76] tracking-[-0.045em] text-[6.75rem] sm:text-[8.5rem] md:text-[10rem] lg:text-[7.5rem] xl:text-[8.5rem] min-[1440px]:text-[11rem]">
+            Bugs
+          </span>
+          <span className="mt-2 block font-normal italic leading-[0.9] tracking-[-0.028em] text-[2.25rem] sm:text-[3rem] lg:text-[3.25rem] xl:text-[3.75rem] min-[1440px]:text-[4.25rem]">
+            on demand.
+          </span>
         </h1>
         <p className="mt-8 max-w-[34rem] font-text text-2xl leading-7 text-foreground">
           A simple, flexible API for placeholder images featuring real insect photography. Perfect for
