@@ -1,0 +1,13 @@
+---
+description: Homepage hero is frozen at the committed post_thanksgiving EditorialHero
+alwaysApply: true
+---
+
+# Frozen homepage hero
+
+The caller likes the homepage hero and set it aside. Treat `src/components/ui/EditorialHero.tsx` as frozen at its committed state on `post_thanksgiving` (commit `096bc12`).
+
+- Do not edit, redesign, restyle, or change typography in `EditorialHero.tsx`.
+- Do not revert that file or rewrite the hero headline, layout, or type scale.
+- Leave the hero unchanged unless the caller explicitly asks to change it.
+---
