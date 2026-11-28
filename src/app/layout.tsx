@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Geist_Mono, Source_Serif_4, Geist } from "next/font/google";
+import { Fraunces, Geist_Mono, Instrument_Serif, Source_Serif_4, Geist } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "../lib/theme";
@@ -26,6 +26,14 @@ const text = Source_Serif_4({
 
 const mono = Geist_Mono({
   variable: "--font-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const editorial = Instrument_Serif({
+  variable: "--font-editorial",
+  weight: "400",
+  style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -61,7 +69,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn(display.variable, text.variable, mono.variable, "font-sans", geist.variable)}
+      className={cn(display.variable, text.variable, mono.variable, editorial.variable, "font-sans", geist.variable)}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
@@ -82,10 +90,10 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <a
-            href="#builder"
-            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-primary focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-primary-foreground"
+            href="#collection"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-foreground focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-background"
           >
-            Skip to the Bug Builder
+            Skip to the collection
           </a>
           <Navigation />
           <main>

@@ -53,6 +53,7 @@ const config: Config = {
       },
       fontFamily: {
         display: ['var(--font-display)', 'Georgia', 'serif'],
+        editorial: ['var(--font-editorial)', 'Georgia', 'serif'],
         text: ['var(--font-text)', 'Georgia', 'serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
         sans: ['var(--font-text)', 'Georgia', 'serif'],
