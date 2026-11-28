@@ -8,7 +8,8 @@ import { Navigation } from '@/components/ui/Navigation'
 export function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const home = pathname === '/'
-  const standalone = pathname === '/mark-studies'
+  const standalone =
+    pathname === '/mark-studies' || pathname === '/plate' || pathname === '/logo-marks'
 
   if (standalone) return <main>{children}</main>
 

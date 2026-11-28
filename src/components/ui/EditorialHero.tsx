@@ -19,6 +19,30 @@ function randomCatalogIndex() {
   return value % SPECIMEN_COUNT
 }
 
+const photoCornerPositions = [
+  'left-0 top-0',
+  'right-0 top-0 rotate-90',
+  'bottom-0 right-0 rotate-180',
+  'bottom-0 left-0 -rotate-90',
+]
+
+function PhotoCorners() {
+  return (
+    <>
+      {photoCornerPositions.map((position) => (
+        <svg
+          key={position}
+          viewBox="0 0 84 84"
+          aria-hidden
+          className={`pointer-events-none absolute z-10 origin-center text-foreground size-[4.75rem] ${position}`}
+        >
+          <path fill="currentColor" d="M0 24 A24 24 0 0 1 24 0 L80 0 A140 140 0 0 1 0 80 Z" />
+        </svg>
+      ))}
+    </>
+  )
+}
+
 export function EditorialHero() {
   const [index, setIndex] = useState<number | null>(null)
 
@@ -65,15 +89,20 @@ export function EditorialHero() {
       </div>
 
       <figure className="flex h-full min-h-0 flex-col">
-        {file ? (
-          <img
-            src={`/images/bugs/only/${file}`}
-            alt={name}
-            className="h-full min-h-0 w-full flex-1 object-cover"
-          />
-        ) : (
-          <div className="h-full min-h-0 w-full flex-1 bg-muted" />
-        )}
+        <div className="relative min-h-0 flex-1">
+          {file ? (
+            <img
+              src={`/images/bugs/only/${file}`}
+              alt={name}
+              className="h-full min-h-0 w-full object-cover lg:absolute lg:inset-5 lg:h-[calc(100%-2.5rem)] lg:w-[calc(100%-2.5rem)]"
+            />
+          ) : (
+            <div className="h-full min-h-0 w-full bg-muted lg:absolute lg:inset-5 lg:h-[calc(100%-2.5rem)] lg:w-[calc(100%-2.5rem)]" />
+          )}
+          <div className="pointer-events-none absolute inset-0 hidden lg:block">
+            <PhotoCorners />
+          </div>
+        </div>
         <figcaption className="mt-4 flex shrink-0 flex-col gap-4 border-t border-border pt-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.14em]">Photograph no. {plate}</p>
